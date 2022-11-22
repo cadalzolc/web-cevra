@@ -7,7 +7,7 @@ function BASE_URL()
 
 function BASE_TITLE()
 {
-    return "Re-Connect";
+    return "Event Places";
 }
 
 function DIR_Upload()
