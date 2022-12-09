@@ -1,0 +1,61 @@
+$(function () {
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-top-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "3000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+});
+
+function PostRequestRedirect(frm) {
+    let resRedirect= $(frm).data("redirect");
+    let btnConfirm = $(frm).data("confirm");
+    let btnCancel= $(frm).data("cancel");
+    $.ajax({
+        type: "POST",
+        url: $(frm).attr("action"),
+        data: $(frm).serialize(),
+        beforeSend: function () {
+            if (btnConfirm) {
+                $(btnConfirm).attr("disabled", true);
+            }
+        },
+        success: function (res) {
+            if (res.success == true){
+                toastr.success(res.message)
+                if (resRedirect) {
+                    setTimeout(function () {
+                        window.location.href = resRedirect;
+                    }, 2000);
+                }
+            }else{
+                toastr.error(res.message);
+                if (btnConfirm) {
+                    $(btnConfirm).attr("disabled", false);
+                }
+            }
+        },
+        error: function (err) {
+            toastr.error(err);
+            if (btnConfirm) {
+                $(btnConfirm).attr("disabled", false);
+            }
+        }
+    });
+    return false;
+}
+
+function OnVerticalNavClick() {
+    $('#vnav').toggleClass("vertical_nav__minify");
+}
