@@ -2,9 +2,9 @@
 
 
 ### Dashboard
-- Client
-- Bussiness
-- Platform Owner
+- Client (Done)
+- Bussiness (Done)
+- Platform Owner (Done)
 
 ## Client
  - Registration (Done)
