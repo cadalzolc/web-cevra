@@ -7,6 +7,11 @@ include('../libs/db.php');
 
 $today = date("D, M j, Y");
 
+if (!empty($_SESSION['B-ID'])) {
+    header("Location: " . BASE_URL() . 'business');
+    exit;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +22,7 @@ $today = date("D, M j, Y");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <title>CEVRA - Customer Registration</title>
+    <title>CEVRA - Business Login</title>
     <link rel="icon" href="<?php echo BASE_URL() . 'assets/base/img/icon.png' ?>" type="image/png" sizes="16x16">
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
@@ -55,34 +60,22 @@ $today = date("D, M j, Y");
                                     </div>
                                 </a>
                                 <div class="app-top-right-link">
-                                    Already have a customer account?<a class="sidebar-register-link" href="<?php echo BASE_URL() . 'customer/login.php' ?>">Sign In</a>
+                                    New Business Owner?<a class="sidebar-register-link" href="<?php echo BASE_URL() . 'business/register.php' ?>">Register Here</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-5 col-lg-6 col-md-7">
                             <div class="registration">
                                 <form   method="POST" 
-                                        action="./process/register.php" 
+                                        action="./process/login.php" 
                                         onsubmit="return PostRequestRedirect(this);" 
-                                        data-redirect="<?php echo BASE_URL() . 'customer/login.php' ?>"
+                                        data-redirect="<?php echo BASE_URL() . 'business/' ?>"
                                         data-confirm="#btnSignUp">
-                                    <h2 class="registration-title">Customer Registration</h2>
+                                    <h2 class="registration-title">Business Login</h2>
                                     <div class="row mt-3">
-                                        <div class="col-lg-6 col-md-12">
-                                            <div class="form-group mt-4">
-                                                <label class="form-label">First Name*</label>
-                                                <input class="form-control h_50" type="text" placeholder="" value="" name="first_name" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-12">
-                                            <div class="form-group mt-4">
-                                                <label class="form-label">Last Name*</label>
-                                                <input class="form-control h_50" type="text" placeholder="" value="" name="last_name" required>
-                                            </div>
-                                        </div>
                                         <div class="col-lg-12 col-md-12">
                                             <div class="form-group mt-4">
-                                                <label class="form-label">Your Email*</label>
+                                                <label class="form-label">Email*</label>
                                                 <input class="form-control h_50" type="email" placeholder="" value="" name="email" required>
                                             </div>
                                         </div>
@@ -98,23 +91,14 @@ $today = date("D, M j, Y");
                                             </div>
                                         </div>
                                         <div class="col-lg-12 col-md-12">
-                                            <button id="btnSignUp" class="main-btn btn-hover w-100 mt-4" type="submit">Sign Up</button>
+                                            <button id="btnSignUp" class="main-btn btn-hover w-100 mt-4" type="submit">Submit</button>
                                         </div>
                                     </div>
                                 </form>
-                                <div class="agree-text">
-                                    By clicking "Sign up", you agree to CEVRA <a href="#">Terms &amp; Conditions</a> and have read the <a href="#">Privacy Policy</a>.
-                                </div>
-                                <div class="new-sign-link">
-                                    Already have a customer account?<a class="signup-link" href="<?php echo BASE_URL() . 'customer/login.php' ?>">Sign In</a>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <br>
-                <br>
-                <br>
                 <div class="copyright-footer">
                     © 2022. All rights reserved. Powered by CEVRA
                 </div>
@@ -130,7 +114,7 @@ $today = date("D, M j, Y");
     <script src="<?php echo BASE_URL() . 'assets/base/js/night-mode.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/base/js/app.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/plugins/js/toastr.js' ?>"></script>
-    <script src="<?php echo BASE_URL() . 'customer/js/app.js' ?>"></script>
+    <script src="<?php echo BASE_URL() . 'business/js/app.js' ?>"></script>
 </body>
 
 </html>

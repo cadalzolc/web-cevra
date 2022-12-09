@@ -1567,7 +1567,7 @@ body {
     -ms-flex-pack: justify;
     justify-content: space-between;
     min-height: 100vh;
-    background: #6ac045 url(../images/sign_bg.jpg);
+    background: #6ac045 url(../img/bg-1.jpg);
     width: 500px;
     padding: 50px;
 }
