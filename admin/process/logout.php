@@ -5,7 +5,7 @@ include('../../libs/base.php');
 include('../../libs/func.php');
 include('../../libs/db.php');
 
-if (isset($_SESSION['B-ID'])) {
+if (isset($_SESSION['A-ID'])) {
     session_destroy();
 }
 
