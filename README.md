@@ -10,7 +10,7 @@
  - Registration (Done)
  - Search
  - Reserve (Payment)
- - History
+ - Transaction
  - Profile
  - Dashboard / Landing
  - Login / Guest (Email) (Done)
