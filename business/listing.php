@@ -4,6 +4,7 @@ session_start();
 
 include('../libs/base.php');
 include('../libs/db.php');
+include('../libs/func.php');
 
 if (empty($_SESSION['B-ID'])) {
     header("Location: " . BASE_URL() . 'business/login.php');
@@ -12,6 +13,11 @@ if (empty($_SESSION['B-ID'])) {
 
 $today = date("D, M j, Y");
 $GLOBALS["tabs"] = "Listings";
+
+$sql = "SELECT * FROM vw_listing";
+$db = new Server();
+$qry = $db->DbQuery($sql);
+$cntLst = mysqli_num_rows($qry);
 
 ?>
 
@@ -23,7 +29,7 @@ $GLOBALS["tabs"] = "Listings";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <title>Business - Events Place</title>
+    <title>Business - Venues</title>
     <link rel="icon" href="<?php echo BASE_URL() . 'assets/base/img/icon.png' ?>" type="image/png" sizes="16x16">
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
@@ -52,13 +58,12 @@ $GLOBALS["tabs"] = "Listings";
                 <div class="row">
                     <div class="col-md-12">
                         <div class="d-main-title">
-                            <h3><i class="fa-solid fa-gauge me-3"></i>Events / Place</h3>
+                            <h3><i class="fa-solid fa-gauge me-3"></i>Venues</h3>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="main-card mt-5">
                             <div class="dashboard-wrap-content p-4">
-                                <h5 class="mb-4">Listings</h5>
                                 <div class="d-md-flex flex-wrap align-items-center">
                                     <div class="dashboard-date-wrap">
                                         <div class="form-group">
@@ -70,66 +75,81 @@ $GLOBALS["tabs"] = "Listings";
                                     </div>
                                     <div class="rs ms-auto mt_r4">
                                         <div class="nav custom2-tabs btn-group" role="tablist">
-                                            <button class="tab-link active" title="New Listing">New Listing</button>
+                                            <a href="<?php echo BASE_URL() . 'business/listing-new.php' ?>" class="tab-link active btn-tabs" title="New Listing">New venue</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="event-list">
-                            <div class="contact-list">
-                                            <div
-                                                class="card-top event-top p-4 align-items-center top d-md-flex flex-wrap justify-content-between">
-                                                <div class="d-md-flex align-items-center event-top-info">
-                                                    <div class="card-event-img">
-                                                        <img src="<?php echo BASE_URL() . 'assets/uploads/listings/default.jpg' ?>" alt="">
-                                                    </div>
-                                                    <div class="card-event-dt">
-                                                        <h5>Tutorial on Canvas Painting for Beginners</h5>
-                                                    </div>
-                                                </div>
-                                                <div class="dropdown">
-                                                    <button class="option-btn" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a href="#" class="dropdown-item"><i class="fa-solid fa-gear me-3"></i>Manage</a>
-                                                        <a href="#" class="dropdown-item delete-event"><i class="fa-solid fa-trash-can me-3"></i>Delete</a>
-                                                    </div>
-                                                </div>
+                            <?php 
+                               if ($cntLst == 0) {
+                            ?>
+                            <p>No list of venue to display.</p>
+                            <?php
+                               } else{
+                                    $r = 1;
+                                    foreach($qry as $row)
+                                    {
+                            ?>
+                                <div class="contact-list">
+                                    <div class="card-top event-top p-4 align-items-center top d-md-flex flex-wrap justify-content-between">
+                                        <div class="d-md-flex align-items-center event-top-info">
+                                            <div class="card-event-img">
+                                                <img src="<?php echo BASE_URL() . 'assets/uploads/listings/'. IIF($row['photo'], "", "default.jpg") ?>" alt="">
                                             </div>
-                                            <div
-                                                class="bottom d-flex flex-wrap justify-content-between align-items-center p-4">
-                                                <div class="icon-box ">
-                                                    <span class="icon">
-                                                        <i class="fa-solid fa-location-dot"></i>
-                                                    </span>
-                                                    <p>Status</p>
-                                                    <h6 class="coupon-status">Publish</h6>
-                                                </div>
-                                                <div class="icon-box">
-                                                    <span class="icon">
-                                                        <i class="fa-solid fa-calendar-days"></i>
-                                                    </span>
-                                                    <p>Starts on</p>
-                                                    <h6 class="coupon-status">30 Jun, 2022 10:00 AM</h6>
-                                                </div>
-                                                <div class="icon-box">
-                                                    <span class="icon">
-                                                        <i class="fa-solid fa-ticket"></i>
-                                                    </span>
-                                                    <p>Ticket</p>
-                                                    <h6 class="coupon-status">250</h6>
-                                                </div>
-                                                <div class="icon-box">
-                                                    <span class="icon">
-                                                        <i class="fa-solid fa-tag"></i>
-                                                    </span>
-                                                    <p>Tickets sold</p>
-                                                    <h6 class="coupon-status">20</h6>
-                                                </div>
+                                            <div class="card-event-dt">
+                                                <h5 class="mb-0"><?=  $row['name']; ?></h5>
+                                                <p class="mb-0"><?=  $row['description']; ?></p>
                                             </div>
                                         </div>
+                                        <div class="dropdown">
+                                            <button class="option-btn" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="<?php echo BASE_URL() . 'business/listing-manage.php?ref=' . Encrypt($row['id'])  ?>" class="dropdown-item"><i class="fa-solid fa-gear me-3"></i>Update</a>
+                                                <a href="<?php echo BASE_URL() . 'business/listing-gallery.php?ref=' . Encrypt($row['id'])  ?>" class="dropdown-item"><i class="fa-regular fa-image me-3"></i>Gallery</a>
+                                                <a href="#" class="dropdown-item delete-event"><i class="fa-solid fa-trash-can me-3"></i>Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="bottom d-flex flex-wrap justify-content-between align-items-center p-4">
+                                        <div class="icon-box ">
+                                            <span class="icon">
+                                                <i class="fa-solid fa-circle-info menu--icon"></i>
+                                            </span>
+                                            <p>Status</p>
+                                            <h6 class="coupon-status"><?=  $row['status']; ?></h6>
+                                        </div>
+                                        <div class="icon-box">
+                                            <span class="icon">
+                                                <i class="fa-solid fa-tag"></i>
+                                            </span>
+                                            <p>Sub Info</p>
+                                            <h6 class="coupon-status"><?=  $row['subinfo']; ?></h6>
+                                        </div>
+                                        <div class="icon-box">
+                                            <span class="icon">
+                                                <i class="fa-solid fa-dollar-sign"></i>
+                                            </span>
+                                            <p>Rates</p>
+                                            <h6 class="coupon-status"><?=  $row['rates']; ?></h6>
+                                        </div>
+                                        <div class="icon-box">
+                                            <span class="icon">
+                                                <i class="fa-solid fa-calendar-days"></i>
+                                            </span>
+                                            <p>Booking Date</p>
+                                            <h6 class="coupon-status"><?=  $row['book_date']; ?></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php
+                                    }
+                               }
+                            ?>
                         </div>
                     </div>
                 </div>

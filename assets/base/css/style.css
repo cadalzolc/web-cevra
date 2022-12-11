@@ -1434,7 +1434,7 @@ body {
 .form-control:focus {
     color: #717171 !important;
     background-color: #fff !important;
-    border-color: #a2ff7a !important;
+    border-color: #d6d5db !important;
     box-shadow: none !important;
 }
 
@@ -1461,7 +1461,7 @@ body {
 .form-textarea:focus {
     color: #717171 !important;
     background-color: #f9f9f9 !important;
-    border-color: #a2ff7a !important;
+    border-color: #d6d5db !important;
     box-shadow: none !important;
 }
 
@@ -1512,7 +1512,7 @@ body {
     outline: none !important;
     outline: none !important;
     outline-offset: -2px;
-	border-color: #a2ff7a !important;
+	border-color: #d6d5db !important;
 	box-shadow: none !important;
 }
 
@@ -4771,7 +4771,7 @@ input[type=number]::-webkit-inner-spin-button {
 .form-check-input:checked {
     background-color: #170f5f !important;
     border-color: #170f5f !important;
-	outline: #a2ff7a !important;
+	outline: #d6d5db !important;
 	box-shadow: none !important;
 }
 

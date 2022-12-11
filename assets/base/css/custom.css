@@ -2,3 +2,74 @@ button:disabled {
     cursor: no-drop;
     opacity: 0.7;
 }
+
+.btn-tabs {
+    line-height: 40px;
+    text-align: center;
+}
+
+.ta-center {
+    text-align: center;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.contact-list {
+    border-bottom: 3px solid #ddd;
+}
+
+.contact-list:last-child {
+    border-bottom: none;
+}
+
+.default-event-thumb-btn .thumb-change-btn [type="file"] + label {
+    background: none;
+    border: none;
+    padding: 5px;
+    font-size: 20px;
+}
+
+.default-event-thumb-btn .thumb-change-btn [type="file"] + label:hover {
+    background: none;
+    color: #fff;
+}
+
+.thumb-remove {
+    color: #000;
+    border-radius: 3px;
+    cursor: pointer;
+    float: right;
+    font-size: 20px;
+    font-weight: 500;
+    outline: none;
+    padding: 5px;
+    position: relative;
+    transition: all 0.3s;
+    vertical-align: middle;
+    margin: 0;
+}
+
+.thumb-remove:hover {
+    color: #fff;
+}
+
+.dialog-container {
+    left: 0;
+    top: 0;
+    z-index: 2000;
+    background: rgba(26, 29, 31, 0.32);
+    height: 100%;
+    overflow: auto;
+    width: 100%;
+    position: fixed;
+}
+
+.dialog-close {
+    background: #333;
+}
+
+.dialog-close:hover {
+    background: #181717;
+}

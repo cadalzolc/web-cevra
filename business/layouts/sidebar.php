@@ -11,7 +11,7 @@
                 <li class="menu--item">
                     <a href="<?php echo BASE_URL() . 'business/listing.php' ?>" class="menu--link <?php if ($GLOBALS["tabs"] === 'Listings') { echo 'active'; } ?>" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Listing">
                         <i class="fa-solid fa-calendar-days menu--icon"></i>
-                        <span class="menu--label">Events / Places</span>
+                        <span class="menu--label">Venues</span>
                     </a>
                 </li>
                 <li class="menu--item">
