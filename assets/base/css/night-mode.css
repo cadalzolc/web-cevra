@@ -5,7 +5,7 @@ Night Mood
 .night-mode #night-mode {
     padding: 0;
     font-size: 15px;
-    background: #6ac045;
+    background: #170f5f;
     color: #fff;
     cursor: pointer;
     border-radius: 50%;
@@ -197,15 +197,15 @@ Night Mood
 .night-mode .owl-nav .owl-prev:hover {
 	color: #fff !important;
 	opacity: 1;
-	background: #6ac045 !important;
-	border: 1px solid #6ac045 !important;
+	background: #170f5f !important;
+	border: 1px solid #170f5f !important;
 }	
 
 .night-mode .owl-nav .owl-next:hover {
 	color: #fff !important;
 	opacity: 1;
-	border: 1px solid #6ac045 !important;
-	background: #6ac045 !important;
+	border: 1px solid #170f5f !important;
+	background: #170f5f !important;
 }
 
 .night-mode .feature-group-list {
@@ -235,7 +235,7 @@ Night Mood
 
 .night-mode .step-tabs .step-link.active:hover {
     color: #fff;
-    background-color: #6ac045;
+    background-color: #170f5f;
 }
 
 .night-mode .testimonial-slider-area {
@@ -422,7 +422,7 @@ Night Mood
 .night-mode .form-control:focus {
     color: #fcfcfc !important;
     background-color: #000  !important;
-    border: 1px solid #6ac045 !important;
+    border: 1px solid #170f5f !important;
 }
 
 .night-mode .form-textarea {
@@ -434,7 +434,7 @@ Night Mood
 .night-mode .form-textarea:focus {
     color: #fcfcfc !important;
     background-color: #000  !important;
-    border: 1px solid #6ac045 !important;
+    border: 1px solid #170f5f !important;
 }
 
 .night-mode .border_bottom {
@@ -460,7 +460,7 @@ Night Mood
 
 .night-mode .cb-icon:hover {
     color: #fff !important;
-    background: #6ac045;
+    background: #170f5f;
 }
 
 .night-mode .booking-confirmed-bottom-bg {
@@ -516,13 +516,13 @@ Night Mood
 
 .night-mode .bootstrap-select .dropdown-item.active:hover {
     color: #FCFCFC !important;
-    background: #6ac045 !important;
+    background: #170f5f !important;
 }
 
 .night-mode .bootstrap-select.dropdown-item.active, .night-mode .bootstrap-select .dropdown-item:active {
     color: #fff !important;
     text-decoration: none;
-    background-color: #6ac045 !important;
+    background-color: #170f5f !important;
 }
 
 .night-mode .main-form .bootstrap-select .dropdown-toggle:focus, .night-mode .main-form .bootstrap-select>select.mobile-device:focus+.dropdown-toggle {
@@ -544,16 +544,16 @@ Night Mood
 
 .night-mode .user-avatar-img img {
     background: #272b30;
-    border: 2px solid #6ac045;
+    border: 2px solid #170f5f;
 }
 
 .night-mode .account-holder-avatar img {
     background-color: #272b30;
-    border: 2px solid #6ac045;
+    border: 2px solid #170f5f;
 }
 
 .night-mode .account-link.show img {
-    border: 2px solid #6ac045;
+    border: 2px solid #170f5f;
 }
 
 .night-mode .coming-soon-content {
@@ -587,7 +587,7 @@ Night Mood
 
 .night-mode #add-event-tab .step-steps > li.active > a > .number,
 .night-mode #add-event-tab .step-steps > li.done > a > .number {
-	background-color: #6ac045;
+	background-color: #170f5f;
 
 }
 
@@ -597,7 +597,7 @@ Night Mood
 }
 
 .night-mode #add-event-tab .step-steps > li.done:before {
-    background-color: #6ac045;
+    background-color: #170f5f;
 }
 
 .night-mode #add-event-tab .step-steps > li.active > a > .step-name, 
@@ -897,8 +897,8 @@ Night Mood
 
 .night-mode .custom2-tabs .tab-link.active, .night-mode .tab-tabs .show>.tab-link {
     color: #fff;
-    background-color: #6ac045;
-	border: 1px solid #6ac045;
+    background-color: #170f5f;
+	border: 1px solid #170f5f;
 }
 
 .night-mode .custom2-tabs .tab-link.active span, .night-mode .tab-tabs .show>.tab-link span {
@@ -1000,7 +1000,7 @@ Night Mood
 }
 
 .night-mode .tracking-tab .nav-tabs .nav-link.active {
-    background-color: #6ac045;
+    background-color: #170f5f;
 	color: #fff !important;
 }
 
@@ -1065,15 +1065,15 @@ Night Mood
 }
 
 .night-mode .my-event-tabs .event-link.active:hover {
-    color: #6ac045;
+    color: #170f5f;
     background-color: #1a1d1f;
-    border-bottom: 3px solid #6ac045;
+    border-bottom: 3px solid #170f5f;
 }
 
 .night-mode .my-event-tabs .event-link.active, .night-mode .my-event-tabs .show>.event-link {
-    color: #6ac045;
+    color: #170f5f;
     background-color: #1a1d1f;
-    border-bottom: 3px solid #6ac045;
+    border-bottom: 3px solid #170f5f;
 }
 
 .night-mode .event-link span {
@@ -1110,9 +1110,9 @@ Night Mood
 }
 
 .night-mode .custom-tabs .tab-link.active, .tab-tabs .show>.tab-link {
-    color: #6ac045;
+    color: #170f5f;
     background-color: #1a1d1f;
-	border-bottom: 3px solid #6ac045;
+	border-bottom: 3px solid #170f5f;
 }
 
 .night-mode .custom-tabs .tab-link:hover {
@@ -1127,9 +1127,9 @@ Night Mood
 }
 
 .night-mode .custom-tabs .tab-link.active:hover {
-    color: #6ac045;
+    color: #170f5f;
     background-color: #1a1d1f;
-	border-bottom: 3px solid #6ac045;
+	border-bottom: 3px solid #170f5f;
 }
 
 .night-mode .flex-slide .right h3 {
@@ -1206,8 +1206,8 @@ Night Mood
 
 .night-mode .counter span:hover {
     color: #fff;
-    background: #6ac045;
-    border: 2px solid #6ac045;
+    background: #170f5f;
+    border: 2px solid #170f5f;
 }
 
 .night-mode .xtotel-tickets-count {
@@ -1241,7 +1241,7 @@ Night Mood
 
 .night-mode #option-1:checked:checked ~ .option-1, 
 .night-mode #option-2:checked:checked ~ .option-2 {
-    border: 2px solid #6ac045;
+    border: 2px solid #170f5f;
     background: #1a1d1f;
 }
 
