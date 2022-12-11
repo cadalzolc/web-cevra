@@ -1,5 +1,7 @@
 <?php
 
+require_once('crypt.php');
+
 function IsNullOrEmptyString($str)
 {
     return ($str === null || trim($str) === '');
@@ -29,6 +31,20 @@ function GeneratePin()
 function GetUserFromEmail($email)
 {
     return strstr($email, '@', true);
+}
+
+function IIF($value, $checkValue, $defaultValue) {
+    return($value == $checkValue ? $defaultValue : $value);
+}
+
+function Encrypt($word) {
+    $crypt = new Crypto();
+    return $crypt->Encrypt($word);
+}
+
+function Decrypt($word) {
+    $crypt = new Crypto();
+    return $crypt->Decrypt($word);
 }
 
 ?>
