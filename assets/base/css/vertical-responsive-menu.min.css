@@ -30,7 +30,7 @@
 }
 
 .toggle_menu i:hover {
-    color: #6ac045;
+    color: #170f5f;
 }
 	
 .vertical_nav {
@@ -71,12 +71,12 @@
 
 .menu--link:hover {
 	background: #e8f7f7;
-	color: #6ac045 !important;
+	color: #170f5f !important;
 }
 
 .menu--link.active {
 	background: #e8f7f7;
-	color: #6ac045;
+	color: #170f5f;
 }
 
 .menu--item__has_sub_menu .menu--link:after {
@@ -150,7 +150,7 @@
 }
 
 .sub_menu--link:hover {
-	color: #6ac045 !important;
+	color: #170f5f !important;
 	background: #e8f7f7;
 }
 
@@ -223,7 +223,7 @@
     height: 60px;
     padding: 0;
     border: 0;
-    background: #6ac045;
+    background: #170f5f;
     color: #fff;
     font-size: 30px;
     margin: 0;
@@ -233,7 +233,7 @@
 
 .collapse_menu:hover {
 	color: #fff;
-	background: #7ad254;
+	background: #1f1672;
 }
 
 .collapse_menu .collapse_menu--icon {

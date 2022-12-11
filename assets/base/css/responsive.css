@@ -31,7 +31,7 @@
 }
 
 .navbar-nav .nav-link:hover {
-	color: #6ac045 !important;
+	color: #170f5f !important;
 	background-color: #e8f7f7;
 }
 
@@ -67,7 +67,7 @@
 }
 
 .dropdown-submenu .dropdown-item:hover {
-	color: #6ac045 !important;
+	color: #170f5f !important;
 	background-color: transparent !important;
 }
 
@@ -189,19 +189,19 @@
 
 .custom-tabs .tab-link.active, .tab-tabs .show>.tab-link {
     color: #fff;
-    background-color: #6ac045;
-    border-bottom: 2px solid #6ac045;
+    background-color: #170f5f;
+    border-bottom: 2px solid #170f5f;
     border-radius: 3px;
 }
 
 .custom-tabs .tab-link.active:hover {
     color: #fff;
-    background-color: #6ac045;
-	border-bottom: 2px solid #6ac045;
+    background-color: #170f5f;
+	border-bottom: 2px solid #170f5f;
 }
 
 .custom-tabs .tab-link:hover {
-	color: #6ac045;
+	color: #170f5f;
     background-color: #fff;
 	border-bottom: 2px solid transparent;
 }
@@ -254,7 +254,7 @@
 
 .my-event-tabs .event-link.active, .my-event-tabs .show>.event-link {
     color: #fff !important;
-    background-color: #6ac045 !important;
+    background-color: #170f5f !important;
     border-bottom: none !important;
 }
 
@@ -514,7 +514,7 @@
 }
 
 .navbar-nav .nav-link:hover {
-	color: #6ac045 !important;
+	color: #170f5f !important;
 	background-color: #e8f7f7;
 }
 
@@ -550,7 +550,7 @@
 }
 
 .dropdown-submenu .dropdown-item:hover, .dropdown-submenu .dropdown-item:focus {
-	color: #6ac045 !important;
+	color: #170f5f !important;
 	background-color: transparent !important;
 }
 
@@ -673,19 +673,19 @@
 
 .custom-tabs .tab-link.active, .tab-tabs .show>.tab-link {
     color: #fff;
-    background-color: #6ac045;
-    border-bottom: 2px solid #6ac045;
+    background-color: #170f5f;
+    border-bottom: 2px solid #170f5f;
     border-radius: 3px;
 }
 
 .custom-tabs .tab-link.active:hover {
     color: #fff;
-    background-color: #6ac045;
-	border-bottom: 2px solid #6ac045;
+    background-color: #170f5f;
+	border-bottom: 2px solid #170f5f;
 }
 
 .custom-tabs .tab-link:hover {
-	color: #6ac045;
+	color: #170f5f;
     background-color: #fff;
 	border-bottom: 2px solid transparent;
 }
@@ -885,7 +885,7 @@
 }
 
 .navbar-nav .nav-link:hover {
-	color: #6ac045 !important;
+	color: #170f5f !important;
 	background-color: #e8f7f7;
 }
 
@@ -921,7 +921,7 @@
 }
 
 .dropdown-submenu .dropdown-item:hover, .dropdown-submenu .dropdown-item:focus {
-	color: #6ac045 !important;
+	color: #170f5f !important;
 	background-color: transparent !important;
 }
 
