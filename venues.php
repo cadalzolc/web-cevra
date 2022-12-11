@@ -6,8 +6,9 @@ include('./libs/base.php');
 include('./libs/db.php');
 
 $today = date("D, M j, Y");
+$GLOBALS["tabs"] = "Venues";
 
-$sql_venues = "SELECT * FROM vw_listing LIMIT 12";
+$sql_venues = "SELECT * FROM vw_listing";
 $db = new Server();
 $qry_venues = $db->DbQuery($sql_venues);
 $cntLst = mysqli_num_rows($qry_venues);
@@ -16,13 +17,12 @@ $cntLst = mysqli_num_rows($qry_venues);
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <title>Home</title>
+    <title>CEVRA - Venues</title>
     <link rel="icon" href="<?php echo BASE_URL() . 'assets/base/img/icon.png' ?>" type="image/png" sizes="16x16">
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
@@ -39,66 +39,15 @@ $cntLst = mysqli_num_rows($qry_venues);
     <link rel="stylesheet" href="<?php echo BASE_URL() . 'assets/base/css/custom.css' ?>">
     <link rel="stylesheet" href="<?php echo BASE_URL() . 'assets/plugins/css/toastr.css' ?>">
 </head>
-
 <body class="d-flex flex-column h-100">
     <?php include("./website/layouts/header.php"); ?>
     <div class="wrapper">
-        
-        <div class="hero-banner">
-
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-9 col-md-10">
-                        <div class="hero-banner-content">
-                            <img src="./assets/base/img/logo-1.png" class="hero-logo" />
-                        </div>
-                    </div>
-                    <div class="col-xl-8 col-lg-8 col-md-10">
-                        <div class="hero-banner-content" style="display: none;">
-                            <h2>Discover Venues For All The Things You Love</h2>
-                            <div class="search-form main-form">
-                                <div class="row g-3">
-                                    <div class="col-lg-5 col-md-12">
-                                        <div class="form-group search-category">
-                                            <div class="dropdown bootstrap-select" style="width: 100%;">
-                                            <select class="selectpicker" data-width="100%" data-size="5" tabindex="null">
-                                                    <option value="browse_all" data-icon="fa-solid fa-tower-broadcast" selected="">Browse All</option>
-                                                    <option value="online_events" data-icon="fa-solid fa-video">Online Events</option>
-                                                    <option value="venue_events" data-icon="fa-solid fa-location-dot"> Venue Events</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5 col-md-12">
-                                        <div class="form-group">
-                                            <div class="dropdown bootstrap-select" style="width: 100%;"><select
-                                                    class="selectpicker" data-width="100%" data-size="5"
-                                                    data-live-search="true">
-                                                    <option value="01" selected="">All</option>
-                                                    <option value="02">Arts</option>
-                                                    <option value="03">Business</option>
-                                                    <option value="04">Coaching and Consulting</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 col-md-12">
-                                        <a href="#" class="main-btn btn-hover w-100">Find</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="explore-events p-80">
+    <div class="explore-events p-80">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12">
                         <div class="main-title">
-                            <h3>Explore Events</h3>
+                            <h3>All Venues</h3>
                         </div>
                     </div>
                     <div class="col-xl-12 col-lg-12 col-md-12">
@@ -131,18 +80,13 @@ $cntLst = mysqli_num_rows($qry_venues);
                                         endforeach;
                                     ?>
                                 </div>
-                                <div class="browse-btn">
-                                    <a href="<?php echo BASE_URL() . 'venues.php' ?>" class="main-btn btn-hover ">Browse All</a>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-
     <script src="<?php echo BASE_URL() . 'assets/base/js/jquery-3.6.0.min.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/base/js/bootstrap.bundle.min.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/base/js/owl.carousel.js' ?>"></script>
@@ -152,5 +96,4 @@ $cntLst = mysqli_num_rows($qry_venues);
     <script src="<?php echo BASE_URL() . 'assets/plugins/js/toastr.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/base/js/app.js' ?>"></script>
 </body>
-
 </html>

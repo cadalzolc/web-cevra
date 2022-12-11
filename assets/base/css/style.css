@@ -743,7 +743,8 @@ body {
 }
 
 .hero-banner {
-	background-image: url(../images/banner.jpg);
+    background: url(../img/bg-main.png) rgba(233, 232, 241, 100);
+    background-blend-mode: multiply;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;

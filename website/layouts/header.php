@@ -31,7 +31,7 @@
                             <div class="create-bg">
                                 <a href="#" class="offcanvas-create-btn">
                                     <i class="fa-solid fa-calendar-days"></i>
-                                    <span>Make a Reservation</span>
+                                    <span>Rent Venue</span>
                                 </a>
                             </div>
                         </div>
@@ -39,25 +39,17 @@
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="<?php echo BASE_URL() ?>">Home</a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Explore</a>
-                                <ul class="dropdown-menu dropdown-submenu">
-                                    <li>
-                                        <a class="dropdown-item" href="#">Venue</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">Dine and Lounge</a>
-                                    </li>
-                                </ul>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?php echo BASE_URL() . 'about.php' ?>">About Us</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">About Us</a>
+                                <a class="nav-link" href="<?php echo BASE_URL() . 'venues.php' ?>">Venues</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Contact Us</a>
+                                <a class="nav-link"href="<?php echo BASE_URL() . 'contact.php' ?>">Contact Us</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Policy</a>
+                                <a class="nav-link" href="<?php echo BASE_URL() . 'policy.php' ?>">Policy</a>
                             </li>
                         </ul>
                     </div>
@@ -72,12 +64,6 @@
                                     <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                                </li>
-                                <li>
                                     <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
                                 </li>
                             </ul>
@@ -88,7 +74,7 @@
                     <ul class="align-self-stretch">
                         <li>
                             <a href="#" class="create-btn btn-hover"> <i class="fa-solid fa-calendar-days"></i>
-                                <span>Make a Reservation</span>
+                                <span>Rent Venue</span>
                             </a>
                         </li>
                         <li class="dropdown account-dropdown">
