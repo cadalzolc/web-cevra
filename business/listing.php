@@ -13,8 +13,8 @@ if (empty($_SESSION['B-ID'])) {
 
 $today = date("D, M j, Y");
 $GLOBALS["tabs"] = "Listings";
-
-$sql = "SELECT * FROM vw_listing";
+$id = $_SESSION['B-ID'];
+$sql = "SELECT * FROM vw_listing WHERE account_id = $id";
 $db = new Server();
 $qry = $db->DbQuery($sql);
 $cntLst = mysqli_num_rows($qry);
