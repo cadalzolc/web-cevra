@@ -8,7 +8,7 @@
 
 ## Client
  - Registration (Done)
- - Search
+ - Search (Done)
  - Reserve (Payment)
  - Transaction
  - Profile
@@ -18,7 +18,7 @@
  ## Business
  - Resgistration (Done)
   -  (Business Platform Validation) TBC
- - List of Events Venue (Add, Update, Delete), Open/Closed Active/Deactivate
+ - List of Events Venue (Add, Update, Delete), Open/Closed Active/Deactivate (Done)
  - List Reservation (Pending)
  - List Transaction (Paid, Confirmed, Done, History)
  - Report / Summary
