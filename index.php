@@ -4,6 +4,7 @@ session_start();
 
 include('./libs/base.php');
 include('./libs/db.php');
+include('./libs/func.php');
 
 $today = date("D, M j, Y");
 
@@ -111,12 +112,12 @@ $cntLst = mysqli_num_rows($qry_venues);
                                             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mix arts concert workshops volunteer sports health_Wellness">
                                                 <div class="main-card mt-4">
                                                     <div class="event-thumbnail">
-                                                        <a href="#" class="thumbnail-img">
+                                                        <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($row['id']) ?>" class="thumbnail-img">
                                                             <img src="<?= BASE_URL() .'assets/uploads/listings/'. $row['photo'] ?>" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="event-content">
-                                                        <a href="#" class="event-title"><?= $row['name'] ?></a>
+                                                        <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($row['id']) ?>" class="event-title"><?= $row['name'] ?></a>
                                                         <div class="duration-price-remaining">
                                                             <span class="duration-price"><?= $row['rates'] ?></span>
                                                             <span class="remaining"></span>
@@ -140,7 +141,6 @@ $cntLst = mysqli_num_rows($qry_venues);
                 </div>
             </div>
         </div>
-
     </div>
 
     <script src="<?php echo BASE_URL() . 'assets/base/js/jquery-3.6.0.min.js' ?>"></script>
