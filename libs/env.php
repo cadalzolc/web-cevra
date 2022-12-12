@@ -2,10 +2,11 @@
 class Configuration {
 
     private static $environment;
+
     public static function GetEnvironment(){
         if(empty(Configuration::$environment)){
-            switch($_SERVER['SERVER_NAME']){
-                case 'speshvenue.com':
+            switch($_SERVER['SERVER_ADDR']){
+                case '151.106.117.3':
                     Configuration::$environment = 'prod';
                 default:
                     Configuration::$environment = 'dev';
