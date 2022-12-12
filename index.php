@@ -20,6 +20,7 @@ include('./libs/env.php');
     <pre>Username:  <?php echo Configuration::Setting('username'); ?></pre>
     <pre>Password:  <?php echo Configuration::Setting('password'); ?></pre>
     <pre>Database:  <?php echo Configuration::Setting('database'); ?></pre>
+    <pre>Hello</pre>
 </body>
 
 </html>
