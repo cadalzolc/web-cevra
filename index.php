@@ -14,5 +14,5 @@
 <body class="d-flex flex-column h-100">
 
 </body>
-    <p><?php echo $_SERVER['SERVER_NAME'] ?></p>
+    <pre><?php echo $_SERVER; ?></pre>
 </html>
