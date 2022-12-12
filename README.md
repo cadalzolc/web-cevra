@@ -1,6 +1,5 @@
 # Calbayog Events Place Reservation System
 
-
 ### Dashboard
 - Client (Done)
 - Bussiness (Done)
@@ -9,11 +8,11 @@
 ## Client
  - Registration (Done)
  - Search (Done)
- - Reserve (Payment)
- - Transaction
- - Profile
+ - Reserve (Payment) (Ongoing)
+ - Report / Summary (Ongoing)
+ - Profile (Ongoing)
  - Dashboard / Landing (Done)
- - Login / Guest (Email) (Done)
+ - Login (Done)
  
  ## Business
  - Resgistration (Done)
@@ -30,5 +29,4 @@
  - List of Clients
  - List of Business
  - Sales Summary of Business
- - Report
  - Login (Admin) (Done)
