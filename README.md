@@ -1,4 +1,4 @@
-# cs-event-place-reservations
+# Calbayog Events Place Reservation System
 
 
 ### Dashboard
