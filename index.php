@@ -1,18 +1,9 @@
 <?php
 
-//session_start();
+session_start();
 
-include('./libs/env.php');
-//include('./libs/base.php');
-//include('./libs/db.php');
-//include('./libs/func.php');
+include('./libs/db.php');
 
-//$today = date("D, M j, Y");
-
-//$sql_venues = "SELECT * FROM vw_listing LIMIT 12";
-//$db = new Server();
-//$qry_venues = $db->DbQuery($sql_venues);
-//$cntLst = mysqli_num_rows($qry_venues);
 
 ?>
 
