@@ -7,8 +7,6 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <title>Home </title>
-    <link rel="icon" href="<?php echo BASE_URL() . 'assets/base/img/icon.png' ?>" type="image/png" sizes="16x16">
-
 </head>
 
 <body class="d-flex flex-column h-100">
