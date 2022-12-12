@@ -14,5 +14,5 @@
 <body class="d-flex flex-column h-100">
 
 </body>
-    <pre><?php print_r($_SERVER); ?></pre>
+    <pre><?php var_dump($_SERVER); ?></pre>
 </html>

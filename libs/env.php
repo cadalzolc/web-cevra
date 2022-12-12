@@ -2,6 +2,7 @@
 class Configuration {
 
     private static $environment;
+    
     public static function GetEnvironment(){
         if(empty(Configuration::$environment)){
             switch($_SERVER['SERVER_NAME']){
