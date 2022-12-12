@@ -1,11 +1,11 @@
 <?php
 
-session_start();
+//session_start();
 
 include('./libs/env.php');
-include('./libs/base.php');
-include('./libs/db.php');
-include('./libs/func.php');
+//include('./libs/base.php');
+//include('./libs/db.php');
+//include('./libs/func.php');
 
 //$today = date("D, M j, Y");
 
