@@ -28,9 +28,9 @@ class Configuration {
             'password'        => '',
         ],
         'prod' => [
-            'server'          => 'sql445.main-hosting.eu',
+            'server'          => '151.106.117.0',
             'database'          => 'u485374257_cevra',
-            'username'            => 'u485374257_cevra',
+            'username'            => 'u485374257_root',
             'password'        => 'P@ssw0rd.22',
         ],
         '*' => [
