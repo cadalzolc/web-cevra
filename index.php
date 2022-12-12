@@ -4,7 +4,6 @@ session_start();
 
 include('./libs/db.php');
 
-
 ?>
 
 <!DOCTYPE html>
