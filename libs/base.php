@@ -1,8 +1,14 @@
 <?php
+require_once('env.php');
 
 function BASE_URL()
 {
-    return $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].'/';
+    $env = Configuration::GetEnvironment();
+    switch($env)
+    {
+        case 'prod': return $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].'/';
+        case 'dev': return 'http://localhost:8080/event-place/';
+    }
 }
 
 function BASE_TITLE()
