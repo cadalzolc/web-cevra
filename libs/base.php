@@ -2,7 +2,7 @@
 
 function BASE_URL()
 {
-    return 'http://localhost:8080/event-place/';
+    return $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].'/';
 }
 
 function BASE_TITLE()
