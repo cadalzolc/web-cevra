@@ -9,18 +9,18 @@
                 </button>
                 <a class="navbar-brand order-1 order-lg-0 ml-lg-0 ml-2 me-auto" href="<?php echo BASE_URL() ?>">
                     <div class="res-main-logo">
-                        <img src="<?php echo BASE_URL() . 'assets/base/svg/logo-icon.svg' ?>" alt="">
+                        <img src="<?php echo BASE_URL() . 'assets/base/img/logo-1-small.png' ?>" alt="">
                     </div>
                     <div class="main-logo" id="logo">
-                        <img src="<?php echo BASE_URL() . 'assets/base/svg/logo.svg' ?>" alt="">
-                        <img class="logo-inverse" src="<?php echo BASE_URL() . 'assets/base/svg/dark-logo.svg' ?>" alt="">
+                        <img src="<?php echo BASE_URL() . 'assets/base/img/logo-1-small.png' ?>" alt="">
+                        <img class="logo-inverse" src="<?php echo BASE_URL() . 'assets/base/img/logo-1-small.png' ?>" alt="">
                     </div>
                 </a>
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
                     aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
                         <div class="offcanvas-logo" id="offcanvasNavbarLabel">
-                            <img src="<?php echo BASE_URL() . 'assets/base/svg/logo-icon.svg' ?>" alt="">
+                            <img src="<?php echo BASE_URL() . 'assets/base/img/logo-1-small.png' ?>" alt="">
                         </div>
                         <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
                             <i class="fa-solid fa-xmark"></i>
@@ -29,9 +29,9 @@
                     <div class="offcanvas-body">
                         <div class="offcanvas-top-area">
                             <div class="create-bg">
-                                <a href="#" class="offcanvas-create-btn">
+                                <a href="<?php echo BASE_URL() . 'venues.php' ?>" class="offcanvas-create-btn">
                                     <i class="fa-solid fa-calendar-days"></i>
-                                    <span>Rent Venue</span>
+                                    <span>Explore Venue</span>
                                 </a>
                             </div>
                         </div>
@@ -41,9 +41,6 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo BASE_URL() . 'about.php' ?>">About Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo BASE_URL() . 'venues.php' ?>">Venues</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link"href="<?php echo BASE_URL() . 'contact.php' ?>">Contact Us</a>
@@ -73,8 +70,8 @@
                 <div class="right-header order-2">
                     <ul class="align-self-stretch">
                         <li>
-                            <a href="#" class="create-btn btn-hover"> <i class="fa-solid fa-calendar-days"></i>
-                                <span>Rent Venue</span>
+                            <a href="<?php echo BASE_URL() . 'venues.php' ?>" class="create-btn btn-hover"> <i class="fa-solid fa-calendar-days"></i>
+                                <span>Explore Venues</span>
                             </a>
                         </li>
                         <li class="dropdown account-dropdown">

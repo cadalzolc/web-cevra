@@ -11,7 +11,7 @@ $success = false;
 $msg = "Business registration failed";
 $p_name = $_POST['name'];
 $p_email = $_POST['email'];
-$p_password = $_POST['password'];
+$p_password = ToHash($_POST['password']);
 
 $sql = "CALL sp_account_create_business('$p_email', '$p_password', '$p_name')";
 

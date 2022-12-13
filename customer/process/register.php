@@ -12,7 +12,7 @@ $msg = "Customer registration failed";
 $p_first_name = $_POST['first_name'];
 $p_last_name = $_POST['last_name'];
 $p_email = $_POST['email'];
-$p_password = $_POST['password'];
+$p_password = ToHash($_POST['password']);
 
 $sql = "CALL sp_account_create_customer('$p_email', '$p_password', '$p_first_name', '$p_last_name')";
 

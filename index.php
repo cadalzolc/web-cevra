@@ -10,8 +10,8 @@ $today = date("D, M j, Y");
 
 $sql_venues = "SELECT * FROM vw_listing LIMIT 12";
 $db = new Server();
-$qry_venues = $db->DbQuery($sql_venues);
-$cntLst = mysqli_num_rows($qry_venues);
+$res_venues = $db->DbQuery($sql_venues);
+$cnt_venues = mysqli_num_rows($res_venues);
 
 ?>
 
@@ -98,45 +98,45 @@ $cntLst = mysqli_num_rows($qry_venues);
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12">
-                        <div class="main-title">
-                            <h3>Explore Events</h3>
-                        </div>
-                    </div>
-                    <div class="col-xl-12 col-lg-12 col-md-12">
-                        <div class="event-filter-items">
+                        <?php 
+                            if ($cnt_venues == 0) {
+                        ?>
+                            <h5>No venue selectrion to display.</h5>
+                        <?php
+                            } else {
+                        ?>
                             <div class="featured-controls">
                                 <div class="row">
-                                    <?php 
-                                        foreach($qry_venues as $row):
-                                            ?>
-                                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mix arts concert workshops volunteer sports health_Wellness">
-                                                <div class="main-card mt-4">
-                                                    <div class="event-thumbnail">
-                                                        <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($row['id']) ?>" class="thumbnail-img">
-                                                            <img src="<?= BASE_URL() .'assets/uploads/listings/'. $row['photo'] ?>" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="event-content">
-                                                        <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($row['id']) ?>" class="event-title"><?= $row['name'] ?></a>
-                                                        <div class="duration-price-remaining">
-                                                            <span class="duration-price"><?= $row['rates'] ?></span>
-                                                            <span class="remaining"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="event-footer">
-
+                                <?php 
+                                    foreach($res_venues as $row):
+                                        ?>
+                                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mix arts concert workshops volunteer sports health_Wellness">
+                                            <div class="main-card mt-4">
+                                                <div class="event-thumbnail">
+                                                    <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($row['id']) ?>" class="thumbnail-img">
+                                                        <img src="<?= BASE_URL() .'assets/uploads/listings/'. $row['photo'] ?>" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="event-content">
+                                                    <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($row['id']) ?>" class="event-title"><?= $row['name'] ?></a>
+                                                    <div class="duration-price-remaining">
+                                                        <span class="duration-price"><?= $row['rates'] ?></span>
+                                                        <span class="remaining"></span>
                                                     </div>
                                                 </div>
+                                                <div class="event-footer">
+
+                                                </div>
                                             </div>
-                                            <?php
-                                        endforeach;
-                                    ?>
-                                </div>
-                                <div class="browse-btn">
-                                    <a href="<?php echo BASE_URL() . 'venues.php' ?>" class="main-btn btn-hover ">Browse All</a>
+                                        </div>
+                                        <?php
+                                    endforeach;
+                                ?>
                                 </div>
                             </div>
-                        </div>
+                        <?php
+                            }
+                        ?>
                     </div>
                 </div>
             </div>

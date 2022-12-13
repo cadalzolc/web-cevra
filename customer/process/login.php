@@ -12,7 +12,7 @@ $name = "";
 $success = false;
 $msg = "Customer login failed";
 $p_email = $_POST['email'];
-$p_password = $_POST['password'];
+$p_password = ToHash($_POST['password']);
 
 $sql = "CALL sp_login_customer('$p_email', '$p_password')";
 

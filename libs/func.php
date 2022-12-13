@@ -47,4 +47,9 @@ function Decrypt($word) {
     return $crypt->Decrypt($word);
 }
 
+function ToHash($word)
+{
+    return hash('sha1', $word);
+}
+
 ?>
