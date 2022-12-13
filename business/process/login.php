@@ -12,7 +12,7 @@ $name = "";
 $success = false;
 $msg = "Business login failed";
 $p_email = $_POST['email'];
-$p_password = $_POST['password'];
+$p_password = ToHash($_POST['password']);
 
 $sql = "CALL sp_login_business('$p_email', '$p_password')";
 
