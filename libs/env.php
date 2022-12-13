@@ -26,17 +26,17 @@ class Configuration {
             'server'=> 'localhost',
             'database'=> 'db_events',
             'username'=> 'root',
-            'password'=> ''
+            'password'=> '',
         ],
         'prod' => [
             'server'=> '151.106.117.0',
             'database'=> 'u485374257_cevra',
             'username'=> 'u485374257_root',
-            'password'=> 'P@ssw0rd.22'
+            'password'=> 'P@ssw0rd.22',
         ],
         '*' => [
             'maileraddress'=> 'mailer@gmail.com',
-            'mailerpassword'=> '123456789'
+            'mailerpassword'=> '123456789',
         ]
     ];
 

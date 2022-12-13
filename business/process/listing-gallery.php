@@ -13,7 +13,7 @@ $order = $_POST['order'];
 $venue = $_POST['venue'];
 
 $dirListings = DIR_Upload_Folder("listings");
-$allowedTypes = array('jpg', 'jpeg', 'png', 'bmp');
+$allowedTypes = array('jpg', 'jpeg', 'png', 'bmp', 'webp');
 $photo = $_FILES['photo']['name'];
 $photoPath = $_FILES["photo"]["tmp_name"];
 $fileType  = pathinfo($photo, PATHINFO_EXTENSION );
@@ -48,11 +48,15 @@ if (!empty($photo)) {
             }
         }
     }
+    else {
+        $success = false;
+        $msg = "Photo was successfully uploaded!";
+    }
 }
 
 $data = '{
     "success": '. ToBoolean($success) .',
-    "message": "'. $msg .'"
+    "message": "File type '. $fileType .' is not supported."
 }';
 
 header('Content-Type: application/json');
