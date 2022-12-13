@@ -2,7 +2,7 @@
 
 function BASE_URL()
 {
-    return 'http://localhost:8080/event-place/';
+    return './';
 }
 
 function BASE_TITLE()
