@@ -8,9 +8,9 @@
 ## Client
  - Registration (Completed)
  - Search (Done)
- - Reserve (Payment) (Ongoing) (Status: For Verification)
+ - Reserve (Payment) (Ongoing) (Status: For Verification) (Completed)
  - Report / Summary (Ongoing)
- - Profile | Email Validation (Ongoing)
+ - Profile | Email Validation (Completed)
  - Dashboard / Landing (Completed)
  - Login (Completed)
  
@@ -31,7 +31,7 @@
    - No. Of Days of Refund Reservation 5 (Verify to Business)
    - Percent of Refund Amount (100%) (Verify to Business)
     
- - Dashboard (Completed) / Email Validation
+ - Dashboard (Completed) / Email Validation (Completed)
  - Login (Completed)
  
  ## Platform
