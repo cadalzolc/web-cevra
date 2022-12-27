@@ -80,6 +80,7 @@ function PostRequestReload(frm) {
             }
         },
         success: function (res) {
+            //console.log(res);
             if (res.success == true){
                 toastr.success(res.message)
                 setTimeout(function () {

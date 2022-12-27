@@ -13,6 +13,7 @@ if (empty($_SESSION['B-ID'])) {
 
 $today = date("D, M j, Y");
 $GLOBALS["tabs"] = "Listings";
+
 $id = $_SESSION['B-ID'];
 $sql = "SELECT * FROM vw_listing WHERE account_id = $id";
 $db = new Server();

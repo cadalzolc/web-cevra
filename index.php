@@ -114,18 +114,11 @@ $cnt_venues = mysqli_num_rows($res_venues);
                                             <div class="main-card mt-4">
                                                 <div class="event-thumbnail">
                                                     <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($row['id']) ?>" class="thumbnail-img">
-                                                        <img src="<?= BASE_URL() .'assets/uploads/listings/'. $row['photo'] ?>" alt="">
+                                                        <img src="<?= BASE_URL() . 'assets/uploads/listings/'. IIF($row['photo'], "", "default.jpg") ?>" alt="">
                                                     </a>
                                                 </div>
                                                 <div class="event-content">
-                                                    <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($row['id']) ?>" class="event-title"><?= $row['name'] ?></a>
-                                                    <div class="duration-price-remaining">
-                                                        <span class="duration-price"><?= $row['rates'] ?></span>
-                                                        <span class="remaining"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="event-footer">
-
+                                                    <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($row['id']) ?>" class="event-name"><?= $row['name'] ?></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -151,6 +144,7 @@ $cnt_venues = mysqli_num_rows($res_venues);
     <script src="<?php echo BASE_URL() . 'assets/base/js/night-mode.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/plugins/js/toastr.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/base/js/app.js' ?>"></script>
+    <?php include("./website/layouts/scripts.php"); ?>
 </body>
 
 </html>

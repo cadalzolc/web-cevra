@@ -62,7 +62,7 @@ $cntLst = mysqli_num_rows($qry_venues);
                                                 <div class="main-card mt-4">
                                                     <div class="event-thumbnail">
                                                         <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($row['id']) ?>" class="thumbnail-img">
-                                                            <img src="<?= BASE_URL() .'assets/uploads/listings/'. $row['photo'] ?>" alt="">
+                                                            <img src="<?= BASE_URL() . 'assets/uploads/listings/'. IIF($row['photo'], "", "default.jpg") ?>" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="event-content">
@@ -94,5 +94,6 @@ $cntLst = mysqli_num_rows($qry_venues);
     <script src="<?php echo BASE_URL() . 'assets/base/js/night-mode.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/plugins/js/toastr.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/base/js/app.js' ?>"></script>
+    <?php include("./website/layouts/scripts.php"); ?>
 </body>
 </html>

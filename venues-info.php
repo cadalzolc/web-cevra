@@ -3,10 +3,22 @@
 session_start();
 
 include('./libs/base.php');
+include('./libs/func.php');
 include('./libs/db.php');
 
 $today = date("D, M j, Y");
 $GLOBALS["tabs"] = "Venues";
+
+if (empty($_GET['ref'])) {
+    header("Location: " . BASE_URL() . 'venues.php');
+    exit;
+}
+
+$id =  Decrypt($_GET['ref']);
+$sql = "SELECT * FROM vw_listing WHERE id = $id";
+$db = new Server();
+$res = $db->DbQuery($sql);
+$row = mysqli_fetch_array($res);
 
 ?>
 
@@ -62,28 +74,11 @@ $GLOBALS["tabs"] = "Venues";
                     <div class="col-xl-8 col-lg-7 col-md-12">
                         <div class="main-event-dt">
                             <div class="event-img">
-                                <img src="./assets/uploads/listings/BE56FF59-59EF-E922-641C-ECB9A7D2448F.jpg" alt="">
+                                <img src="<?php echo BASE_URL() . 'assets/uploads/listings/'. IIF($row['photo'], "", "default.jpg") ?>" alt="">
                             </div>
                             <div class="main-event-content">
-                                <h4>About This Event</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dolor justo, sodales
-                                    mattis orci et, mattis faucibus est. Nulla semper consectetur sapien a tempor. Ut
-                                    vel lacus lorem. Nulla mauris massa, pharetra a mi ut, mattis euismod libero. Ut
-                                    pretium bibendum urna nec egestas. Etiam tempor vehicula libero. Aenean cursus
-                                    venenatis orci, ac porttitor leo porta sit amet. Nulla eleifend mollis enim sed
-                                    rutrum. Nunc cursus ex a ligula consequat aliquet. Donec semper tellus ac ante
-                                    vestibulum, vitae varius leo mattis. In vestibulum blandit tempus. Etiam elit
-                                    turpis, volutpat hendrerit varius ut, posuere a sapien. Maecenas molestie bibendum
-                                    finibus. Nulla euismod neque vel sem hendrerit faucibus. Nam sit amet metus
-                                    sollicitudin, luctus eros at, consectetur libero.</p>
-                                <p>In malesuada luctus libero sed gravida. Suspendisse nunc est, maximus vel viverra
-                                    nec, suscipit non massa. Maecenas efficitur vestibulum pellentesque. Ut finibus
-                                    ullamcorper congue. Sed ut libero sit amet lorem venenatis facilisis. Mauris egestas
-                                    tortor vel massa auctor, eget gravida mauris cursus. Etiam elementum semper
-                                    fermentum. Suspendisse potenti. Morbi lobortis leo urna, non laoreet enim ultricies
-                                    id. Integer id felis nec sapien consectetur porttitor. Proin tempor mauris in odio
-                                    iaculis semper. Cras ultricies nulla et dui viverra, eu convallis orci fermentum.
-                                </p>
+                                <h4><?php echo $row['name'] ?></h4>
+                                <p><?php echo $row['description'] ?></p>
                             </div>
                         </div>
                     </div>
@@ -92,23 +87,25 @@ $GLOBALS["tabs"] = "Venues";
                             <div class="bp-title">
                                 <h4>Details</h4>
                             </div>
-                            <div class="event-dt-right-group">
-                                <div class="event-dt-right-icon">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                </div>
-                                <div class="event-dt-right-content">
-                                    <h4>Location</h4>
-                                    <h5 class="mb-0">00 Challis St, Newport, Victoria, 0000, Australia</h5>
-                                    <a href="#"><i class="fa-solid fa-location-dot me-2"></i>View Map</a>
-                                </div>
-                            </div>
                             <div class="select-tickets-block">
                                 <div class="xtotel-tickets-count">
-                                    <h4><span>$0.00</span></h4>
+                                    <label><strong>Rates:</strong></label>
+                                    <h5><span>₱ <?php echo $row['rates'] ?></span></h5>
                                 </div>
                             </div>
                             <div class="booking-btn">
-                                <a href="checkout.html" class="main-btn btn-hover w-100">Book Now</a>
+                                <?php
+                                    if (empty($_SESSION['C-ID'])) {
+                                ?>
+                                    <a href="#" data-id="<?= $row['id'] ?>" data-dialog="<?php echo BASE_URL() . 'website/forms/dialog-login.php' ?>" class="main-btn btn-hover w-100" style="margin-bottom: 15px;">Sign In to Book this Venue</a>
+                                    <span>Dont have an account? <a href="<?php echo BASE_URL() . 'customer/register.php' ?>">Register here</a></span>
+                                <?php
+                                    } else {
+                                ?>
+                                     <a href="#" data-id="<?= $row['id'] ?>" data-dialog="<?php echo BASE_URL() . 'website/forms/dialog-booking.php' ?>" class="main-btn btn-hover w-100">Book Now</a>
+                                <?php
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -124,6 +121,7 @@ $GLOBALS["tabs"] = "Venues";
     <script src="<?php echo BASE_URL() . 'assets/base/js/night-mode.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/plugins/js/toastr.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/base/js/app.js' ?>"></script>
+    <?php include("./website/layouts/scripts.php"); ?>
 </body>
 
 </html>
