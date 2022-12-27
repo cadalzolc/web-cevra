@@ -21,7 +21,7 @@
  - Summary / Report
  - Profile
    - Information (Contact Number, Address, Photo)
-   - Email Validation
+   - Email Validation (Completed)
    - Business Platform Validation (Documents Upload)
    - Payment Method
     - GCash, PayMaya, Palawan Pay
