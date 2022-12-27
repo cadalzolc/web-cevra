@@ -11,7 +11,7 @@ if (empty($_SESSION['C-ID'])) {
 }
 
 $today = date("D, M j, Y");
-$GLOBALS["tabs"] = "Dashboard";
+$GLOBALS["tabs"] = "Reservation";
 
 ?>
 
@@ -22,7 +22,7 @@ $GLOBALS["tabs"] = "Dashboard";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <title>Customer - Home</title>
+    <title>Reservation - Home</title>
     <link rel="icon" href="<?php echo BASE_URL() . 'assets/base/img/icon.png' ?>" type="image/png" sizes="16x16">
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">

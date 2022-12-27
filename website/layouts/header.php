@@ -74,19 +74,56 @@
                                 <span>Explore Venues</span>
                             </a>
                         </li>
-                        <li class="dropdown account-dropdown">
-                            <a href="#" class="account-link" role="button" id="accountClick" data-bs-auto-close="outside" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="<?php echo BASE_URL() . 'assets/base/img/who.png' ?>" alt="">
-                                <i class="fas fa-caret-down arrow-icon"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-account dropdown-menu-end"  aria-labelledby="accountClick">
-                                <li class="profile-link">
-                                    <a href="<?php echo BASE_URL() . 'customer/register.php' ?>" class="link-item">Customer Registration</a>
-                                    <a href="<?php echo BASE_URL() . 'business/register.php' ?>" class="link-item">Business Registration</a>
-                                    <a href="<?php echo BASE_URL() . 'signin.php' ?>" class="link-item">Sign In</a>
-                                </li>
-                            </ul>
-                        </li>
+
+                        <?php
+                            if (empty($_SESSION['C-ID'])) {
+                        ?>
+                            <li class="dropdown account-dropdown">
+                                <a href="#" class="account-link" role="button" id="accountClick" data-bs-auto-close="outside" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="<?php echo BASE_URL() . 'assets/base/img/who.png' ?>" alt="">
+                                    <i class="fas fa-caret-down arrow-icon"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-account dropdown-menu-end"  aria-labelledby="accountClick">
+                                    <li class="profile-link">
+                                        <a href="<?php echo BASE_URL() . 'customer/register.php' ?>" class="link-item">Customer Registration</a>
+                                        <a href="<?php echo BASE_URL() . 'business/register.php' ?>" class="link-item">Business Registration</a>
+                                        <a href="<?php echo BASE_URL() . 'signin.php' ?>" class="link-item">Sign In</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        <?php
+                            } else {
+                                $id =  $_SESSION['C-ID'];
+                                $sql = "SELECT * FROM accounts WHERE id = $id ";
+                                $db = new Server();
+                                $res = $db->DbQuery($sql);
+                                $info = mysqli_fetch_array($res);
+                        ?>
+                            <li class="dropdown account-dropdown">
+                                <a href="#" class="account-link" role="button" id="accountClick" data-bs-auto-close="outside" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="<?php echo BASE_URL() . 'assets/base/img/who.png' ?>" alt="">
+                                    <i class="fas fa-caret-down arrow-icon"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-account dropdown-menu-end"  aria-labelledby="accountClick">
+                                    <li>
+                                        <div class="dropdown-account-header">
+                                            <div class="account-holder-avatar">
+                                                <img src="<?php echo BASE_URL() . 'assets/base/img/who.png' ?>" alt="">
+                                            </div>
+                                            <h5><?php echo $_SESSION['C-NAME']; ?></h5>
+                                        </div>
+                                    </li>
+                                    <li class="profile-link">
+                                        <a href="<?php echo BASE_URL() . 'customer/profile.php' ?>" class="link-item">My Profile</a>
+                                        <a href="<?php echo BASE_URL() . 'customer' ?>" class="link-item">My Dashboard</a>
+                                        <a href="#" class="link-item" onclick="Logout()">Sign out</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        <?php
+                            }
+                        ?>
+                        
                         <li>
                             <div class="night_mode_switch__btn">
                                 <div id="night-mode" class="fas fa-moon fa-sun"></div>
