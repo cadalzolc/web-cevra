@@ -10,7 +10,7 @@ require_once('PHPMailer/SMTP.php');
 function SendEmail($to, $nameTo, $subject, $message, $altBody)
 {
 
-    $from  = "re.connect0927@gmail.com";
+    $from  = "cevrwa04@gmail.com";
     $nameFrom = "Re-Connect";
 
     $mail = new PHPMailer(true);
@@ -20,7 +20,7 @@ function SendEmail($to, $nameTo, $subject, $message, $altBody)
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
     $mail->Username = $from;
-    $mail->Password = '0513Klover!';
+    $mail->Password = 'fzvxciyjnjjuilcm';
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
     $mail->setFrom($from,  $nameFrom);
@@ -41,7 +41,7 @@ function SendEmail($to, $nameTo, $subject, $message, $altBody)
 function SendEmailMany($address, $subject, $message, $altBody)
 {
 
-    $from  = "re.connect0927@gmail.com";
+    $from  = "cevrwa04@gmail.com";
     $nameFrom = "Re-Connect";
 
     $mail = new PHPMailer(true);
@@ -51,7 +51,7 @@ function SendEmailMany($address, $subject, $message, $altBody)
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
     $mail->Username = $from;
-    $mail->Password = '0513Klover!';
+    $mail->Password = 'fzvxciyjnjjuilcm';
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
     $mail->setFrom($from,  $nameFrom);

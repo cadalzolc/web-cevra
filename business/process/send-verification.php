@@ -13,7 +13,7 @@ $name = "";
 $success = false;
 $msg = 'Verification link not sent';
 
-$id =  $_SESSION['C-ID'];
+$id =  $_SESSION['B-ID'];
 $sql = "SELECT * FROM accounts WHERE id = $id ";
 $db = new Server();
 $res = $db->DbQuery($sql);

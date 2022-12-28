@@ -1,3 +1,15 @@
+<?php 
+
+$id =  $_SESSION['B-ID'];
+$name = $_SESSION['B-NAME'];
+$sql = "SELECT * FROM accounts WHERE id = $id ";
+
+$db = new Server();
+$res = $db->DbQuery($sql);
+$row = mysqli_fetch_array($res);
+
+?>
+
 <header class="header">
     <div class="header-inner">
         <nav class="navbar navbar-expand-lg bg-barren barren-head navbar fixed-top justify-content-sm-start pt-0 pb-0 ps-lg-0 pe-2">
@@ -32,7 +44,20 @@
                             <i class="fa-solid fa-xmark"></i>
                         </button>
                     </div>
-                    <div class="offcanvas-body"></div>
+                    <div class="offcanvas-body">
+                        <?php 
+                            if ($row['email_valid'] == 0){
+                                ?>
+                                 <div class="navbar-nav justify-content-end flex-grow-1 pe_5" >
+                                    <div class="alert alert-danger" role="alert" style="margin: 5px;">
+                                        <span>Please verify your email <?php echo $row['email']; ?>. or 
+                                        <a href="#" onclick="SendVerification(this)" data-url="<?php echo BASE_URL() . 'business/process/send-verification.php'; ?>">Resend Verification</a></span>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                        ?>
+                    </div>
                     <div class="offcanvas-footer"></div>
                 </div>
                 <div class="right-header order-2">

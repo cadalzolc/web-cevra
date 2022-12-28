@@ -132,3 +132,13 @@ function CloseDialog() {
     var ova =  $(this).data("dialog-close");
     $(ova).remove();
 }
+
+function SendVerification(e) {
+    $.post($(e).data("url"), function(res) {
+        if (res.success == true){
+            toastr.success(res.message)
+        }else{
+            toastr.error(res.message);
+        }
+    });
+}
