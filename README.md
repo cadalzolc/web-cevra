@@ -8,7 +8,7 @@
 ## Client
  - Registration (Completed)
  - Search (Done)
- - Reserve (Payment) (Ongoing) (Status: For Verification) (Completed)
+ - Reserve (Completed)
  - Report / Summary (Ongoing)
  - Profile | Email Validation (Completed)
  - Dashboard / Landing (Completed)
@@ -17,8 +17,8 @@
  ## Business
  - Resgistration (Done)
  - Venues (Add, Update, Delete), New|Open|Hidden (For Verification, Reserve -> Date)
- - Reservations (For Verification, Reserve, Refund, Served)
- - Summary / Report
+ - Reservations (For Verification, Paid, Refund, Served) (Completed)
+ - Summary / Report (Ongoing)
  - Profile
    - Information (Contact Number, Address, Photo)
    - Email Validation (Completed)
@@ -31,7 +31,7 @@
    - No. Of Days of Refund Reservation 5 (Verify to Business)
    - Percent of Refund Amount (100%) (Verify to Business)
     
- - Dashboard (Completed) / Email Validation (Completed)
+ - Dashboard / Email Validation (Completed)
  - Login (Completed)
  
  ## Platform
