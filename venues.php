@@ -6,7 +6,6 @@ include('./libs/base.php');
 include('./libs/db.php');
 include('./libs/func.php');
 
-$today = date("D, M j, Y");
 $GLOBALS["tabs"] = "Venues";
 
 $sql_venues = "SELECT * FROM vw_listing";

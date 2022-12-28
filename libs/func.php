@@ -52,4 +52,30 @@ function ToHash($word)
     return hash('sha1', $word);
 }
 
+function LimitString($word, $length)
+{
+    $len = strlen($word);
+    return  substr($word, 0, $len <= 50 ? $len : $length);
+}
+
+function CirlceStatus($status)
+{
+    switch($status){
+        case "RF": return "red-circle";
+        case "PD": return "green-circle";
+        case "FV": return "blue-circle";
+        default: return "";
+    }
+}
+
+function StatusName($status)
+{
+    switch($status){
+        case "FV": return "For Verification";
+        case "PD": return "Paid";
+        case "RF": return "Refunded";
+        default: return "";
+    }
+}
+
 ?>

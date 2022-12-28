@@ -101,7 +101,7 @@ $cntLst = mysqli_num_rows($qry);
                                             </div>
                                             <div class="card-event-dt">
                                                 <h5 class="mb-0"><?=  $row['name']; ?></h5>
-                                                <p class="mb-0"><?=  $row['description']; ?></p>
+                                                <p class="mb-0"><?=  LimitString($row['description'], 120) . '..'; ?></p>
                                             </div>
                                         </div>
                                         <div class="dropdown">

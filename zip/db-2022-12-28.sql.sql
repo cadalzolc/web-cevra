@@ -236,6 +236,10 @@ CREATE PROCEDURE `sp_reservation_by_no` (IN `p_no` VARCHAR(100))  BEGIN
 	SELECT * FROM vw_resevation WHERE ref_no = p_no;
 END$$
 
+CREATE PROCEDURE `sp_reservation_confirm`(IN p_id INT) BEGIN
+	UPDATE reservations SET status = 'PD' WHERE id = p_id;
+END$$
+
 DELIMITER ;
 
 -- --------------------------------------------------------

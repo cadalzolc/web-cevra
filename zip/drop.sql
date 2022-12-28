@@ -18,3 +18,4 @@ DROP PROCEDURE sp_listings_update;
 DROP PROCEDURE sp_login_admin;
 DROP PROCEDURE sp_login_business;
 DROP PROCEDURE sp_login_customer;
+DROP PROCEDURE sp_reservation_confirm;

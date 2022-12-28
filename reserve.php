@@ -109,7 +109,7 @@ $row = mysqli_fetch_array($res);
                                         <div class="d-block" style="margin-top: 15px;">
                                             <h6>Payment Method</h6>
                                         </div>
-                                        <a href="<?php echo BASE_URL() . 'customer/reservation-info.php'; ?>" class="main-btn btn-hover h_50 w-100 mt-5"><i class="fa-solid fa-ticket rotate-icon me-3"></i>View Reservation</a>
+                                        <a href="<?php echo BASE_URL() . 'customer/reservations-info.php=ref='.$row['ref_no']; ?>" class="main-btn btn-hover h_50 w-100 mt-5"><i class="fa-solid fa-ticket rotate-icon me-3"></i>View Reservation</a>
                                     </div>
                                 </div>
                             </div>
