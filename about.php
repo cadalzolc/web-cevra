@@ -37,7 +37,22 @@ $GLOBALS["tabs"] = "About";
 <body class="d-flex flex-column h-100">
     <?php include("./website/layouts/header.php"); ?>
     <div class="wrapper">
-       
+        <div class="breadcrumb-block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-10">
+                        <div class="barren-breadcrumb">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="<?php echo BASE_URL() ?>">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">About Us</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="<?php echo BASE_URL() . 'assets/base/js/jquery-3.6.0.min.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/base/js/bootstrap.bundle.min.js' ?>"></script>

@@ -106,3 +106,41 @@ button:disabled {
     padding: 15px;
     background: #fff;
 }
+
+.forms {
+    background: #fff;
+    padding: 0;
+}
+
+.forms .forms-label {
+    min-width: 80px;
+}
+
+.forms .forms-value {
+    padding: 3px;
+}
+
+.forms .forms-input {
+    border: 1px solid #ccc;
+    border-radius: 0;
+}
+
+.forms .forms-note {
+    color: #000;
+    font-size: 12px;
+    font-weight: bold;
+    padding-bottom: 7px;
+    display: block;
+}
+
+.forms .forms-note .status-yes {
+    color: #198754;
+}
+
+.forms .forms-note .status-no {
+    color: #dc3545;
+}
+
+.card {
+    border-radius: 0;
+}

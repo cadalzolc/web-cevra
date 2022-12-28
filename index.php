@@ -54,42 +54,6 @@ $cnt_venues = mysqli_num_rows($res_venues);
                             <img src="./assets/base/img/logo-1.png" class="hero-logo" />
                         </div>
                     </div>
-                    <div class="col-xl-8 col-lg-8 col-md-10">
-                        <div class="hero-banner-content" style="display: none;">
-                            <h2>Discover Venues For All The Things You Love</h2>
-                            <div class="search-form main-form">
-                                <div class="row g-3">
-                                    <div class="col-lg-5 col-md-12">
-                                        <div class="form-group search-category">
-                                            <div class="dropdown bootstrap-select" style="width: 100%;">
-                                            <select class="selectpicker" data-width="100%" data-size="5" tabindex="null">
-                                                    <option value="browse_all" data-icon="fa-solid fa-tower-broadcast" selected="">Browse All</option>
-                                                    <option value="online_events" data-icon="fa-solid fa-video">Online Events</option>
-                                                    <option value="venue_events" data-icon="fa-solid fa-location-dot"> Venue Events</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5 col-md-12">
-                                        <div class="form-group">
-                                            <div class="dropdown bootstrap-select" style="width: 100%;"><select
-                                                    class="selectpicker" data-width="100%" data-size="5"
-                                                    data-live-search="true">
-                                                    <option value="01" selected="">All</option>
-                                                    <option value="02">Arts</option>
-                                                    <option value="03">Business</option>
-                                                    <option value="04">Coaching and Consulting</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 col-md-12">
-                                        <a href="#" class="main-btn btn-hover w-100">Find</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
