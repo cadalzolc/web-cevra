@@ -10,13 +10,6 @@
                     </a>
                 </li>
                 <li class="menu--item">
-                    <a href="<?php echo BASE_URL() . 'customer/reservation.php' ?>"
-                        class="menu--link <?php if ($GLOBALS["tabs"] === 'Reservation') { echo 'active'; } ?>" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Events">
-                        <i class="fa-solid fa-calendar-days menu--icon"></i>
-                        <span class="menu--label">Reservation</span>
-                    </a>
-                </li>
-                <li class="menu--item">
                     <a href="<?php echo BASE_URL() . 'customer/profile.php' ?>"
                         class="menu--link <?php if ($GLOBALS["tabs"] === 'Profile') { echo 'active'; } ?>" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Contact List">
                         <i class="fa-regular fa-address-card menu--icon"></i>

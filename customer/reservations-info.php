@@ -3,15 +3,32 @@
 session_start(); 
 
 include('../libs/base.php');
+include('../libs/func.php');
 include('../libs/db.php');
 
-if (empty($_SESSION['B-ID'])) {
-    header("Location: " . BASE_URL() . 'business/login.php');
+if (empty($_SESSION['C-ID'])) {
+    header("Location: " . BASE_URL() . 'customer/login.php');
     exit;
 }
 
-$today = date("D, M j, Y");
-$GLOBALS["tabs"] = "Home";
+if (empty($_GET['ref'])) {
+    header("Location: " . BASE_URL() . 'customer');
+    exit;
+}
+
+$ref_no =  $_GET['ref'];
+$sql_rsv = "CALL sp_reservation_by_no('$ref_no');";
+$db = new Server();
+$res_rsv = $db->DbQuery($sql_rsv);
+$cnt_rsv = mysqli_num_rows($res_rsv);
+
+if ($cnt_rsv == 0) {
+    header("Location: " . BASE_URL() . 'customer');
+    exit;
+}
+
+$GLOBALS["tabs"] = "Dashboard";
+$row_rsv = mysqli_fetch_array($res_rsv);
 
 ?>
 
@@ -23,7 +40,7 @@ $GLOBALS["tabs"] = "Home";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <title>Business - Home</title>
+    <title>Customer - Reservations Info</title>
     <link rel="icon" href="<?php echo BASE_URL() . 'assets/base/img/icon.png' ?>" type="image/png" sizes="16x16">
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
@@ -51,53 +68,47 @@ $GLOBALS["tabs"] = "Home";
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="d-main-title">
-                            <h3><i class="fa-solid fa-home me-3"></i></i>Dashboard</h3>
+                        <div class="barren-breadcrumb">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb" style="padding-left: 0 !important;">
+                                    <li class="breadcrumb-item"><a href="<?php echo BASE_URL() . 'customer' ?>">Dahsboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Info</li>
+                                </ol>
+                            </nav>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="main-card p-4 mt-5">
-                            <div class="dashboard-wrap-content">
-                                <div class="dashboard-report-content">
-                                    <div class="row">
-                                        <div class="col-xl-4 col-lg-6 col-md-6">
-                                            <div class="dashboard-report-card purple">
-                                                <div class="card-content">
-                                                    <div class="card-content">
-                                                        <span class="card-title fs-6">Listings</span>
-                                                        <span class="card-sub-title fs-3">0</span>
-                                                    </div>
-                                                    <div class="card-media">
-                                                        <i class="far fa-images"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
+                        <div class="d-main-title mt-4">
+                            <h3><i class="fas fa-bookmark me-3"></i></i>Reservation Details</h3>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        <div class="main-card order-summary">
+                            <div class="bp-title">
+                                <h4>REF: <?php echo $row_rsv["ref_no"]; ?></h4>
+                            </div>
+                            <div class="order-summary-content p_30">
+                                <div class="event-order-dt">
+                                    <div class="event-thumbnail-img">
+                                        <img src="<?= BASE_URL() . 'assets/uploads/listings/'. IIF($row_rsv['listing_photo'], "", "default.jpg") ?>" alt="" style="width: 160px; height: 140px;">
+                                    </div>
+                                    <div class="event-order-dt-content">
+                                        <h5><?php echo $row_rsv["listing_name"]; ?></h5>
+                                        <div class="d-flex">
+                                            <label class="l-caption">Customer :</label>
+                                            <span><?php echo $row_rsv["customer"]; ?></span>
                                         </div>
-                                        <div class="col-xl-4 col-lg-6 col-md-6">
-                                            <div class="dashboard-report-card red">
-                                                <div class="card-content">
-                                                    <div class="card-content">
-                                                        <span class="card-title fs-6">Reservations</span>
-                                                        <span class="card-sub-title fs-3">0</span>
-                                                    </div>
-                                                    <div class="card-media">
-                                                        <i class="fas fa-bookmark"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div class="d-flex">
+                                            <label class="l-caption">Reservation Date :</label>
+                                            <span><?php echo $row_rsv["booking_date"]; ?></span>
                                         </div>
-                                        <div class="col-xl-4 col-lg-6 col-md-6">
-                                            <div class="dashboard-report-card info">
-                                                <div class="card-content">
-                                                    <div class="card-content">
-                                                        <span class="card-title fs-6">Sales</span>
-                                                        <span class="card-sub-title fs-3">0</span>
-                                                    </div>
-                                                    <div class="card-media">
-                                                        <i class="far fa-folder"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div class="d-flex">
+                                            <label class="l-caption">Amount :</label>
+                                            <span>₱ <?php echo $row_rsv["amount"]; ?></span>
+                                        </div>
+                                        <div class="d-flex">
+                                            <label class="l-caption">Status :</label>
+                                            </span><?= StatusName($row_rsv["status"]); ?>
                                         </div>
                                     </div>
                                 </div>
@@ -116,7 +127,7 @@ $GLOBALS["tabs"] = "Home";
     <script src="<?php echo BASE_URL() . 'assets/base/js/night-mode.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/base/js/app.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/plugins/js/toastr.js' ?>"></script>
-    <script src="<?php echo BASE_URL() . 'business/js/app.js' ?>"></script>
+    <script src="<?php echo BASE_URL() . 'customer/js/app.js' ?>"></script>
 </body>
 
 </html>

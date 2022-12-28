@@ -144,3 +144,8 @@ button:disabled {
 .card {
     border-radius: 0;
 }
+
+.l-caption {
+    font-weight: bold;
+    min-width: 80px;
+}

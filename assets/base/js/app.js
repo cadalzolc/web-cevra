@@ -23,6 +23,7 @@ $(function () {
 
 function OnVerticalNavClick() {
     $('#vnav').toggleClass("vertical_nav__minify");
+    $('#vbody').toggleClass("wrapper__minify");
 }
 
 function PostRequestRedirect(frm) {
