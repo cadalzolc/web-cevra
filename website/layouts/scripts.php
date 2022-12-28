@@ -1,0 +1,1 @@
+<script src="<?php echo BASE_URL() . 'website/js/app.js' ?>"></script>

@@ -11,6 +11,7 @@ if (empty($_SESSION['C-ID'])) {
 }
 
 $today = date("D, M j, Y");
+$GLOBALS["tabs"] = "Dashboard";
 
 ?>
 

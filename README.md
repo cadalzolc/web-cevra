@@ -1,32 +1,41 @@
 # Calbayog Events Place Reservation System
 
 ### Dashboard
-- Client (Done)
-- Bussiness (Done)
-- Platform Owner (Done)
+- Client (Completed)
+- Bussiness (Completed)
+- Platform Owner (Completed)
 
 ## Client
- - Registration (Done)
+ - Registration (Completed)
  - Search (Done)
- - Reserve (Payment) (Ongoing)
+ - Reserve (Payment) (Ongoing) (Status: For Verification) (Completed)
  - Report / Summary (Ongoing)
- - Profile (Ongoing)
- - Dashboard / Landing (Done)
- - Login (Done)
+ - Profile | Email Validation (Completed)
+ - Dashboard / Landing (Completed)
+ - Login (Completed)
  
  ## Business
  - Resgistration (Done)
-  -  (Business Platform Validation) TBC
- - List of Events Venue (Add, Update, Delete), Open/Closed Active/Deactivate (Done)
- - List Reservation (Pending)
- - List Transaction (Paid, Confirmed, Done, History)
- - Report / Summary
- - Profile ( Payment Info / Method )
- - Dashboard (Done)
- - Login (Done)
+ - Venues (Add, Update, Delete), New|Open|Hidden (For Verification, Reserve -> Date)
+ - Reservations (For Verification, Reserve, Refund, Served)
+ - Summary / Report
+ - Profile
+   - Information (Contact Number, Address, Photo)
+   - Email Validation (Completed)
+   - Business Platform Validation (Documents Upload)
+   - Payment Method
+    - GCash, PayMaya, Palawan Pay
+   - Free All Option
+   - No. Of Days for Advanced Booking 7 (Verify to Business)
+   - No. Of Days of Allocated for Payment 2 (Verify to Business)
+   - No. Of Days of Refund Reservation 5 (Verify to Business)
+   - Percent of Refund Amount (100%) (Verify to Business)
+    
+ - Dashboard (Completed) / Email Validation (Completed)
+ - Login (Completed)
  
  ## Platform
- - List of Clients
- - List of Business
- - Sales Summary of Business
- - Login (Admin) (Done)
+ - Business Validation
+ - Clients / Business
+ - Summary / Report
+ - Login (Admin) (Completed)

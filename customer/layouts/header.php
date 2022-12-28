@@ -1,3 +1,15 @@
+<?php 
+
+$id =  $_SESSION['C-ID'];
+$name = $_SESSION['C-NAME'];
+$sql = "SELECT * FROM accounts WHERE id = $id ";
+
+$db = new Server();
+$res = $db->DbQuery($sql);
+$row = mysqli_fetch_array($res);
+
+?>
+
 <header class="header">
     <div class="header-inner">
         <nav class="navbar navbar-expand-lg bg-barren barren-head navbar fixed-top justify-content-sm-start pt-0 pb-0 ps-lg-0 pe-2">
@@ -32,11 +44,28 @@
                             <i class="fa-solid fa-xmark"></i>
                         </button>
                     </div>
-                    <div class="offcanvas-body"></div>
+                    <div class="offcanvas-body">
+                        <?php 
+                            if ($row['email_valid'] == 0){
+                                ?>
+                                 <div class="navbar-nav justify-content-end flex-grow-1 pe_5" >
+                                    <div class="alert alert-danger" role="alert" style="margin: 5px;">
+                                        <span>Please verify your email <?php echo $row['email']; ?>. or <a href="#">Resend Verification</a></span>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                        ?>
+                    </div>
                     <div class="offcanvas-footer"></div>
                 </div>
                 <div class="right-header order-2">
                     <ul class="align-self-stretch">
+                        <li>
+                            <a href="<?php echo BASE_URL() . 'venues.php' ?>" class="create-btn btn-hover"> <i class="fa-solid fa-calendar-days"></i>
+                                <span>Explore Venues</span>
+                            </a>
+                        </li>
                         <li class="dropdown account-dropdown">
                             <a href="#" class="account-link" role="button" id="accountClick" data-bs-auto-close="outside" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="<?php echo BASE_URL() . 'assets/base/img/who.png' ?>" alt="">
@@ -48,7 +77,7 @@
                                         <div class="account-holder-avatar">
                                             <img src="<?php echo BASE_URL() . 'assets/base/img/who.png' ?>" alt="">
                                         </div>
-                                        <h5><?php echo $_SESSION['C-NAME'] ?></h5>
+                                        <h5><?php echo $name; ?></h5>
                                     </div>
                                 </li>
                                 <li class="profile-link">

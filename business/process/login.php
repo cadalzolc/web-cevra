@@ -14,6 +14,7 @@ $msg = "Business login failed";
 $p_email = $_POST['email'];
 $p_password = ToHash($_POST['password']);
 
+
 $sql = "CALL sp_login_business('$p_email', '$p_password')";
 
 $db = new Server();
@@ -26,8 +27,9 @@ if ($cnt == 1){
     $name = $arr['name'];
     $success = true;
     $msg = 'Login Successful';
-    $_SESSION['B-ID'] = $arr['id'];
-    $_SESSION['B-NAME'] =  $arr['name'];
+    $_SESSION['C-ID'] = $arr['id'];
+    $_SESSION['C-NAME'] =  $arr['name'];
+    $_SESSION['C-EMAIL'] =  $arr['email'];
 }
 
 $data = '{ 
