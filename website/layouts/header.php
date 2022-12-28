@@ -116,7 +116,7 @@
                                     <li class="profile-link">
                                         <a href="<?php echo BASE_URL() . 'customer/profile.php' ?>" class="link-item">My Profile</a>
                                         <a href="<?php echo BASE_URL() . 'customer' ?>" class="link-item">My Dashboard</a>
-                                        <a href="#" class="link-item" onclick="Logout()">Sign out</a>
+                                        <a href="#" class="link-item" onclick="Logout(this)" data-url="<?php echo BASE_URL() . 'customer/process/logout.php' ?>">Sign out</a>
                                     </li>
                                 </ul>
                             </li>

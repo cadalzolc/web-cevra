@@ -1,6 +1,6 @@
-function Logout() {
+function Logout(e) {
     if (confirm('Log-Out?')) {
-        window.location.href = './process/logout.php?'
+        window.location.href = $(e).data("url");
     }
 }
 

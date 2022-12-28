@@ -5,7 +5,7 @@
                 <li class="menu--item">
                     <a href="<?php echo BASE_URL() . 'customer' ?>"
                         class="menu--link <?php if ($GLOBALS["tabs"] === 'Dashboard') { echo 'active'; } ?>" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
-                        <i class="fa-solid fa-gauge menu--icon"></i>
+                        <i class="fa-solid fa-home menu--icon"></i>
                         <span class="menu--label">Dashboard</span>
                     </a>
                 </li>
