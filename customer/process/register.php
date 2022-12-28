@@ -6,7 +6,6 @@ include('../../libs/db.php');
 
 $data = '';
 $no = "";
-$name = "";
 $success = false;
 $msg = "Customer registration failed";
 $p_first_name = $_POST['first_name'];
@@ -22,11 +21,20 @@ $qry = $db->DbQuery($sql);
 if ($qry){
     $arr = mysqli_fetch_array($qry);
     $no = $arr['id'];
-    $name = $arr['name'];
+    $name = $p_first_name .''. $p_last_name;
     $msg = $arr['message'];
     if (empty($arr['message']))  {
         $success = true;
         $msg = 'Customer registration is successful';
+
+        $link = BASE_URL() .'verify-account.php?ref=' .  Encrypt($no);
+        $body = "<br><p>Hi " . $name .", Thank you for your registration. Please click or visit the link to verify you account.</p><p>Verify Link: <strong>".  $link ." </strong></p>";
+
+        $reciept = SendEmail($p_email, $name, 'Account Verification', $body, $body);
+
+        if ($reciept[0] == '1') {
+            $msg = $msg . ' And a verification link was sent to your email';
+        }
     }
 }
 

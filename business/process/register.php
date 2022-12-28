@@ -9,11 +9,11 @@ $no = "";
 $name = "";
 $success = false;
 $msg = "Business registration failed";
-$p_name = $_POST['name'];
-$p_email = $_POST['email'];
-$p_password = ToHash($_POST['password']);
+$name = $_POST['name'];
+$email = $_POST['email'];
+$password = ToHash($_POST['password']);
 
-$sql = "CALL sp_account_create_business('$p_email', '$p_password', '$p_name')";
+$sql = "CALL sp_account_create_business('$email', '$password', '$name')";
 
 $db = new Server();
 $qry = $db->DbQuery($sql);
@@ -21,11 +21,20 @@ $qry = $db->DbQuery($sql);
 if ($qry){
     $arr = mysqli_fetch_array($qry);
     $no = $arr['id'];
-    $name = $arr['name'];
     $msg = $arr['message'];
+
     if (empty($arr['message']))  {
+
         $success = true;
         $msg = 'Business registration is successful';
+        $link = BASE_URL() .'verify-account.php?ref=' .  Encrypt($no);
+        $body = "<br><p>Hi " . $name .", Thank you for your registration. Please click or visit the link to verify you account.</p><p>Verify Link: <strong>".  $link ." </strong></p>";
+
+        $reciept = SendEmail($email, $name, 'Account Verification', $body, $body);
+
+        if ($reciept[0] == '1') {
+            $msg = $msg . ' And a verification link was sent to your email';
+        }
     }
 }
 

@@ -50,7 +50,8 @@ $row = mysqli_fetch_array($res);
                                 ?>
                                  <div class="navbar-nav justify-content-end flex-grow-1 pe_5" >
                                     <div class="alert alert-danger" role="alert" style="margin: 5px;">
-                                        <span>Please verify your email <?php echo $row['email']; ?>. or <a href="#">Resend Verification</a></span>
+                                        <span>Please verify your email <?php echo $row['email']; ?>. or 
+                                        <a href="#" onclick="SendVerification(this)" data-url="<?php echo BASE_URL() . '/customer/process/send-verification.php'; ?>">Resend Verification</a></span>
                                     </div>
                                 </div>
                                 <?php

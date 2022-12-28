@@ -27,9 +27,9 @@ if ($cnt == 1){
     $name = $arr['name'];
     $success = true;
     $msg = 'Login Successful';
-    $_SESSION['C-ID'] = $arr['id'];
-    $_SESSION['C-NAME'] =  $arr['name'];
-    $_SESSION['C-EMAIL'] =  $arr['email'];
+    $_SESSION['B-ID'] = $arr['id'];
+    $_SESSION['B-NAME'] =  $arr['name'];
+    $_SESSION['B-EMAIL'] =  $arr['email'];
 }
 
 $data = '{ 
