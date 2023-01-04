@@ -10,7 +10,6 @@ if (empty($_SESSION['C-ID'])) {
     exit;
 }
 
-$today = date("D, M j, Y");
 $GLOBALS["tabs"] = "Profile";
 
 ?>

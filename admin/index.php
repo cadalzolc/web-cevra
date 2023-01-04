@@ -44,6 +44,68 @@ $GLOBALS["tabs"] = "Home";
 <body class="d-flex flex-column h-100">
     <?php include("./layouts/header.php"); ?>
     <?php include("./layouts/sidebar.php"); ?>
+    <div class="wrapper wrapper-body" id="vbody">
+        <div class="dashboard-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-main-title">
+                            <h3><i class="fa-solid fa-home me-3"></i></i>Dashboard</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="main-card p-4 mt-5">
+                            <div class="dashboard-wrap-content">
+                                <div class="dashboard-report-content">
+                                    <div class="row">
+                                        <div class="col-xl-4 col-lg-6 col-md-6">
+                                            <div class="dashboard-report-card purple">
+                                                <div class="card-content">
+                                                    <div class="card-content">
+                                                        <span class="card-title fs-6">Clients</span>
+                                                        <span class="card-sub-title fs-3">0</span>
+                                                    </div>
+                                                    <div class="card-media">
+                                                        <i class="far fa-images"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-6 col-md-6">
+                                            <div class="dashboard-report-card red">
+                                                <div class="card-content">
+                                                    <div class="card-content">
+                                                        <span class="card-title fs-6">Business</span>
+                                                        <span class="card-sub-title fs-3">0</span>
+                                                    </div>
+                                                    <div class="card-media">
+                                                        <i class="fas fa-bookmark"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-6 col-md-6">
+                                            <div class="dashboard-report-card info">
+                                                <div class="card-content">
+                                                    <div class="card-content">
+                                                        <span class="card-title fs-6">Sales</span>
+                                                        <span class="card-sub-title fs-3">0</span>
+                                                    </div>
+                                                    <div class="card-media">
+                                                        <i class="far fa-folder"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="<?php echo BASE_URL() . 'assets/base/js/jquery-3.6.0.min.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/base/js/bootstrap.bundle.min.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/base/js/owl.carousel.js' ?>"></script>
