@@ -13,7 +13,8 @@ if (empty($_SESSION['B-ID'])) {
 
 $GLOBALS["tabs"] = "Reports";
 
-$sql = "SELECT * FROM vw_resevation WHERE status != 'FV'";
+$owner = $_SESSION['B-ID'];
+$sql = "SELECT * FROM vw_resevation WHERE status != 'FV' AND business_id = $owner";
 $db = new Server();
 $rows = $db->DbQuery($sql);
 $cnt = mysqli_num_rows($rows);
