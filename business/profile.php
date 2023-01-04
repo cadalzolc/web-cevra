@@ -13,11 +13,13 @@ if (empty($_SESSION['B-ID'])) {
 
 $GLOBALS["tabs"] = "Profile";
 
-$owner = $_SESSION['B-ID'];
-$sql = "SELECT * FROM vw_resevation WHERE status != 'FV' AND business_id = $owner";
+$id =  $_SESSION['B-ID'];
+$name = $_SESSION['B-NAME'];
+$sql = "SELECT * FROM accounts WHERE id = $id ";
+
 $db = new Server();
-$rows = $db->DbQuery($sql);
-$cnt = mysqli_num_rows($rows);
+$res = $db->DbQuery($sql);
+$row = mysqli_fetch_array($res);
 
 ?>
 
@@ -62,19 +64,82 @@ $cnt = mysqli_num_rows($rows);
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="main-card mt-4 p-4 d-flex justify-content-between align-items-center">
-                            <div class="bp-info">
-                                <h4>Business Information</h4>
-                                <p class="mb-0">No payment information added yet.</p>
+                        <div class="main-card add-organisation-card p-4 mt-5">
+                            <div class="ocard-left">
+                                <div class="ocard-avatar">
+                                    <img src="<?php echo BASE_URL() . 'assets/uploads/photo/'. IIF($row['photo'], "", "default.png") ?>"
+                                        alt="">
+                                </div>
+                                <div class="ocard-name">
+                                    <h4><?php echo $row['name']; ?></h4>
+                                    <span>Business</span>
+                                </div>
                             </div>
-                            <button class="pe-4 ps-4 text-center co-main-btn h_40 d-inline-block" >Edit</button>
                         </div>
-                        <div class="main-card mt-4 p-4 d-flex justify-content-between align-items-center">
-                            <div class="bp-info">
-                                <h4>Payment Information</h4>
-                                <p class="mb-0">No payment information added yet.</p>
+                        <div class="main-card mt-4 p-4">
+                            <div class="bp-info forms-display">
+                                <div class="d-block">
+                                    <h4>Business Information</h4>
+                                    <button class="pe-4 ps-4 text-center co-main-btn h_40 d-inline-block tp-btn"
+                                        data-id="<?= $row['id'] ?>" data-dialog="<?php echo BASE_URL() . 'business/forms/form-business-info.php' ?>">Edit</button>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="form-group mt-4">
+                                            <label class="form-label">Name</label>
+                                            <input class="form-control h_40" type="text" value="<?php echo $row['name']; ?>" readonly="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="form-group mt-4">
+                                            <label class="form-label">Email</label>
+                                            <input class="form-control h_40" type="text" value="<?php echo $row['email']; ?>" readonly="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="form-group mt-4">
+                                            <label class="form-label">Last Login</label>
+                                            <input class="form-control h_40" type="text" value="<?php echo $row['last_login']; ?>" readonly="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="form-group mt-4">
+                                            <label class="form-label">Business Verification</label>
+                                            <?php 
+                                                if ($row['verify'] == 1) {
+                                            ?>
+                                                <input class="form-control h_40" type="text" value="VERIFIEVD" readonly="">
+                                            <?php
+                                                } else {
+                                            ?>
+                                                <input class="form-control h_40" type="text" value="FOR VERIFICATION" readonly="">
+                                            <?php
+                                                }
+                                            ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="form-group mt-4">
+                                            <label class="form-label">Business Proof</label>
+                                            <input class="form-control h_40" type="text" value="" readonly="">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <button class="pe-4 ps-4 text-center co-main-btn h_40 d-inline-block" data-bs-toggle="modal" data-bs-target="#paymentinfoModal">Edit</button>
+                        </div>
+                        <div class="main-card mt-4 p-4">
+                            <div class="bp-info forms-display">
+                                <div class="d-block">
+                                    <h4>Payment Method</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="form-group mt-4">
+                                            <textarea class="form-control" rows="10" readonly=""><?php echo $row['payment_method']; ?></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

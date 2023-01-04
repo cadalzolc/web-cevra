@@ -32,7 +32,7 @@ if ($cnt == 1){
 
 $data = '{ 
     "success": '. ToBoolean($success) .',
-    "message": "'. $msg .'"
+    "message": "'. $sql .'"
 }';
 
 header('Content-Type: application/json');

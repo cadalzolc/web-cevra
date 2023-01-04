@@ -20,18 +20,6 @@
                         <span class="menu--label">Business</span>
                     </a>
                 </li>
-                <li class="menu--item">
-                    <a href="<?php echo BASE_URL() . 'admin/sales.php' ?>" class="menu--link <?php if ($GLOBALS["tabs"] === 'Sales') { echo 'active'; } ?>" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Sales">
-                        <i class="fa-solid fa-rectangle-ad menu--icon"></i>
-                        <span class="menu--label">Sales Summart</span>
-                    </a>
-                </li>
-                <li class="menu--item">
-                    <a href="<?php echo BASE_URL() . 'admin/reports.php' ?>" class="menu--link <?php if ($GLOBALS["tabs"] === 'Reports') { echo 'active'; } ?>" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Reports">
-                        <i class="fa-solid fa-rectangle-ad menu--icon"></i>
-                        <span class="menu--label">Reports</span>
-                    </a>
-                </li>
             </ul>
         </div>
     </div>
