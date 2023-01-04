@@ -15,20 +15,11 @@ $row = mysqli_fetch_array($res);
         <div class="row justify-content-center">
             <div class="col-xl-5 col-lg-6 col-md-6">
                 <div class="dialog">
-                    <form method="POST" action="<?php echo BASE_URL() . 'website/process/login.php' ?>"
+                    <form method="POST" action="<?php echo BASE_URL() . 'business/process/business-info.php' ?>"
                         onsubmit="return PostRequestReload(this);" data-div="#<?php echo $_GET['div'] ?>"
                         data-confirm="#btnSignUp" data-cancel="#btnCancel" class="login-form">
                         <h2 class="registration-title">Business Profile</h2>
                         <div class="row">
-                            <div class="col-lg-12 col-md-12">
-                                <div class="form-group text-center mt-4">
-                                    <label class="form-label" for="photo" >Logo*</label>
-                                    <span class="org_design_button btn-file">
-                                        <span><i class="fa-solid fa-camera"></i></span>
-                                        <input type="file" id="photo" accept="image/*" name="photo">
-                                    </span>
-                                </div>
-                            </div>
                             <div class="col-lg-12 col-md-12">
                                 <div class="form-group mt-4">
                                     <label class="form-label">Business Name</label>
