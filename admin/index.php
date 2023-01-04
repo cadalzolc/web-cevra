@@ -66,7 +66,7 @@ $GLOBALS["tabs"] = "Home";
                                                         <span class="card-sub-title fs-3">0</span>
                                                     </div>
                                                     <div class="card-media">
-                                                        <i class="far fa-images"></i>
+                                                        <i class="far fa-folder"></i>
                                                     </div>
                                                 </div>
                                             </div>
@@ -79,7 +79,7 @@ $GLOBALS["tabs"] = "Home";
                                                         <span class="card-sub-title fs-3">0</span>
                                                     </div>
                                                     <div class="card-media">
-                                                        <i class="fas fa-bookmark"></i>
+                                                        <i class="far fa-folder"></i>
                                                     </div>
                                                 </div>
                                             </div>
