@@ -7,6 +7,7 @@ DROP TABLE reservations;
 DROP TABLE users;
 
 DROP VIEW vw_listing;
+DROP VIEW vw_resevation;
 
 DROP PROCEDURE sp_account_create_business;
 DROP PROCEDURE sp_account_create_customer;
@@ -18,4 +19,6 @@ DROP PROCEDURE sp_listings_update;
 DROP PROCEDURE sp_login_admin;
 DROP PROCEDURE sp_login_business;
 DROP PROCEDURE sp_login_customer;
+DROP PROCEDURE sp_reservation;
+DROP PROCEDURE sp_reservation_by_no;
 DROP PROCEDURE sp_reservation_confirm;
