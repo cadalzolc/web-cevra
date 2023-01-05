@@ -53,6 +53,26 @@ $GLOBALS["tabs"] = "Contact";
                 </div>
             </div>
         </div>
+        <div class="explore-events p-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12">
+                        <div class = "panel-body">
+                            <strong><h3>CONTACT US</h3></strong>
+                            <br />
+                            <br />
+                            <center><img src="<?php echo BASE_URL() . 'assets/base/img/logo-1.png';?>" width = "500" height = "400" /></center>
+                            <br />
+                            <br />
+                            <center>
+                            <p>Contact No: +639655291005</p>
+                            <p>Email: cevrwa04@gmail.com</p>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="<?php echo BASE_URL() . 'assets/base/js/jquery-3.6.0.min.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/base/js/bootstrap.bundle.min.js' ?>"></script>
