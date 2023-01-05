@@ -66,7 +66,7 @@ $cnt_venues = mysqli_num_rows($res_venues);
                         <?php 
                             if ($cnt_venues == 0) {
                         ?>
-                            <h5>No venue selectrion to display.</h5>
+                            <h5>No venue selection to display.</h5>
                         <?php
                             } else {
                         ?>
