@@ -24,6 +24,12 @@ if ($cnt == 0) {
 
 $row = mysqli_fetch_array($res);
 
+$id =  $row['business_id'];
+$sql_owner = "SELECT * FROM accounts WHERE id = $id";
+$db = new Server();
+$res_owner = $db->DbQuery($sql_owner);
+$row_owner = mysqli_fetch_array($res_owner);
+
 ?>
 
 <!DOCTYPE html>
@@ -108,8 +114,11 @@ $row = mysqli_fetch_array($res);
                                         <hr>
                                         <div class="d-block" style="margin-top: 15px;">
                                             <h6>Payment Method</h6>
+                                            <textarea rows="20" readonly class="form-control">
+                                                <?php echo $row_owner['payment_method']; ?>
+                                            </textarea>
                                         </div>
-                                        <a href="<?php echo BASE_URL() . 'customer/reservations-info.php=ref='.$row['ref_no']; ?>" class="main-btn btn-hover h_50 w-100 mt-5"><i class="fa-solid fa-ticket rotate-icon me-3"></i>View Reservation</a>
+                                        <a href="<?php echo BASE_URL() . 'customer/reservations-info.php?ref='.$row['ref_no']; ?>" class="main-btn btn-hover h_50 w-100 mt-5"><i class="fa-solid fa-ticket rotate-icon me-3"></i>View Reservation</a>
                                     </div>
                                 </div>
                             </div>

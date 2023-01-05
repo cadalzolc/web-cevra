@@ -81,19 +81,11 @@ $cntLst = mysqli_num_rows($qry_venues);
                                     </div>
                                     <div class="col-lg-5 col-md-12">
                                         <div class="form-group">
-                                            <div class="dropdown bootstrap-select" style="width: 100%;"><select
-                                                    class="selectpicker" data-width="100%" data-size="5"
-                                                    data-live-search="true">
-                                                    <option value="01" selected="">All</option>
-                                                    <option value="02">Arts</option>
-                                                    <option value="03">Business</option>
-                                                    <option value="04">Coaching and Consulting</option>
-                                                </select>
-                                            </div>
+                                            <input class="form-control" name="search" placeholder="Search here" value="" style="padding: 15px !important;" />
                                         </div>
                                     </div>
                                     <div class="col-lg-2 col-md-12">
-                                        <a href="#" class="main-btn btn-hover w-100">Find</a>
+                                        <a href="#" class="main-btn btn-hover w-100">Search</a>
                                     </div>
                                 </div>
                             </div>
@@ -115,8 +107,10 @@ $cntLst = mysqli_num_rows($qry_venues);
                                                             <img src="<?= BASE_URL() . 'assets/uploads/listings/'. IIF($row['photo'], "", "default.jpg") ?>" alt="">
                                                         </a>
                                                     </div>
-                                                    <div class="event-content">
-                                                        <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($row['id']) ?>" class="event-title"><?= $row['name'] ?></a>
+                                                    <div class="event-content" style="text-align: left;">
+                                                        <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($row['id']) ?>" class="event-title" style="margin-bottom: 0;"><?= $row['name'] ?></a>
+                                                        <span><?php echo $row['account_name'] ?></span>
+                                                        <br><br>
                                                         <div class="duration-price-remaining">
                                                             <span class="duration-price">₱ <?= $row['rates'] ?></span>
                                                             <span class="remaining"></span>

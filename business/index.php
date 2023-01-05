@@ -3,6 +3,7 @@
 session_start(); 
 
 include('../libs/base.php');
+include('../libs/func.php');
 include('../libs/db.php');
 
 if (empty($_SESSION['B-ID'])) {
@@ -12,6 +13,24 @@ if (empty($_SESSION['B-ID'])) {
 
 $today = date("D, M j, Y");
 $GLOBALS["tabs"] = "Home";
+
+$id = $_SESSION['B-ID'];
+$sql_count = "SELECT * FROM vw_business_count WHERE business_id = $id ";
+
+$db = new Server();
+$res_count = $db->DbQuery($sql_count);
+$row_count = mysqli_fetch_array($res_count);
+$cnt_all = mysqli_num_rows($res_count);
+
+$list = 0;
+$reserve = 0;
+$sales = 0;
+
+if ($cnt_all != 0) {
+    $list = $row_count['listing'];
+    $reserve = $row_count['reserve'];
+    $sales = $row_count['sales'];
+}
 
 ?>
 
@@ -65,7 +84,7 @@ $GLOBALS["tabs"] = "Home";
                                                 <div class="card-content">
                                                     <div class="card-content">
                                                         <span class="card-title fs-6">Listings</span>
-                                                        <span class="card-sub-title fs-3">0</span>
+                                                        <span class="card-sub-title fs-3"><?php echo $list; ?></span>
                                                     </div>
                                                     <div class="card-media">
                                                         <i class="far fa-images"></i>
@@ -78,7 +97,7 @@ $GLOBALS["tabs"] = "Home";
                                                 <div class="card-content">
                                                     <div class="card-content">
                                                         <span class="card-title fs-6">Reservations</span>
-                                                        <span class="card-sub-title fs-3">0</span>
+                                                        <span class="card-sub-title fs-3"><?php echo $reserve; ?></span>
                                                     </div>
                                                     <div class="card-media">
                                                         <i class="fas fa-bookmark"></i>
@@ -91,7 +110,7 @@ $GLOBALS["tabs"] = "Home";
                                                 <div class="card-content">
                                                     <div class="card-content">
                                                         <span class="card-title fs-6">Sales</span>
-                                                        <span class="card-sub-title fs-3">0</span>
+                                                        <span class="card-sub-title fs-3"><?php echo $sales; ?></span>
                                                     </div>
                                                     <div class="card-media">
                                                         <i class="far fa-folder"></i>

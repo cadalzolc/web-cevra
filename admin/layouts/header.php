@@ -48,7 +48,7 @@
                                         <div class="account-holder-avatar">
                                             <img src="<?php echo BASE_URL() . 'assets/base/img/who.png' ?>" alt="">
                                         </div>
-                                        <h5><?php echo $_SESSION['B-NAME'] ?></h5>
+                                        <h5><?php echo $_SESSION['A-NAME'] ?></h5>
                                     </div>
                                 </li>
                                 <li class="profile-link">

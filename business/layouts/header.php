@@ -1,12 +1,12 @@
 <?php 
 
-$id =  $_SESSION['B-ID'];
+$bid =  $_SESSION['B-ID'];
 $name = $_SESSION['B-NAME'];
-$sql = "SELECT * FROM accounts WHERE id = $id ";
+$sql_current = "SELECT * FROM accounts WHERE id = $bid ";
 
 $db = new Server();
-$res = $db->DbQuery($sql);
-$row = mysqli_fetch_array($res);
+$res_cur = $db->DbQuery($sql_current);
+$row_cur_user = mysqli_fetch_array($res_cur);
 
 ?>
 
@@ -46,12 +46,24 @@ $row = mysqli_fetch_array($res);
                     </div>
                     <div class="offcanvas-body">
                         <?php 
-                            if ($row['email_valid'] == 0){
+                            if ($row_cur_user['email_valid'] == 0){
                                 ?>
                                  <div class="navbar-nav justify-content-end flex-grow-1 pe_5" >
                                     <div class="alert alert-danger" role="alert" style="margin: 5px;">
-                                        <span>Please verify your email <?php echo $row['email']; ?>. or 
+                                        <span>Please verify your email <?php echo $row_cur_user['email']; ?>. or 
                                         <a href="#" onclick="SendVerification(this)" data-url="<?php echo BASE_URL() . 'business/process/send-verification.php'; ?>">Resend Verification</a></span>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                        ?>
+                        <?php 
+                            if ($row_cur_user['verify'] == 0){
+                                ?>
+                                 <div class="navbar-nav justify-content-end flex-grow-1 pe_5" >
+                                    <div class="alert alert-danger" role="alert" style="margin: 5px;">
+                                        <span>Please validate your business.
+                                        <a href="<?php echo BASE_URL() . 'business/profile.php'; ?>"> Go to Profile</a></span>
                                     </div>
                                 </div>
                                 <?php
@@ -64,14 +76,14 @@ $row = mysqli_fetch_array($res);
                     <ul class="align-self-stretch">
                         <li class="dropdown account-dropdown">
                             <a href="#" class="account-link" role="button" id="accountClick" data-bs-auto-close="outside" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="<?php echo BASE_URL() . 'assets/base/img/who.png' ?>" alt="">
+                                <img src="<?php echo BASE_URL() . 'assets/uploads/photo/'. IIF($row_cur_user['photo'], "", "default.png") ?>" alt="">
                                 <i class="fas fa-caret-down arrow-icon"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-account dropdown-menu-end"  aria-labelledby="accountClick">
                                 <li>
                                     <div class="dropdown-account-header">
                                         <div class="account-holder-avatar">
-                                            <img src="<?php echo BASE_URL() . 'assets/base/img/who.png' ?>" alt="">
+                                            <img src="<?php echo BASE_URL() . 'assets/uploads/photo/'. IIF($row_cur_user['photo'], "", "default.png") ?>" alt="">
                                         </div>
                                         <h5><?php echo $_SESSION['B-NAME'] ?></h5>
                                     </div>

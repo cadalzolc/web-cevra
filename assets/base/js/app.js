@@ -112,6 +112,58 @@ function PostRequestReload(frm) {
     return false;
 }
 
+function PostRequestMediaReload(frm) {
+    let btnConfirm = $(frm).data("confirm");
+    let btnCancel = $(frm).data("cancel");
+    let divContainer = $(frm).data("div");
+    let payload = new FormData($(frm)[0]);
+    $.ajax({
+        type: "POST",
+        url: $(frm).attr("action"),
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        data: payload,
+        beforeSend: function () {
+            if (btnConfirm) {
+                $(btnConfirm).attr("disabled", true);
+            }
+            if (btnCancel) {
+                $(btnCancel).attr("disabled", true);
+            }
+        },
+        success: function (res) {
+            if (res.success == true){
+                toastr.success(res.message)
+                setTimeout(function () {
+                   window.location.reload(true);
+                }, 1000);
+            }else{
+                toastr.error(res.message);
+                if (btnConfirm) {
+                    $(btnConfirm).attr("disabled", false);
+                }
+                if (btnCancel) {
+                    $(btnCancel).attr("disabled", false);
+                }
+            }
+        },
+        error: function (err) {
+            toastr.error(err);
+            if (btnConfirm) {
+                $(btnConfirm).attr("disabled", false);
+            }
+            if (btnCancel) {
+                $(btnCancel).attr("disabled", false);
+            }
+        },
+        complete: function() {
+        }
+    });
+    return false;
+}
+
+
 function generateQuickGuid() {
     return Math.random().toString(36).substring(2, 15) +
         Math.random().toString(36).substring(2, 15);

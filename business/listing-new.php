@@ -3,12 +3,14 @@
 session_start(); 
 
 include('../libs/base.php');
+include('../libs/func.php');
 include('../libs/db.php');
 
 if (empty($_SESSION['B-ID'])) {
     header("Location: " . BASE_URL() . 'business/login.php');
     exit;
 }
+
 
 $today = date("D, M j, Y");
 $GLOBALS["tabs"] = "Listings";
