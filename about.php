@@ -12,6 +12,7 @@ $GLOBALS["tabs"] = "About";
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,6 +35,7 @@ $GLOBALS["tabs"] = "About";
     <link rel="stylesheet" href="<?php echo BASE_URL() . 'assets/base/css/custom.css' ?>">
     <link rel="stylesheet" href="<?php echo BASE_URL() . 'assets/plugins/css/toastr.css' ?>">
 </head>
+
 <body class="d-flex flex-column h-100">
     <?php include("./website/layouts/header.php"); ?>
     <div class="wrapper">
@@ -49,6 +51,34 @@ $GLOBALS["tabs"] = "About";
                                 </ol>
                             </nav>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="explore-events p-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12">
+                        <h3><strong>ABOUT US</strong></h3>
+                        <br>
+                        <p>LESS HASSLE,PRICELESS MEMORIES</p>
+                        <p>
+
+                            The Calbayog Events Venue Rentals Web Application serves as a platform for
+                            online reservations for event venues in Calbayog City. Using this platform,
+                            you can quickly find and book event venues that suit your preferences and financial constraints.
+                            <p>
+
+                                <br />
+                                <strong>
+                                    <h4>MISSION</h4>
+                                </strong>
+                                <br>
+                                <p> Our mission at CEVRWA is to make events venues reservation easier to find accessible to
+                                    more people,
+                                    and to deliver enjoyable event experiences that are seamless from end to end. By
+                                    seamless,
+                                    we mean hassle-free from the moment you start to reserve an event venue. <p>
                     </div>
                 </div>
             </div>
