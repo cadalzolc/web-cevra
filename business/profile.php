@@ -80,14 +80,19 @@ $row = mysqli_fetch_array($res);
                             <div class="bp-info forms-display">
                                 <div class="d-block">
                                     <h4>Business Information</h4>
-                                    <button class="pe-4 ps-4 text-center co-main-btn h_40 d-inline-block tp-btn"
-                                        data-id="<?= $row['id'] ?>" data-dialog="<?php echo BASE_URL() . 'business/forms/form-business-info.php' ?>">Edit</button>
+                                    <button class="pe-4 ps-4 text-center co-main-btn h_40 d-inline-block tp-btn" data-id="<?= $row['id'] ?>" data-dialog="<?php echo BASE_URL() . 'business/forms/form-business-info.php' ?>">Edit</button>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12">
                                         <div class="form-group mt-4">
                                             <label class="form-label">Name</label>
                                             <input class="form-control h_40" type="text" value="<?php echo $row['name']; ?>" readonly="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="form-group mt-4">
+                                            <label class="form-label">Contact No</label>
+                                            <input class="form-control h_40" type="contact" value="<?php echo $row['contact_no']; ?>" readonly="">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-12">
@@ -102,17 +107,33 @@ $row = mysqli_fetch_array($res);
                                             <input class="form-control h_40" type="text" value="<?php echo $row['last_login']; ?>" readonly="">
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="main-card mt-4 p-4">
+                            <div class="bp-info forms-display">
+                                <div class="d-block">
+                                    <h4>Business Validation</h4>
+                                    <?php 
+                                        if ($row['verify'] == 0) {
+                                    ?>
+                                        <button class="pe-4 ps-4 text-center co-main-btn h_40 d-inline-block tp-btn" data-id="<?= $row['id'] ?>" data-dialog="<?php echo BASE_URL() . 'business/forms/form-business-docs.php' ?>">Edit</button>
+                                    <?php
+                                        } 
+                                    ?>
+                                </div>
+                                <div class="row">
                                     <div class="col-lg-6 col-md-12">
                                         <div class="form-group mt-4">
-                                            <label class="form-label">Business Verification</label>
+                                            <label class="form-label">Status</label>
                                             <?php 
                                                 if ($row['verify'] == 1) {
                                             ?>
-                                                <input class="form-control h_40" type="text" value="VERIFIEVD" readonly="">
+                                                <input class="form-control h_40" type="text" value="VERIFIED" readonly="" style="color: #0b7c28 !important; font-weight: bold;">
                                             <?php
                                                 } else {
                                             ?>
-                                                <input class="form-control h_40" type="text" value="FOR VERIFICATION" readonly="">
+                                                <input class="form-control h_40" type="text" value="FOR VERIFICATION" readonly="" style="color: #c73535 !important; font-weight: bold;">
                                             <?php
                                                 }
                                             ?>
@@ -120,8 +141,20 @@ $row = mysqli_fetch_array($res);
                                     </div>
                                     <div class="col-lg-6 col-md-12">
                                         <div class="form-group mt-4">
-                                            <label class="form-label">Business Proof</label>
-                                            <input class="form-control h_40" type="text" value="" readonly="">
+                                            <label class="form-label">Document</label>
+                                            <input class="form-control h_40" type="text" value="<?= $row['proof'] ?>" readonly="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="form-group mt-4">
+                                            <label class="form-label">Submitted Date</label>
+                                            <input class="form-control h_40" type="text" value="<?= $row['verify_date'] ?>" readonly="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="form-group mt-4">
+                                            <label class="form-label">Verified Date</label>
+                                            <input class="form-control h_40" type="text" value="<?= $row['proof_date'] ?>" readonly="">
                                         </div>
                                     </div>
                                 </div>
@@ -131,11 +164,12 @@ $row = mysqli_fetch_array($res);
                             <div class="bp-info forms-display">
                                 <div class="d-block">
                                     <h4>Payment Method</h4>
+                                    <button class="pe-4 ps-4 text-center co-main-btn h_40 d-inline-block tp-btn" data-id="<?= $row['id'] ?>" data-dialog="<?php echo BASE_URL() . 'business/forms/form-business-payment.php' ?>">Edit</button>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12">
                                         <div class="form-group mt-4">
-                                            <textarea class="form-control" rows="10" readonly=""><?php echo $row['payment_method']; ?></textarea>
+                                            <textarea class="form-control" rows="10" readonly="" style="padding: 10px !important;"><?php echo $row['payment_method']; ?></textarea>
                                         </div>
                                     </div>
                                 </div>

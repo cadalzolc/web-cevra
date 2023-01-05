@@ -1,12 +1,12 @@
 <?php 
 
-$id =  $_SESSION['C-ID'];
+$cid =  $_SESSION['C-ID'];
 $name = $_SESSION['C-NAME'];
-$sql = "SELECT * FROM accounts WHERE id = $id ";
+$sql_user = "SELECT * FROM accounts WHERE id = $cid ";
 
 $db = new Server();
-$res = $db->DbQuery($sql);
-$row = mysqli_fetch_array($res);
+$res_user = $db->DbQuery($sql_user);
+$row_cur_user = mysqli_fetch_array($res_user);
 
 ?>
 
@@ -46,11 +46,11 @@ $row = mysqli_fetch_array($res);
                     </div>
                     <div class="offcanvas-body">
                         <?php 
-                            if ($row['email_valid'] == 0){
+                            if ($row_cur_user['email_valid'] == 0){
                                 ?>
                                  <div class="navbar-nav justify-content-end flex-grow-1 pe_5" >
                                     <div class="alert alert-danger" role="alert" style="margin: 5px;">
-                                        <span>Please verify your email <?php echo $row['email']; ?>. or 
+                                        <span>Please verify your email <?php echo $row_cur_user['email']; ?>. or 
                                         <a href="#" onclick="SendVerification(this)" data-url="<?php echo BASE_URL() . '/customer/process/send-verification.php'; ?>">Resend Verification</a></span>
                                     </div>
                                 </div>
@@ -69,14 +69,14 @@ $row = mysqli_fetch_array($res);
                         </li>
                         <li class="dropdown account-dropdown">
                             <a href="#" class="account-link" role="button" id="accountClick" data-bs-auto-close="outside" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="<?php echo BASE_URL() . 'assets/base/img/who.png' ?>" alt="">
+                                <img src="<?php echo BASE_URL() . 'assets/uploads/photo/'. IIF($row_cur_user['photo'], "", "default.png") ?>" alt="">
                                 <i class="fas fa-caret-down arrow-icon"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-account dropdown-menu-end"  aria-labelledby="accountClick">
                                 <li>
                                     <div class="dropdown-account-header">
                                         <div class="account-holder-avatar">
-                                            <img src="<?php echo BASE_URL() . 'assets/base/img/who.png' ?>" alt="">
+                                            <img src="<?php echo BASE_URL() . 'assets/uploads/photo/'. IIF($row_cur_user['photo'], "", "default.png") ?>" alt="">
                                         </div>
                                         <h5><?php echo $name; ?></h5>
                                     </div>

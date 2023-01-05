@@ -20,6 +20,12 @@ $db = new Server();
 $qry = $db->DbQuery($sql);
 $cntLst = mysqli_num_rows($qry);
 
+$sql_user = "SELECT * FROM accounts WHERE id = $id ";
+
+$db = new Server();
+$res_user = $db->DbQuery($sql_user);
+$row_user = mysqli_fetch_array($res_user);
+
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +82,13 @@ $cntLst = mysqli_num_rows($qry);
                                     </div>
                                     <div class="rs ms-auto mt_r4">
                                         <div class="nav custom2-tabs btn-group" role="tablist">
-                                            <a href="<?php echo BASE_URL() . 'business/listing-new.php' ?>" class="tab-link active btn-tabs" title="New Listing">New venue</a>
+                                            <?php
+                                                if ($row_user['verify'] == 1 && $row_user['email_valid'] == 1) {
+                                            ?>
+                                                 <a href="<?php echo BASE_URL() . 'business/listing-new.php' ?>" class="tab-link active btn-tabs" title="New Listing">New venue</a>
+                                            <?php
+                                                }
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
@@ -85,14 +97,14 @@ $cntLst = mysqli_num_rows($qry);
                         <div class="event-list">
                             <?php 
                                if ($cntLst == 0) {
-                            ?>
-                            <p>No list of venue to display.</p>
-                            <?php
-                               } else{
-                                    $r = 1;
-                                    foreach($qry as $row)
-                                    {
-                            ?>
+                                ?>
+                                <p>No list of venue to display.</p>
+                                <?php
+                                } else{
+                                        $r = 1;
+                                        foreach($qry as $row)
+                                        {
+                                ?>
                                 <div class="contact-list">
                                     <div class="card-top event-top p-4 align-items-center top d-md-flex flex-wrap justify-content-between">
                                         <div class="d-md-flex align-items-center event-top-info">
@@ -109,8 +121,8 @@ $cntLst = mysqli_num_rows($qry);
                                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="<?php echo BASE_URL() . 'business/listing-manage.php?ref=' . Encrypt($row['id'])  ?>" class="dropdown-item"><i class="fa-solid fa-gear me-3"></i>Update</a>
-                                                <a href="<?php echo BASE_URL() . 'business/listing-gallery.php?ref=' . Encrypt($row['id'])  ?>" class="dropdown-item"><i class="fa-regular fa-image me-3"></i>Gallery</a>
+                                                <a href="<?php echo BASE_URL() . 'business/listing-manage.php?ref=' . $row['id']  ?>" class="dropdown-item"><i class="fa-solid fa-gear me-3"></i>Update</a>
+                                                <a href="<?php echo BASE_URL() . 'business/listing-gallery.php?ref=' . $row['id']  ?>" class="dropdown-item"><i class="fa-regular fa-image me-3"></i>Gallery</a>
                                                 <a href="#" class="dropdown-item delete-event"><i class="fa-solid fa-trash-can me-3"></i>Delete</a>
                                             </div>
                                         </div>

@@ -38,26 +38,26 @@ if (!empty($photo)) {
         $dirPath = $dirListings . $photoName;
         $id = $arr['id'];
 
+        $msg = $msg . ' ' . $photoName;
+
         if (move_uploaded_file($photoPath, $dirPath)) {
             $sql_update = "CALL sp_listings_photo_update($id, '$photoName');";
             $db = new Server();
             $res = $db->DbQuery($sql_update);
             if ($res) {
                 $success = true;
-                $msg = "Photo was successfully uploaded!";
+                $msg = $msg . " Photo was successfully uploaded!";
             }
         }
     }
     else {
         $success = false;
-        $msg = "Photo was successfully uploaded!";
+        $msg = "File type '. $fileType .' is not supported.";
     }
 }
 
 $data = '{
-    "success": '. ToBoolean($success) .',
-    "message": "File type '. $fileType .' is not supported."
-}';
+    "success": '. ToBoolean($success) .', "message": "'. $msg . '" }';
 
 header('Content-Type: application/json');
 

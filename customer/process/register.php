@@ -1,6 +1,7 @@
 <?php
 
 include('../../libs/base.php');
+include('../../libs/mailer.php');
 include('../../libs/func.php');
 include('../../libs/db.php');
 
@@ -22,7 +23,8 @@ if ($qry){
     $arr = mysqli_fetch_array($qry);
     $no = $arr['id'];
     $name = $p_first_name .''. $p_last_name;
-    $msg = $arr['message'];
+    $msg = "Registration was successful";
+    
     if (empty($arr['message']))  {
         $success = true;
         $msg = 'Customer registration is successful';

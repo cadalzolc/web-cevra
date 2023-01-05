@@ -1,6 +1,7 @@
 <?php
 
 include('../../libs/base.php');
+include('../../libs/mailer.php');
 include('../../libs/func.php');
 include('../../libs/db.php');
 
@@ -19,9 +20,10 @@ $db = new Server();
 $qry = $db->DbQuery($sql);
 
 if ($qry){
+
     $arr = mysqli_fetch_array($qry);
     $no = $arr['id'];
-    $msg = $arr['message'];
+    $msg = "Registration was successful";
 
     if (empty($arr['message']))  {
 

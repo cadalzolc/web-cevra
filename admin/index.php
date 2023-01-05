@@ -13,6 +13,29 @@ if (empty($_SESSION['A-ID'])) {
 $today = date("D, M j, Y");
 $GLOBALS["tabs"] = "Home";
 
+$sql_count = "SELECT * FROM vw_admin_dashboard";
+$db = new Server();
+$res_count = $db->DbQuery($sql_count);
+$row_count = mysqli_fetch_array($res_count);
+
+$sql_verify = "SELECT * FROM accounts WHERE verify = 0 and proof !='' AND account_type_id = 2";
+$db = new Server();
+$res_verify = $db->DbQuery($sql_verify);
+$cnt_verify = mysqli_num_rows($res_verify);
+
+$cnt_all = mysqli_num_rows($res_count);
+
+$verify = 0;
+$clients = 0;
+$business = 0;
+
+if ($cnt_all != 0) {
+    $verify = $row_count['verify'];
+    $clients = $row_count['clients'];
+    $business = $row_count['business'];
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -58,12 +81,25 @@ $GLOBALS["tabs"] = "Home";
                             <div class="dashboard-wrap-content">
                                 <div class="dashboard-report-content">
                                     <div class="row">
+                                    <div class="col-xl-4 col-lg-6 col-md-6">
+                                            <div class="dashboard-report-card info">
+                                                <div class="card-content">
+                                                    <div class="card-content">
+                                                        <span class="card-title fs-6">For Validation</span>
+                                                        <span class="card-sub-title fs-3"><?php echo $verify; ?></span>
+                                                    </div>
+                                                    <div class="card-media">
+                                                        <i class="far fa-folder"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="col-xl-4 col-lg-6 col-md-6">
                                             <div class="dashboard-report-card purple">
                                                 <div class="card-content">
                                                     <div class="card-content">
                                                         <span class="card-title fs-6">Clients</span>
-                                                        <span class="card-sub-title fs-3">0</span>
+                                                        <span class="card-sub-title fs-3"><?php echo $clients; ?></span>
                                                     </div>
                                                     <div class="card-media">
                                                         <i class="far fa-folder"></i>
@@ -76,7 +112,7 @@ $GLOBALS["tabs"] = "Home";
                                                 <div class="card-content">
                                                     <div class="card-content">
                                                         <span class="card-title fs-6">Business</span>
-                                                        <span class="card-sub-title fs-3">0</span>
+                                                        <span class="card-sub-title fs-3"><?php echo $business; ?></span>
                                                     </div>
                                                     <div class="card-media">
                                                         <i class="far fa-folder"></i>
@@ -84,17 +120,55 @@ $GLOBALS["tabs"] = "Home";
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xl-4 col-lg-6 col-md-6">
-                                            <div class="dashboard-report-card info">
-                                                <div class="card-content">
-                                                    <div class="card-content">
-                                                        <span class="card-title fs-6">Sales</span>
-                                                        <span class="card-sub-title fs-3">0</span>
-                                                    </div>
-                                                    <div class="card-media">
-                                                        <i class="far fa-folder"></i>
-                                                    </div>
-                                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="main-card p-4 mt-5">
+                            <h5>List of Business for Validation</h5>
+                            <div class="dashboard-wrap-content">
+                                <div class="event-list" id="tbList">
+                                    <div class="table-card mt-4">
+                                        <div class="main-table">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead class="thead-dark">
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Date Submitted</th>
+                                                            <th scope="col">Name</th>
+                                                            <th scope="col">Document</th>
+                                                            <th scope="col">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <?php 
+                                                        if ($cnt_verify == 0) {
+                                                    ?>
+                                                        <tr>
+                                                            <td colspan="25">No records to display</td>
+                                                        </tr>
+                                                    <?php
+                                                        } else {
+                                                            $ctr = 1;
+                                                            foreach($res_verify as $row):
+                                                                ?>
+                                                                <tr>
+                                                                    <td><?= $ctr; ?></td>
+                                                                    <td><?= $row["verify_date"]; ?></td>
+                                                                    <td><?= $row["name"]; ?></td>
+                                                                    <td><a href="#" data-id="<?= $row["id"]; ?>" data-dialog="<?php echo BASE_URL().'admin/forms/form-viewer.php?' ?>" style="color: #0d6efd;"><?= $row["proof"]; ?></a></td>
+                                                                    <td>
+                                                                        <a href="#" data-id="<?= $row["id"]; ?>" data-dialog="<?php echo BASE_URL().'admin/forms/form-verify.php?' ?>"><strong>Verify</strong></a>
+                                                                    </td>
+                                                                </tr>
+                                                                <?php
+                                                                $ctr++;
+                                                            endforeach;
+                                                        }
+                                                    ?>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>

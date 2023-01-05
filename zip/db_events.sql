@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2022 at 02:13 PM
+-- Generation Time: Jan 05, 2023 at 06:23 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -25,7 +25,7 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE PROCEDURE `sp_account_create_business` (IN `p_email` VARCHAR(120), IN `p_password` VARCHAR(120), IN `p_name` VARCHAR(120))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_account_create_business` (IN `p_email` VARCHAR(120), IN `p_password` VARCHAR(120), IN `p_name` VARCHAR(120))  BEGIN
 	
     DECLARE p_id INT;
     
@@ -53,7 +53,7 @@ CREATE PROCEDURE `sp_account_create_business` (IN `p_email` VARCHAR(120), IN `p_
     
 END$$
 
-CREATE PROCEDURE `sp_account_create_customer` (IN `p_email` VARCHAR(120), IN `p_password` VARCHAR(120), IN `p_first_name` VARCHAR(120), IN `p_last_name` VARCHAR(120))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_account_create_customer` (IN `p_email` VARCHAR(120), IN `p_password` VARCHAR(120), IN `p_first_name` VARCHAR(120), IN `p_last_name` VARCHAR(120))  BEGIN
 	
     DECLARE p_id INT;
     DECLARE p_name VARCHAR(300);
@@ -84,7 +84,46 @@ CREATE PROCEDURE `sp_account_create_customer` (IN `p_email` VARCHAR(120), IN `p_
     
 END$$
 
-CREATE PROCEDURE `sp_listings_create` (IN `p_account_id` INT, IN `p_name` VARCHAR(300), IN `p_description` VARCHAR(3000), IN `p_info` VARCHAR(300), IN `p_rates` DECIMAL(10,2))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_account_document` (IN `p_id` INT, IN `p_doc` VARCHAR(300))  BEGIN
+
+	DECLARE p_date VARCHAR(45);
+    
+	SET p_date = DATE_FORMAT(now(),'%Y-%m-%d');
+    
+    UPDATE accounts
+    SET		verify_date = p_date,
+			proof = p_doc
+    WHERE id = p_id;
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_account_payment` (IN `p_id` INT, IN `p_payment` VARCHAR(3000))  BEGIN
+	UPDATE accounts SET payment_method = p_payment WHERE id = p_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_account_update` (IN `p_id` INT, IN `p_name` VARCHAR(100), IN `p_photo` VARCHAR(300))  BEGIN
+
+	UPDATE accounts 
+    SET name = p_name,
+		photo = p_photo
+    WHERE id = p_id;
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_account_verify_business` (IN `p_id` INT)  BEGIN
+
+	DECLARE p_date VARCHAR(45);
+    
+	SET p_date = DATE_FORMAT(now(),'%Y-%m-%d');
+        
+	UPDATE 	accounts 
+	SET 	verify = 1,
+			proof_date = p_date
+    WHERE id = p_id;
+     
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listings_create` (IN `p_account_id` INT, IN `p_name` VARCHAR(300), IN `p_description` VARCHAR(3000), IN `p_info` VARCHAR(300), IN `p_rates` DECIMAL(10,2))  BEGIN
 
 	DECLARE p_id INT;
 
@@ -110,7 +149,7 @@ CREATE PROCEDURE `sp_listings_create` (IN `p_account_id` INT, IN `p_name` VARCHA
 
 END$$
 
-CREATE PROCEDURE `sp_listings_photo_by_listing_id` (IN `p_id` INT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listings_photo_by_listing_id` (IN `p_id` INT)  BEGIN
 	SELECT o.id AS orders, 
 			(CASE ISNULL(lp.id) WHEN 1 THEN 0 ELSE lp.id END) AS id, 
 			(CASE ISNULL(lp.photo) WHEN 1 THEN '' ELSE lp.photo END) AS photo FROM orders o
@@ -120,7 +159,7 @@ CREATE PROCEDURE `sp_listings_photo_by_listing_id` (IN `p_id` INT)  BEGIN
     LIMIT 5;
 END$$
 
-CREATE PROCEDURE `sp_listings_photo_id` (IN `p_order` INT, IN `p_venue` INT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listings_photo_id` (IN `p_order` INT, IN `p_venue` INT)  BEGIN
 	DECLARE p_id INT;
     
     SET p_id = (SELECT id FROM listings_photo WHERE listing_id = p_venue AND listing_order = p_order);
@@ -137,7 +176,7 @@ CREATE PROCEDURE `sp_listings_photo_id` (IN `p_order` INT, IN `p_venue` INT)  BE
 
 END$$
 
-CREATE PROCEDURE `sp_listings_photo_update` (IN `p_id` INT, IN `p_photo` VARCHAR(300))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listings_photo_update` (IN `p_id` INT, IN `p_photo` VARCHAR(300))  BEGIN
 	DECLARE p_venue INT;
     
     SET p_venue = (SELECT listing_id FROM listings_photo WHERE id = p_id AND listing_order =  1);
@@ -150,7 +189,7 @@ CREATE PROCEDURE `sp_listings_photo_update` (IN `p_id` INT, IN `p_photo` VARCHAR
 
 END$$
 
-CREATE PROCEDURE `sp_listings_update` (IN `p_id` INT, IN `p_name` VARCHAR(300), IN `p_description` VARCHAR(3000), IN `p_info` VARCHAR(300), IN `p_rates` DECIMAL(10,2))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listings_update` (IN `p_id` INT, IN `p_name` VARCHAR(300), IN `p_description` VARCHAR(3000), IN `p_info` VARCHAR(300), IN `p_rates` DECIMAL(10,2))  BEGIN
 	IF EXISTS(SELECT name FROM listings WHERE name = p_name AND id <> p_id) THEN BEGIN
 		 SELECT CONCAT(p_name, ' is already in used.') as message, p_id as id;
 	END;
@@ -163,7 +202,7 @@ CREATE PROCEDURE `sp_listings_update` (IN `p_id` INT, IN `p_name` VARCHAR(300), 
     END IF;
 END$$
 
-CREATE PROCEDURE `sp_login_admin` (IN `p_username` VARCHAR(100), IN `p_password` VARCHAR(30))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_login_admin` (IN `p_username` VARCHAR(100), IN `p_password` VARCHAR(30))  BEGIN
 
 	DECLARE p_id INT;
 	DECLARE p_date VARCHAR(45);
@@ -180,7 +219,7 @@ CREATE PROCEDURE `sp_login_admin` (IN `p_username` VARCHAR(100), IN `p_password`
      END IF;
 END$$
 
-CREATE PROCEDURE `sp_login_business` (IN `p_email` VARCHAR(100), IN `p_password` VARCHAR(100))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_login_business` (IN `p_email` VARCHAR(100), IN `p_password` VARCHAR(100))  BEGIN
 
 	DECLARE p_id INT;
 	DECLARE p_date VARCHAR(45);
@@ -197,7 +236,7 @@ CREATE PROCEDURE `sp_login_business` (IN `p_email` VARCHAR(100), IN `p_password`
      END IF;
 END$$
 
-CREATE PROCEDURE `sp_login_customer` (IN `p_email` VARCHAR(100), IN `p_password` VARCHAR(100))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_login_customer` (IN `p_email` VARCHAR(100), IN `p_password` VARCHAR(100))  BEGIN
 
 	DECLARE p_id INT;
 	DECLARE p_date VARCHAR(45);
@@ -214,7 +253,7 @@ CREATE PROCEDURE `sp_login_customer` (IN `p_email` VARCHAR(100), IN `p_password`
      END IF;
 END$$
 
-CREATE PROCEDURE `sp_reservation` (IN `p_listing_id` INT, IN `p_customer_id` INT, IN `p_date` VARCHAR(35), IN `p_rates` DECIMAL(10,2), IN `p_ref_no` VARCHAR(60))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_reservation` (IN `p_listing_id` INT, IN `p_customer_id` INT, IN `p_date` VARCHAR(35), IN `p_rates` DECIMAL(10,2), IN `p_ref_no` VARCHAR(60))  BEGIN
 	
     DECLARE p_id INT;
     
@@ -232,11 +271,11 @@ CREATE PROCEDURE `sp_reservation` (IN `p_listing_id` INT, IN `p_customer_id` INT
 
 END$$
 
-CREATE PROCEDURE `sp_reservation_by_no` (IN `p_no` VARCHAR(100))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_reservation_by_no` (IN `p_no` VARCHAR(100))  BEGIN
 	SELECT * FROM vw_resevation WHERE ref_no = p_no;
 END$$
 
-CREATE PROCEDURE `sp_reservation_confirm`(IN p_id INT) BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_reservation_confirm` (IN `p_id` INT)  BEGIN
 	UPDATE reservations SET status = 'PD' WHERE id = p_id;
 END$$
 
@@ -259,16 +298,24 @@ CREATE TABLE `accounts` (
   `last_login` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT '',
   `status` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT '',
   `email_valid` bit(1) DEFAULT b'0',
-  `photo` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT ''
+  `photo` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `payment_method` varchar(3000) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `verify` bit(1) DEFAULT b'0',
+  `verify_date` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `proof` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `proof_date` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `contact_no` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`id`, `account_type_id`, `email`, `password`, `first_name`, `last_name`, `name`, `last_login`, `status`, `email_valid`, `photo`) VALUES
-(1, 2, 'niftyers@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '', '', 'HONEYMOON CASTLE', '2022-12-13 15:00:46', 'NEW', b'0', ''),
-(2, 1, 'ozlagame@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Kid', 'Python', 'KID PYTHON', '2022-12-28 18:27:09', 'NEW', b'0', '');
+INSERT INTO `accounts` (`id`, `account_type_id`, `email`, `password`, `first_name`, `last_name`, `name`, `last_login`, `status`, `email_valid`, `photo`, `payment_method`, `verify`, `verify_date`, `proof`, `proof_date`, `contact_no`) VALUES
+(1, 2, 'abc@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '', '', 'HONEYMOON CASTLE 1', '2023-01-05 23:00:04', 'NEW', b'1', '51914E86-D1C1-9CD6-EE2E-2C086D600279.webp ', 'Pay with Gcash 3 simple steps!\r\n\r\n1. Send your payment (exact amount) to GCASH Number 09655291005. Make sure you take a screenshot.\r\n\r\n2. Send the screenshot of your transaction to our official Facebook page. Make sure the Gcash Reference Number is visible.\r\n\r\n3. Wait for a confirmation of your payment in the Calbayog Events Venue Rentals Web App. This usually takes a few minutes after you send us your payment.\r\n\r\nPlease note that your reservation will not be processed if no payment is received. ', b'1', '2023-01-05', '2DC05DB6-AB05-2A86-D3F5-237BD2B7F900.pdf ', '2023-01-06', ''),
+(2, 1, 'xyz@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Kid', 'Python', 'KID PYTHONS', '2023-01-06 01:09:13', 'NEW', b'1', 'D69849A0-4B40-1912-A7B1-DB40B011C694.webp ', '', b'0', '', '', '', ''),
+(8, 2, 'vamp@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '', '', 'ICE PLANT', '2023-01-06 00:52:14', 'NEW', b'0', '', '', b'0', '', '', '', ''),
+(9, 2, 'baypark@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '', '', 'BAYPARK HOTEL', '2023-01-06 00:59:40', 'NEW', b'0', '', '', b'0', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -312,8 +359,9 @@ CREATE TABLE `listings` (
 --
 
 INSERT INTO `listings` (`id`, `account_id`, `name`, `description`, `subinfo`, `rates`, `photo`, `status`, `book_date`) VALUES
-(1, 1, 'Wedding Ceremonial', 'If your dream is to celebrate in its cool ambiance and natural charms, then you have visited the right page.', 'Wedding', '5000.00', 'FAA60B84-B599-D7FC-84CD-994178121D6C.jpg', 'NEW', ''),
-(2, 1, 'Birthday Rockwell', 'The venue or events place for your upcoming kiddie party will have an effect on such matters as the theme, the logistics, the suppliers (some venues only allow a certain set of suppliers), the caterer, and ultimately, the costing or fee for styling the event.', 'Birthday', '1500.00', '641710C3-4E91-339B-3F1D-2421EDDDA625.jpg', 'NEW', '');
+(1, 1, 'Wedding Ceremonial', 'If your dream is to celebrate in its cool ambiance and natural charms, then you have visited the right page.', 'Wedding', '5000.00', '415AEB45-0CF4-AD1E-303C-CAC7BBA0AAC4.webp', 'NEW', ''),
+(2, 1, 'Birthday Rockwell', 'The venue or events place for your upcoming kiddie party will have an effect on such matters as the theme, the logistics, the suppliers (some venues only allow a certain set of suppliers), the caterer, and ultimately, the costing or fee for styling the event.', 'Birthday', '1500.00', '641710C3-4E91-339B-3F1D-2421EDDDA625.jpg', 'NEW', ''),
+(3, 1, 'Events Ground 123', 'ghjghjg', 'Wedding', '3000.00', 'BB932B6C-064B-B6B1-160B-9472AE776122.webp', 'NEW', '');
 
 -- --------------------------------------------------------
 
@@ -333,11 +381,12 @@ CREATE TABLE `listings_photo` (
 --
 
 INSERT INTO `listings_photo` (`id`, `listing_id`, `listing_order`, `photo`) VALUES
-(1, 1, 1, 'FAA60B84-B599-D7FC-84CD-994178121D6C.jpg'),
+(1, 1, 1, '415AEB45-0CF4-AD1E-303C-CAC7BBA0AAC4.webp'),
 (2, 1, 2, 'C85953FE-B187-8B2D-0FBA-2D519573F898.jpg'),
 (3, 1, 3, '223818DD-1C68-E06E-8922-4138FD6E5F70.jpg'),
 (4, 1, 4, 'F169E450-2A64-DFE3-BFDE-815B838DFAE7.jpg'),
-(5, 2, 1, '641710C3-4E91-339B-3F1D-2421EDDDA625.jpg');
+(5, 2, 1, '641710C3-4E91-339B-3F1D-2421EDDDA625.jpg'),
+(6, 3, 1, 'BB932B6C-064B-B6B1-160B-9472AE776122.webp');
 
 -- --------------------------------------------------------
 
@@ -398,8 +447,9 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`id`, `listing_id`, `customer_id`, `booking_date`, `amount`, `status`, `payment_ref`, `ref_no`) VALUES
-(1, 2, 2, '2023-01-04', '1500.00', 'FV', 0, '87599120221228200449'),
-(2, 2, 2, '2023-01-14', '1500.00', 'FV', 0, '45332020221228210100');
+(1, 2, 2, '2023-01-04', '1500.00', 'PD', 0, '87599120221228200449'),
+(2, 2, 2, '2023-01-14', '1500.00', 'FV', 0, '45332020221228210100'),
+(3, 2, 2, '2023-01-25', '1500.00', 'FV', 0, '29149820230105230742');
 
 -- --------------------------------------------------------
 
@@ -409,18 +459,43 @@ INSERT INTO `reservations` (`id`, `listing_id`, `customer_id`, `booking_date`, `
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `username` varchar(45) DEFAULT '',
-  `password` varchar(45) DEFAULT '',
-  `name` varchar(45) DEFAULT '',
-  `last_login` varchar(30) DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `username` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `password` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `name` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `last_login` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `name`, `last_login`) VALUES
-(1, 'cevra', '123456', 'Administrator', '2022-12-10 06:09:06');
+(1, 'cevra', '123456', 'Administrator', '2023-01-06 01:01:11');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vw_admin_dashboard`
+-- (See below for the actual view)
+--
+CREATE TABLE `vw_admin_dashboard` (
+`business` decimal(42,0)
+,`clients` decimal(42,0)
+,`verify` bigint(21)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vw_business_count`
+-- (See below for the actual view)
+--
+CREATE TABLE `vw_business_count` (
+`business_id` int(11)
+,`listing` bigint(21)
+,`reserve` bigint(21)
+,`sales` decimal(32,2)
+);
 
 -- --------------------------------------------------------
 
@@ -466,11 +541,29 @@ CREATE TABLE `vw_resevation` (
 -- --------------------------------------------------------
 
 --
+-- Structure for view `vw_admin_dashboard`
+--
+DROP TABLE IF EXISTS `vw_admin_dashboard`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_admin_dashboard`  AS  select sum(`rec`.`business`) AS `business`,sum(`rec`.`clients`) AS `clients`,(select count(0) AS `N` from `accounts` where `accounts`.`verify` = 0 and `accounts`.`proof` <> '' and `accounts`.`account_type_id` = 2) AS `verify` from (select count(0) AS `clients`,0 AS `business` from `accounts` where `accounts`.`account_type_id` = 1 union all select 0 AS `clients`,count(0) AS `business` from `accounts` where `accounts`.`account_type_id` = 2) `rec` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vw_business_count`
+--
+DROP TABLE IF EXISTS `vw_business_count`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_business_count`  AS  select `r`.`business_id` AS `business_id`,count(`r`.`listing_id`) AS `listing`,(select count(0) from `reservations` where `reservations`.`status` = 'FV' and `r`.`business_id` = `r`.`business_id`) AS `reserve`,(select sum(`reservations`.`amount`) from `reservations` where `reservations`.`status` = 'PD' and `r`.`business_id` = `r`.`business_id`) AS `sales` from `vw_resevation` `r` group by `r`.`business_id` ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `vw_listing`
 --
 DROP TABLE IF EXISTS `vw_listing`;
 
-CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vw_listing`  AS  select `l`.`id` AS `id`,`l`.`account_id` AS `account_id`,`a`.`name` AS `account_name`,`l`.`name` AS `name`,`l`.`description` AS `description`,`l`.`subinfo` AS `subinfo`,`l`.`rates` AS `rates`,`l`.`photo` AS `photo`,`l`.`status` AS `status`,`l`.`book_date` AS `book_date` from (`listings` `l` left join `accounts` `a` on(`a`.`id` = `l`.`account_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_listing`  AS  select `l`.`id` AS `id`,`l`.`account_id` AS `account_id`,`a`.`name` AS `account_name`,`l`.`name` AS `name`,`l`.`description` AS `description`,`l`.`subinfo` AS `subinfo`,`l`.`rates` AS `rates`,`l`.`photo` AS `photo`,`l`.`status` AS `status`,`l`.`book_date` AS `book_date` from (`listings` `l` left join `accounts` `a` on(`a`.`id` = `l`.`account_id`)) ;
 
 -- --------------------------------------------------------
 
@@ -479,7 +572,7 @@ CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vw_listing`  AS  select `l
 --
 DROP TABLE IF EXISTS `vw_resevation`;
 
-CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vw_resevation`  AS  select `r`.`id` AS `id`,`r`.`listing_id` AS `listing_id`,`l`.`name` AS `listing_name`,`l`.`photo` AS `listing_photo`,`r`.`customer_id` AS `customer_id`,`c`.`name` AS `customer`,`r`.`booking_date` AS `booking_date`,`r`.`amount` AS `amount`,`r`.`status` AS `status`,`r`.`payment_ref` AS `payment_ref`,`r`.`ref_no` AS `ref_no`,`l`.`account_id` AS `business_id`,`b`.`name` AS `business` from (((`reservations` `r` left join `listings` `l` on(`l`.`id` = `r`.`listing_id`)) left join `accounts` `c` on(`c`.`id` = `r`.`customer_id`)) left join `accounts` `b` on(`b`.`id` = `l`.`account_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_resevation`  AS  select `r`.`id` AS `id`,`r`.`listing_id` AS `listing_id`,`l`.`name` AS `listing_name`,`l`.`photo` AS `listing_photo`,`r`.`customer_id` AS `customer_id`,`c`.`name` AS `customer`,`r`.`booking_date` AS `booking_date`,`r`.`amount` AS `amount`,`r`.`status` AS `status`,`r`.`payment_ref` AS `payment_ref`,`r`.`ref_no` AS `ref_no`,`l`.`account_id` AS `business_id`,`b`.`name` AS `business` from (((`reservations` `r` left join `listings` `l` on(`l`.`id` = `r`.`listing_id`)) left join `accounts` `c` on(`c`.`id` = `r`.`customer_id`)) left join `accounts` `b` on(`b`.`id` = `l`.`account_id`)) ;
 
 --
 -- Indexes for dumped tables
@@ -535,7 +628,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `accounts_type`
@@ -547,13 +640,13 @@ ALTER TABLE `accounts_type`
 -- AUTO_INCREMENT for table `listings`
 --
 ALTER TABLE `listings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `listings_photo`
 --
 ALTER TABLE `listings_photo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -565,7 +658,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`

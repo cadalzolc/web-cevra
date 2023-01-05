@@ -89,6 +89,7 @@ $cnt = mysqli_num_rows($rows);
                                                     <th scope="col">#</th>
                                                     <th scope="col">Email</th>
                                                     <th scope="col">Business Name</th>
+                                                    <th scope="col">Verification Status</th>
                                                     <th scope="col">Last Login</th>
                                                 </tr>
                                             </thead>
@@ -108,6 +109,20 @@ $cnt = mysqli_num_rows($rows);
                                                             <td><?= $ctr; ?></td>
                                                             <td><?= $row["email"]; ?></td>
                                                             <td><?= $row["name"]; ?></td>
+                                                            <td>
+                                                            <?php 
+                                                                if ($row["verify"] == 1) {
+                                                                    ?>
+                                                                        <span style="color: #198754; font-weight: bold;">VERIFIED</span>
+                                                                    <?php
+                                                                }
+                                                                else {
+                                                                    ?>
+                                                                        <span style="color: #dc3545; font-weight: bold;">FOR VERIFICATION</span>
+                                                                    <?php
+                                                                }
+                                                            ?>
+                                                            </td>
                                                             <td><?= $row["last_login"]; ?></td>
                                                         </tr>
                                                         <?php

@@ -3,8 +3,9 @@
 session_start();
 
 include('./libs/base.php');
-include('./libs/db.php');
 include('./libs/func.php');
+include('./libs/db.php');
+
 
 $today = date("D, M j, Y");
 
@@ -81,8 +82,9 @@ $cnt_venues = mysqli_num_rows($res_venues);
                                                         <img src="<?= BASE_URL() . 'assets/uploads/listings/'. IIF($row['photo'], "", "default.jpg") ?>" alt="">
                                                     </a>
                                                 </div>
-                                                <div class="event-content">
+                                                <div class="event-content" style="text-align: center;">
                                                     <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($row['id']) ?>" class="event-name"><?= $row['name'] ?></a>
+                                                    <span><?php echo $row['account_name'] ?></span>
                                                 </div>
                                             </div>
                                         </div>

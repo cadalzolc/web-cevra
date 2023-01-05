@@ -15,13 +15,13 @@ $row_user = mysqli_fetch_array($res_user);
         <div class="row justify-content-center">
             <div class="col-xl-5 col-lg-6 col-md-6">
                 <div class="dialog">
-                    <form method="POST" action="<?php echo BASE_URL() . 'business/process/business-info.php' ?>"
+                    <form method="POST" action="<?php echo BASE_URL() . 'customer/process/customer-info.php' ?>"
                         onsubmit="return PostRequestMediaReload(this);" data-div="#<?php echo $_GET['div'] ?>"
                         data-confirm="#btnSignUp" data-cancel="#btnCancel" class="login-form">
-                        <h2 class="registration-title">Business Profile</h2>
+                        <h2 class="registration-title">Customer Profile</h2>
                         <div class="col-lg-12 col-md-12">
                             <div class="form-group text-center mt-4">
-                                <label class="form-label">Business Logo*</label>
+                                <label class="form-label">Customer Logo*</label>
                                 <div class="img-b-logo">
                                     <img id="img-b-logo" src="<?php echo BASE_URL() . 'assets/uploads/photo/'. IIF($row_user['photo'], "", "default.png") ?>" style="width: 200px;">
                                 </div>
@@ -34,7 +34,7 @@ $row_user = mysqli_fetch_array($res_user);
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="form-group mt-4">
-                                    <label class="form-label">Business Name</label>
+                                    <label class="form-label">Customer Name</label>
                                     <input class="form-control h_40" name="name" type="text" value="<?php echo $row_user['name']; ?>" required="">
                                 </div>
                             </div>

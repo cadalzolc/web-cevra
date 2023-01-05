@@ -3,6 +3,7 @@
 session_start();
 
 include('./libs/base.php');
+include('./libs/mailer.php');
 include('./libs/func.php');
 include('./libs/db.php');
 
@@ -85,7 +86,12 @@ $row = mysqli_fetch_array($res);
                     <div class="col-xl-4 col-lg-5 col-md-12">
                         <div class="main-card event-right-dt">
                             <div class="bp-title">
-                                <h4>Details</h4>
+                               <div style="padding: 15px;">
+                                    <div class="xtotel-tickets-count" style="padding-top: 0; border-top: 0;">
+                                        <h5><span><?php echo $row['name'] ?></span></h5>
+                                        <p><?php echo $row['account_name'] ?></p>
+                                    </div>
+                               </div>
                             </div>
                             <div class="select-tickets-block">
                                 <div class="xtotel-tickets-count">
@@ -101,8 +107,26 @@ $row = mysqli_fetch_array($res);
                                     <span>Dont have an account? <a href="<?php echo BASE_URL() . 'customer/register.php' ?>">Register here</a></span>
                                 <?php
                                     } else {
+
+                                        $cs_id = $_SESSION['C-ID'];
+                                        $sql_cs = "SELECT * FROM accounts WHERE id = $cs_id ";
+                                        $db = new Server();
+                                        $res_cs = $db->DbQuery($sql_cs);
+                                        $row_cs = mysqli_fetch_array($res_cs);
+
+                                        if ($row_cs['email_valid'] == 1) {
+                                            ?>
+                                                 <a href="#" data-id="<?= $row['id'] ?>" data-dialog="<?php echo BASE_URL() . 'website/forms/dialog-booking.php' ?>" class="main-btn btn-hover w-100">Book Now</a>
+                                            <?php
+                                        } else {
+                                            ?>
+                                                 <div class="alert alert-danger" role="alert" style="margin: 5px;">
+                                                    <span>Please verify your email <?php echo $row_cs['email']; ?>. or 
+                                                    <a href="#" onclick="SendVerification(this)" data-url="<?php echo BASE_URL() . '/customer/process/send-verification.php'; ?>">Resend Verification</a></span>
+                                                </div>
+                                            <?php
+                                        }
                                 ?>
-                                     <a href="#" data-id="<?= $row['id'] ?>" data-dialog="<?php echo BASE_URL() . 'website/forms/dialog-booking.php' ?>" class="main-btn btn-hover w-100">Book Now</a>
                                 <?php
                                     }
                                 ?>

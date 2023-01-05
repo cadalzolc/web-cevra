@@ -18,7 +18,7 @@ if (empty($ref)) {
     exit;
 }
 
-$id = Decrypt($ref);
+$id = $ref;
 $today = date("D, M j, Y");
 $GLOBALS["tabs"] = "Listings";
 
