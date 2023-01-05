@@ -25,7 +25,7 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_account_create_business` (IN `p_email` VARCHAR(120), IN `p_password` VARCHAR(120), IN `p_name` VARCHAR(120))  BEGIN
+CREATE PROCEDURE `sp_account_create_business` (IN `p_email` VARCHAR(120), IN `p_password` VARCHAR(120), IN `p_name` VARCHAR(120))  BEGIN
 	
     DECLARE p_id INT;
     
@@ -53,7 +53,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_account_create_business` (IN `p_
     
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_account_create_customer` (IN `p_email` VARCHAR(120), IN `p_password` VARCHAR(120), IN `p_first_name` VARCHAR(120), IN `p_last_name` VARCHAR(120))  BEGIN
+CREATE PROCEDURE `sp_account_create_customer` (IN `p_email` VARCHAR(120), IN `p_password` VARCHAR(120), IN `p_first_name` VARCHAR(120), IN `p_last_name` VARCHAR(120))  BEGIN
 	
     DECLARE p_id INT;
     DECLARE p_name VARCHAR(300);
@@ -84,7 +84,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_account_create_customer` (IN `p_
     
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_account_document` (IN `p_id` INT, IN `p_doc` VARCHAR(300))  BEGIN
+CREATE PROCEDURE `sp_account_document` (IN `p_id` INT, IN `p_doc` VARCHAR(300))  BEGIN
 
 	DECLARE p_date VARCHAR(45);
     
@@ -97,11 +97,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_account_document` (IN `p_id` INT
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_account_payment` (IN `p_id` INT, IN `p_payment` VARCHAR(3000))  BEGIN
+CREATE PROCEDURE `sp_account_payment` (IN `p_id` INT, IN `p_payment` VARCHAR(3000))  BEGIN
 	UPDATE accounts SET payment_method = p_payment WHERE id = p_id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_account_update` (IN `p_id` INT, IN `p_name` VARCHAR(100), IN `p_photo` VARCHAR(300))  BEGIN
+CREATE PROCEDURE `sp_account_update` (IN `p_id` INT, IN `p_name` VARCHAR(100), IN `p_photo` VARCHAR(300))  BEGIN
 
 	UPDATE accounts 
     SET name = p_name,
@@ -110,7 +110,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_account_update` (IN `p_id` INT, 
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_account_verify_business` (IN `p_id` INT)  BEGIN
+CREATE PROCEDURE `sp_account_verify_business` (IN `p_id` INT)  BEGIN
 
 	DECLARE p_date VARCHAR(45);
     
@@ -123,7 +123,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_account_verify_business` (IN `p_
      
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listings_create` (IN `p_account_id` INT, IN `p_name` VARCHAR(300), IN `p_description` VARCHAR(3000), IN `p_info` VARCHAR(300), IN `p_rates` DECIMAL(10,2))  BEGIN
+CREATE PROCEDURE `sp_listings_create` (IN `p_account_id` INT, IN `p_name` VARCHAR(300), IN `p_description` VARCHAR(3000), IN `p_info` VARCHAR(300), IN `p_rates` DECIMAL(10,2))  BEGIN
 
 	DECLARE p_id INT;
 
@@ -149,7 +149,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listings_create` (IN `p_account_
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listings_photo_by_listing_id` (IN `p_id` INT)  BEGIN
+CREATE PROCEDURE `sp_listings_photo_by_listing_id` (IN `p_id` INT)  BEGIN
 	SELECT o.id AS orders, 
 			(CASE ISNULL(lp.id) WHEN 1 THEN 0 ELSE lp.id END) AS id, 
 			(CASE ISNULL(lp.photo) WHEN 1 THEN '' ELSE lp.photo END) AS photo FROM orders o
@@ -159,7 +159,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listings_photo_by_listing_id` (I
     LIMIT 5;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listings_photo_id` (IN `p_order` INT, IN `p_venue` INT)  BEGIN
+CREATE PROCEDURE `sp_listings_photo_id` (IN `p_order` INT, IN `p_venue` INT)  BEGIN
 	DECLARE p_id INT;
     
     SET p_id = (SELECT id FROM listings_photo WHERE listing_id = p_venue AND listing_order = p_order);
@@ -176,7 +176,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listings_photo_id` (IN `p_order`
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listings_photo_update` (IN `p_id` INT, IN `p_photo` VARCHAR(300))  BEGIN
+CREATE PROCEDURE `sp_listings_photo_update` (IN `p_id` INT, IN `p_photo` VARCHAR(300))  BEGIN
 	DECLARE p_venue INT;
     
     SET p_venue = (SELECT listing_id FROM listings_photo WHERE id = p_id AND listing_order =  1);
@@ -189,7 +189,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listings_photo_update` (IN `p_id
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listings_update` (IN `p_id` INT, IN `p_name` VARCHAR(300), IN `p_description` VARCHAR(3000), IN `p_info` VARCHAR(300), IN `p_rates` DECIMAL(10,2))  BEGIN
+CREATE PROCEDURE `sp_listings_update` (IN `p_id` INT, IN `p_name` VARCHAR(300), IN `p_description` VARCHAR(3000), IN `p_info` VARCHAR(300), IN `p_rates` DECIMAL(10,2))  BEGIN
 	IF EXISTS(SELECT name FROM listings WHERE name = p_name AND id <> p_id) THEN BEGIN
 		 SELECT CONCAT(p_name, ' is already in used.') as message, p_id as id;
 	END;
@@ -202,7 +202,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_listings_update` (IN `p_id` INT,
     END IF;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_login_admin` (IN `p_username` VARCHAR(100), IN `p_password` VARCHAR(30))  BEGIN
+CREATE PROCEDURE `sp_login_admin` (IN `p_username` VARCHAR(100), IN `p_password` VARCHAR(30))  BEGIN
 
 	DECLARE p_id INT;
 	DECLARE p_date VARCHAR(45);
@@ -219,7 +219,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_login_admin` (IN `p_username` VA
      END IF;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_login_business` (IN `p_email` VARCHAR(100), IN `p_password` VARCHAR(100))  BEGIN
+CREATE PROCEDURE `sp_login_business` (IN `p_email` VARCHAR(100), IN `p_password` VARCHAR(100))  BEGIN
 
 	DECLARE p_id INT;
 	DECLARE p_date VARCHAR(45);
@@ -236,7 +236,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_login_business` (IN `p_email` VA
      END IF;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_login_customer` (IN `p_email` VARCHAR(100), IN `p_password` VARCHAR(100))  BEGIN
+CREATE PROCEDURE `sp_login_customer` (IN `p_email` VARCHAR(100), IN `p_password` VARCHAR(100))  BEGIN
 
 	DECLARE p_id INT;
 	DECLARE p_date VARCHAR(45);
@@ -253,7 +253,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_login_customer` (IN `p_email` VA
      END IF;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_reservation` (IN `p_listing_id` INT, IN `p_customer_id` INT, IN `p_date` VARCHAR(35), IN `p_rates` DECIMAL(10,2), IN `p_ref_no` VARCHAR(60))  BEGIN
+CREATE PROCEDURE `sp_reservation` (IN `p_listing_id` INT, IN `p_customer_id` INT, IN `p_date` VARCHAR(35), IN `p_rates` DECIMAL(10,2), IN `p_ref_no` VARCHAR(60))  BEGIN
 	
     DECLARE p_id INT;
     
@@ -271,11 +271,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_reservation` (IN `p_listing_id` 
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_reservation_by_no` (IN `p_no` VARCHAR(100))  BEGIN
+CREATE PROCEDURE `sp_reservation_by_no` (IN `p_no` VARCHAR(100))  BEGIN
 	SELECT * FROM vw_resevation WHERE ref_no = p_no;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_reservation_confirm` (IN `p_id` INT)  BEGIN
+CREATE PROCEDURE `sp_reservation_confirm` (IN `p_id` INT)  BEGIN
 	UPDATE reservations SET status = 'PD' WHERE id = p_id;
 END$$
 
@@ -545,7 +545,7 @@ CREATE TABLE `vw_resevation` (
 --
 DROP TABLE IF EXISTS `vw_admin_dashboard`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_admin_dashboard`  AS  select sum(`rec`.`business`) AS `business`,sum(`rec`.`clients`) AS `clients`,(select count(0) AS `N` from `accounts` where `accounts`.`verify` = 0 and `accounts`.`proof` <> '' and `accounts`.`account_type_id` = 2) AS `verify` from (select count(0) AS `clients`,0 AS `business` from `accounts` where `accounts`.`account_type_id` = 1 union all select 0 AS `clients`,count(0) AS `business` from `accounts` where `accounts`.`account_type_id` = 2) `rec` ;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vw_admin_dashboard`  AS  select sum(`rec`.`business`) AS `business`,sum(`rec`.`clients`) AS `clients`,(select count(0) AS `N` from `accounts` where `accounts`.`verify` = 0 and `accounts`.`proof` <> '' and `accounts`.`account_type_id` = 2) AS `verify` from (select count(0) AS `clients`,0 AS `business` from `accounts` where `accounts`.`account_type_id` = 1 union all select 0 AS `clients`,count(0) AS `business` from `accounts` where `accounts`.`account_type_id` = 2) `rec` ;
 
 -- --------------------------------------------------------
 
@@ -554,7 +554,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vw_business_count`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_business_count`  AS  select `r`.`business_id` AS `business_id`,count(`r`.`listing_id`) AS `listing`,(select count(0) from `reservations` where `reservations`.`status` = 'FV' and `r`.`business_id` = `r`.`business_id`) AS `reserve`,(select sum(`reservations`.`amount`) from `reservations` where `reservations`.`status` = 'PD' and `r`.`business_id` = `r`.`business_id`) AS `sales` from `vw_resevation` `r` group by `r`.`business_id` ;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vw_business_count`  AS  select `r`.`business_id` AS `business_id`,count(`r`.`listing_id`) AS `listing`,(select count(0) from `reservations` where `reservations`.`status` = 'FV' and `r`.`business_id` = `r`.`business_id`) AS `reserve`,(select sum(`reservations`.`amount`) from `reservations` where `reservations`.`status` = 'PD' and `r`.`business_id` = `r`.`business_id`) AS `sales` from `vw_resevation` `r` group by `r`.`business_id` ;
 
 -- --------------------------------------------------------
 
@@ -563,7 +563,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vw_listing`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_listing`  AS  select `l`.`id` AS `id`,`l`.`account_id` AS `account_id`,`a`.`name` AS `account_name`,`l`.`name` AS `name`,`l`.`description` AS `description`,`l`.`subinfo` AS `subinfo`,`l`.`rates` AS `rates`,`l`.`photo` AS `photo`,`l`.`status` AS `status`,`l`.`book_date` AS `book_date` from (`listings` `l` left join `accounts` `a` on(`a`.`id` = `l`.`account_id`)) ;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vw_listing`  AS  select `l`.`id` AS `id`,`l`.`account_id` AS `account_id`,`a`.`name` AS `account_name`,`l`.`name` AS `name`,`l`.`description` AS `description`,`l`.`subinfo` AS `subinfo`,`l`.`rates` AS `rates`,`l`.`photo` AS `photo`,`l`.`status` AS `status`,`l`.`book_date` AS `book_date` from (`listings` `l` left join `accounts` `a` on(`a`.`id` = `l`.`account_id`)) ;
 
 -- --------------------------------------------------------
 
@@ -572,7 +572,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vw_resevation`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_resevation`  AS  select `r`.`id` AS `id`,`r`.`listing_id` AS `listing_id`,`l`.`name` AS `listing_name`,`l`.`photo` AS `listing_photo`,`r`.`customer_id` AS `customer_id`,`c`.`name` AS `customer`,`r`.`booking_date` AS `booking_date`,`r`.`amount` AS `amount`,`r`.`status` AS `status`,`r`.`payment_ref` AS `payment_ref`,`r`.`ref_no` AS `ref_no`,`l`.`account_id` AS `business_id`,`b`.`name` AS `business` from (((`reservations` `r` left join `listings` `l` on(`l`.`id` = `r`.`listing_id`)) left join `accounts` `c` on(`c`.`id` = `r`.`customer_id`)) left join `accounts` `b` on(`b`.`id` = `l`.`account_id`)) ;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vw_resevation`  AS  select `r`.`id` AS `id`,`r`.`listing_id` AS `listing_id`,`l`.`name` AS `listing_name`,`l`.`photo` AS `listing_photo`,`r`.`customer_id` AS `customer_id`,`c`.`name` AS `customer`,`r`.`booking_date` AS `booking_date`,`r`.`amount` AS `amount`,`r`.`status` AS `status`,`r`.`payment_ref` AS `payment_ref`,`r`.`ref_no` AS `ref_no`,`l`.`account_id` AS `business_id`,`b`.`name` AS `business` from (((`reservations` `r` left join `listings` `l` on(`l`.`id` = `r`.`listing_id`)) left join `accounts` `c` on(`c`.`id` = `r`.`customer_id`)) left join `accounts` `b` on(`b`.`id` = `l`.`account_id`)) ;
 
 --
 -- Indexes for dumped tables
