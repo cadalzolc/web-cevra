@@ -115,7 +115,7 @@ $info_venue = mysqli_fetch_array($qry_venue);
                                 <div class="step-footer step-tab-pager mt-4 ta-center">
                                     <button id="btnCreate" data-direction="finish" class="btn btn-default btn-hover steps_btn">Update</button>
                                 </div>
-                                <input type="hidden" name="id" value="<?php echo $id; ?>" />
+                                <input type="hidden" name="id" value="<?php echo $id_venue; ?>" />
                             </form>
                         </div>
                     </div>
