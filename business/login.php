@@ -53,11 +53,9 @@ if (!empty($_SESSION['B-ID'])) {
                     <div class="row justify-content-center">
                         <div class="col-lg-10 col-md-10">
                             <div class="app-top-items">
-                                <a href="index.html">
-                                    <div class="sign-logo" id="logo">
-                                        <img src="<?php echo BASE_URL() . 'assets/base/svg/logo.svg' ?>" alt="">
-                                        <img class="logo-inverse" src="<?php echo BASE_URL() . 'assets/base/svg/dark-logo.svg' ?>" alt="">
-                                    </div>
+                                <a href="<?php echo BASE_URL() ?>">
+                                    <img src="<?php echo BASE_URL() . 'assets/base/img/logo-1-small.png' ?>" alt="" style="height: 75px;" title="Home">
+                                    <strong style="color: #170f5f; margin-left: 15px;">Home</strong>
                                 </a>
                                 <div class="app-top-right-link">
                                     New Business Owner?<a class="sidebar-register-link" href="<?php echo BASE_URL() . 'business/register.php' ?>">Register Here</a>
