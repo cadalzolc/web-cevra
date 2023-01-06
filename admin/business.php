@@ -89,6 +89,7 @@ $cnt = mysqli_num_rows($rows);
                                                     <th scope="col">#</th>
                                                     <th scope="col">Email</th>
                                                     <th scope="col">Business Name</th>
+                                                    <th scope="col">Contact No</th>
                                                     <th scope="col">Verification Status</th>
                                                     <th scope="col">Last Login</th>
                                                 </tr>
@@ -109,6 +110,7 @@ $cnt = mysqli_num_rows($rows);
                                                             <td><?= $ctr; ?></td>
                                                             <td><?= $row["email"]; ?></td>
                                                             <td><?= $row["name"]; ?></td>
+                                                            <td><?= $row["contact_no"]; ?></td>
                                                             <td>
                                                             <?php 
                                                                 if ($row["verify"] == 1) {

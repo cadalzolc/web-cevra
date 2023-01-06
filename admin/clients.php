@@ -90,6 +90,7 @@ $cnt = mysqli_num_rows($rows);
                                                     <th scope="col">Email</th>
                                                     <th scope="col">First Name</th>
                                                     <th scope="col">Last Name</th>
+                                                    <th scope="col">Contact No</th>
                                                     <th scope="col">Last Login</th>
                                                 </tr>
                                             </thead>
@@ -110,6 +111,7 @@ $cnt = mysqli_num_rows($rows);
                                                             <td><?= $row["email"]; ?></td>
                                                             <td><?= $row["first_name"]; ?></td>
                                                             <td><?= $row["last_name"]; ?></td>
+                                                            <td><?= $row["contact_no"]; ?></td>
                                                             <td><?= $row["last_login"]; ?></td>
                                                         </tr>
                                                         <?php
