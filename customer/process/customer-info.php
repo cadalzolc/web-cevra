@@ -15,6 +15,7 @@ $allowedTypes = array('jpg', 'jpeg', 'png', 'bmp', 'webp');
 
 $id = $_POST['id'];
 $name = $_POST['name'];
+$contact = $_POST['contact'];
 $photo = $_FILES['photo']['name'];
 $photoPath = $_FILES["photo"]["tmp_name"];
 $fileType  = pathinfo($photo, PATHINFO_EXTENSION );
@@ -26,7 +27,7 @@ if (!empty($photo)) {
         $photoName = $fileId . '.' . $fileType;
         $dirPath = $dirUpload . $photoName;
 
-        $sql = "CALL sp_account_update($id, '$name', '$photoName ')";
+        $sql = "CALL sp_account_update($id, '$name', '$photoName', '$contact')";
         $db = new Server();
         $qry = $db->DbQuery($sql);
 

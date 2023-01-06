@@ -18,14 +18,14 @@ if (empty($ref)) {
     exit;
 }
 
-$id = Decrypt($ref);
+$id_venue = $ref;
 $today = date("D, M j, Y");
 $GLOBALS["tabs"] = "Listings";
 
-$sql = "SELECT * FROM vw_listing where id = " . $id;
+$sql_venue = "SELECT * FROM vw_listing where id = " . $id_venue;
 $db = new Server();
-$qry = $db->DbQuery($sql);
-$info = mysqli_fetch_array($qry);
+$qry_venue = $db->DbQuery($sql_venue);
+$info_venue = mysqli_fetch_array($qry_venue);
 
 ?>
 
@@ -87,23 +87,23 @@ $info = mysqli_fetch_array($qry);
                                                 <div class="col-lg-12 col-md-12">
                                                     <div class="form-group border_bottom pb_30">
                                                         <label class="form-label fs-16">Unique name.*</label>
-                                                        <input name="name" class="form-control" type="text" placeholder="Type name here" value="<?php echo $info['name']; ?>" required maxlength="300">
+                                                        <input name="name" class="form-control" type="text" placeholder="Type name here" value="<?php echo $info_venue['name']; ?>" required maxlength="300">
                                                     </div>
                                                     <div class="form-group border_bottom pb_30">
                                                         <label class="form-label fs-16">Description.*</label>
-                                                        <textarea name="description" class="form-control" type="text" placeholder="Type name here" rows="5" maxlength="3000" required><?php echo $info['description']; ?></textarea>
+                                                        <textarea name="description" class="form-control" type="text" placeholder="Type name here" rows="5" maxlength="3000" required><?php echo $info_venue['description']; ?></textarea>
                                                     </div>
                                                     <div class="row g-4">
                                                         <div class="col-md-6">
                                                             <div class="form-group mt-1">
                                                                 <label class="form-label fs-6">Additional Info*</label>
-                                                                <input name="info" class="form-control" type="text" placeholder="" value="<?php echo $info['subinfo']; ?>" required maxlength="300">
+                                                                <input name="info" class="form-control" type="text" placeholder="" value="<?php echo $info_venue['subinfo']; ?>" required maxlength="300">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group mt-1">
                                                                 <label class="form-label fs-6">Rates*</label>
-                                                                <input name="rates" class="form-control" type="text" placeholder="0" min="0" max="100000" value="<?php echo $info['rates']; ?>" required>
+                                                                <input name="rates" class="form-control" type="text" placeholder="0" min="0" max="100000" value="<?php echo $info_venue['rates']; ?>" required>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -115,7 +115,7 @@ $info = mysqli_fetch_array($qry);
                                 <div class="step-footer step-tab-pager mt-4 ta-center">
                                     <button id="btnCreate" data-direction="finish" class="btn btn-default btn-hover steps_btn">Update</button>
                                 </div>
-                                <input type="hidden" name="id" value="<?php echo $id; ?>" />
+                                <input type="hidden" name="id" value="<?php echo $id_venue; ?>" />
                             </form>
                         </div>
                     </div>

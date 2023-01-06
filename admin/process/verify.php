@@ -24,7 +24,7 @@ if ($qry){
 
 $data = '{ 
     "success": '. ToBoolean($success) .',
-    "message": "'. $sql .'"
+    "message": "'. $msg .'"
 }';
 
 header('Content-Type: application/json');

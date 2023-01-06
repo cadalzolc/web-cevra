@@ -60,7 +60,7 @@ $cntLst = mysqli_num_rows($qry_venues);
         </div>
         <div class="explore-events p-80">
             <div class="container">
-                <div class="row justify-content-md-center">
+                <div class="row justify-content-md-center" style="display: none;">
                     <div class="col-xl-8 col-lg-8 col-md-10">
                         <div class="hero-banner-content">
                             <h2>Explore</h2>
