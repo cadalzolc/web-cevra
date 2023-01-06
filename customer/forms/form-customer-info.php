@@ -27,7 +27,15 @@ $row_user = mysqli_fetch_array($res_user);
                                 </div>
                                 <span class="org_design_button btn-file">
                                     <span><i class="fa-solid fa-camera"></i></span>
-                                    <input type="file" id="photo" accept="image/*" name="photo" onchange="OnImageSelection(this)" data-image="#img-b-logo" required="">
+                                    <?php if ($row_user['photo'] == "") {
+                                        ?>
+                                        <input type="file" id="photo" accept="image/*" name="photo" onchange="OnImageSelection(this)" data-image="#img-b-logo" required="" value="<?php echo $row_user['photo'] ?>" data-input="#changePhoto">
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <input type="file" id="photo" accept="image/*" name="photo" onchange="OnImageSelection(this)" data-image="#img-b-logo" value="<?php echo $row_user['photo'] ?>" data-input="#changePhoto">
+                                        <?php
+                                    } ?>
                                 </span>
                             </div>
                         </div>
@@ -55,6 +63,8 @@ $row_user = mysqli_fetch_array($res_user);
                             </div>
                         </div>
                         <input type="hidden" name="id" value="<?php echo $id; ?>" />
+                        <input type="hidden" name="photoVal" value="<?php echo $row_user['photo']; ?>" />
+                        <input type="hidden" name="changePhoto" value="0" />
                     </form>
                 </div>
             </div>
