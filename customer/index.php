@@ -63,7 +63,7 @@ $cnt = mysqli_num_rows($rows);
                         <div class="main-card p-4 mt-5">
                             <div class="dashboard-wrap-content">
                                 <div class="d-md-flex flex-wrap align-items-center">
-                                    <div class="dashboard-date-wrap mt-4">
+                                    <div class="dashboard-date-wrap mt-4" style="display: none !important;">
                                         <div class="form-group">
                                             <div class="relative-input position-relative">
                                                 <input class="form-control h_40" type="text" placeholder="Search by ref" value="">

@@ -60,21 +60,10 @@ $cnt = mysqli_num_rows($rows);
                     </div>
                     <div class="col-md-12">
                         <div class="main-card p-4 mt-5">
-                            <div class="dashboard-wrap-content">
-                                <div class="d-md-flex flex-wrap align-items-center">
-                                    <div class="dashboard-date-wrap mt-4">
-                                        <div class="form-group">
-                                            <div class="relative-input position-relative">
-                                                <input class="form-control h_40" type="text" placeholder="Search here" value="">
-                                                <i class="fas fa-search"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="rs ms-auto mt-4 mt_r4">
-                                        <a href="#" class="pe-4 w-100 ps-4 text-center co-main-btn h_40 d-inline-block">
-                                            <i class="fa-solid fa-arrow-rotate-right me-3"></i>
-                                            Search
-                                        </a>
+                        <div class="dashboard-wrap-content">
+                                <div class="d-blocl">
+                                    <div class="d-block" style="float: right;">
+                                        <button class="btn btn-primary" style="float: right;" onclick="printJS({ printable: 'CnReports', type: 'html' })">Print</button>
                                     </div>
                                 </div>
                             </div>
@@ -83,12 +72,13 @@ $cnt = mysqli_num_rows($rows);
                             <div class="table-card mt-4">
                                 <div class="main-table">
                                     <div class="table-responsive">
-                                        <table class="table">
+                                        <table class="table" id="CnReports">
                                             <thead class="thead-dark">
                                                 <tr>
                                                     <th scope="col">#</th>
                                                     <th scope="col">Email</th>
                                                     <th scope="col">Business Name</th>
+                                                    <th scope="col">Contact No</th>
                                                     <th scope="col">Verification Status</th>
                                                     <th scope="col">Last Login</th>
                                                 </tr>
@@ -109,6 +99,7 @@ $cnt = mysqli_num_rows($rows);
                                                             <td><?= $ctr; ?></td>
                                                             <td><?= $row["email"]; ?></td>
                                                             <td><?= $row["name"]; ?></td>
+                                                            <td><?= $row["contact_no"]; ?></td>
                                                             <td>
                                                             <?php 
                                                                 if ($row["verify"] == 1) {
@@ -149,6 +140,7 @@ $cnt = mysqli_num_rows($rows);
     <script src="<?php echo BASE_URL() . 'assets/base/js/night-mode.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/base/js/app.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/plugins/js/toastr.js' ?>"></script>
+    <script src="<?php echo BASE_URL() . 'assets/plugins/js/print.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'customer/js/app.js' ?>"></script>
 </body>
 </html>

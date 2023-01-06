@@ -16,27 +16,47 @@ $allowedTypes = array('jpg', 'jpeg', 'png', 'bmp', 'webp');
 $id = $_POST['id'];
 $name = $_POST['name'];
 $contact = $_POST['contact'];
-$photo = $_FILES['photo']['name'];
-$photoPath = $_FILES["photo"]["tmp_name"];
-$fileType  = pathinfo($photo, PATHINFO_EXTENSION );
+$changePhoto = $_POST['changePhoto'];
+$photoVal = $_POST['photoVal'];
+$sql= "";
 
-if (!empty($photo)) {
-    if (in_array($fileType, $allowedTypes)) {
+$hasChanges = ToBoolean($changePhoto);
 
-        $fileId = GUID();
-        $photoName = $fileId . '.' . $fileType;
-        $dirPath = $dirUpload . $photoName;
+if ($hasChanges === true) {
 
-        $sql = "CALL sp_account_update($id, '$name', '$photoName ', '$contact')";
-        $db = new Server();
-        $qry = $db->DbQuery($sql);
+    $photo = $_FILES['photo']['name'];
+    $photoPath = $_FILES["photo"]["tmp_name"];
+    $fileType  = pathinfo($photo, PATHINFO_EXTENSION );
 
-        if (move_uploaded_file($photoPath, $dirPath)) {
-            $success = true;
-            $msg = "Photo was successfully uploaded!";
+    if (!empty($photo)) {
+        if (in_array($fileType, $allowedTypes)) {
+
+            $fileId = GUID();
+            $photoName = $fileId . '.' . $fileType;
+            $dirPath = $dirUpload . $photoName;
+        
+            $sql = $sql."CALL sp_account_update($id, '$name', '$photoName ', '$contact')";
+            $db = new Server();
+            $qry = $db->DbQuery($sql);
+        
+            if (move_uploaded_file($photoPath, $dirPath)) {
+                $success = true;
+                $msg = "Info was successfully updated!";
+            }
+
         }
     }
+
+} else {
+
+    $sql = $sql."CALL sp_account_update($id, '$name', '$photoVal ', '$contact')";
+    $db = new Server();
+    $qry = $db->DbQuery($sql);
+    $success = true;
+    $msg = "Info was successfully updated!";
+
 }
+
 
 $data = '{
     "success": '. ToBoolean($success) .',

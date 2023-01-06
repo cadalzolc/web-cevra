@@ -72,7 +72,7 @@ $row_user = mysqli_fetch_array($res_user);
                         <div class="main-card mt-5">
                             <div class="dashboard-wrap-content p-4">
                                 <div class="d-md-flex flex-wrap align-items-center">
-                                    <div class="dashboard-date-wrap">
+                                    <div class="dashboard-date-wrap" style="display: none !important;">
                                         <div class="form-group">
                                             <div class="relative-input position-relative">
                                                 <input class="form-control h_40" type="text" placeholder="Search by event name, status" value="">
@@ -123,7 +123,7 @@ $row_user = mysqli_fetch_array($res_user);
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a href="<?php echo BASE_URL() . 'business/listing-manage.php?ref=' . $row['id']  ?>" class="dropdown-item"><i class="fa-solid fa-gear me-3"></i>Update</a>
                                                 <a href="<?php echo BASE_URL() . 'business/listing-gallery.php?ref=' . $row['id']  ?>" class="dropdown-item"><i class="fa-regular fa-image me-3"></i>Gallery</a>
-                                                <a href="#" class="dropdown-item delete-event" style="display: none;"><i class="fa-solid fa-trash-can me-3"></i>Delete</a>
+                                                <a href="#" class="dropdown-item delete-event" style="display: none !important;"><i class="fa-solid fa-trash-can me-3"></i>Delete</a>
                                             </div>
                                         </div>
                                     </div>

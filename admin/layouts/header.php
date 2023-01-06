@@ -16,7 +16,7 @@
                 </button>
                 <a class="navbar-brand order-1 order-lg-0 ml-lg-0 ml-2 me-auto" href="<?php echo BASE_URL() . 'admin/' ?>">
                     <div class="res-main-logo">
-                        <img src="<?php echo BASE_URL() . 'assets/base/svg/logo-icon.svg' ?>" alt="">
+                        <img src="<?php echo BASE_URL() . 'assets/base/img/logo-1-small.png' ?>" alt="">
                     </div>
                     <div class="main-logo">
                        <b>ADMIN PORTAL</b>
@@ -26,7 +26,7 @@
                     aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
                         <div class="offcanvas-logo" id="offcanvasNavbarLabel">
-                            <img src="<?php echo BASE_URL() . 'assets/base/svg/logo-icon.svg' ?>" alt="">
+                            <img src="<?php echo BASE_URL() . 'assets/base/img/logo-1-small.png' ?>" alt="">
                         </div>
                         <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
                             <i class="fa-solid fa-xmark"></i>
