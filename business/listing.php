@@ -123,7 +123,7 @@ $row_user = mysqli_fetch_array($res_user);
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a href="<?php echo BASE_URL() . 'business/listing-manage.php?ref=' . $row['id']  ?>" class="dropdown-item"><i class="fa-solid fa-gear me-3"></i>Update</a>
                                                 <a href="<?php echo BASE_URL() . 'business/listing-gallery.php?ref=' . $row['id']  ?>" class="dropdown-item"><i class="fa-regular fa-image me-3"></i>Gallery</a>
-                                                <a href="#" class="dropdown-item delete-event"><i class="fa-solid fa-trash-can me-3" style="display: none;"></i>Delete</a>
+                                                <a href="#" class="dropdown-item delete-event" style="display: none;"><i class="fa-solid fa-trash-can me-3"></i>Delete</a>
                                             </div>
                                         </div>
                                     </div>
