@@ -22,10 +22,10 @@ $id = Decrypt($ref);
 $today = date("D, M j, Y");
 $GLOBALS["tabs"] = "Listings";
 
-$sql = "SELECT * FROM vw_listing where id = " . $id;
+$sql_veneu = "SELECT * FROM vw_listing where id = " . $id;
 $db = new Server();
-$qry = $db->DbQuery($sql);
-$info = mysqli_fetch_array($qry);
+$qry_veneu = $db->DbQuery($sql_veneu);
+$info_veneu = mysqli_fetch_array($qry_veneu);
 
 ?>
 
@@ -87,23 +87,23 @@ $info = mysqli_fetch_array($qry);
                                                 <div class="col-lg-12 col-md-12">
                                                     <div class="form-group border_bottom pb_30">
                                                         <label class="form-label fs-16">Unique name.*</label>
-                                                        <input name="name" class="form-control" type="text" placeholder="Type name here" value="<?php echo $info['name']; ?>" required maxlength="300">
+                                                        <input name="name" class="form-control" type="text" placeholder="Type name here" value="<?php echo $info_veneu['name']; ?>" required maxlength="300">
                                                     </div>
                                                     <div class="form-group border_bottom pb_30">
                                                         <label class="form-label fs-16">Description.*</label>
-                                                        <textarea name="description" class="form-control" type="text" placeholder="Type name here" rows="5" maxlength="3000" required><?php echo $info['description']; ?></textarea>
+                                                        <textarea name="description" class="form-control" type="text" placeholder="Type name here" rows="5" maxlength="3000" required><?php echo $info_veneu['description']; ?></textarea>
                                                     </div>
                                                     <div class="row g-4">
                                                         <div class="col-md-6">
                                                             <div class="form-group mt-1">
                                                                 <label class="form-label fs-6">Additional Info*</label>
-                                                                <input name="info" class="form-control" type="text" placeholder="" value="<?php echo $info['subinfo']; ?>" required maxlength="300">
+                                                                <input name="info" class="form-control" type="text" placeholder="" value="<?php echo $info_veneu['subinfo']; ?>" required maxlength="300">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group mt-1">
                                                                 <label class="form-label fs-6">Rates*</label>
-                                                                <input name="rates" class="form-control" type="text" placeholder="0" min="0" max="100000" value="<?php echo $info['rates']; ?>" required>
+                                                                <input name="rates" class="form-control" type="text" placeholder="0" min="0" max="100000" value="<?php echo $info_veneu['rates']; ?>" required>
                                                             </div>
                                                         </div>
                                                     </div>
