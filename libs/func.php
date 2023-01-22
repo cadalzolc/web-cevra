@@ -78,4 +78,71 @@ function StatusName($status)
     }
 }
 
+function GroupBy($array, $key) {
+    $temp_array = [];
+    foreach ($array as $init) {
+        $temp_array[$init[$key]][] = $init;
+    }
+    $result = array();
+    foreach ($temp_array as $name => $arr) {
+        $obj = new stdClass;
+        $obj->key = $name;
+        $obj->value = $arr;
+        array_push($result, $obj);
+    }
+    return $result;
+}
+
+function FilterBy($arr, $key, $val) {
+    foreach ($arr as $init) {
+        if ($init[$key] == $val) {
+            return $init;
+        }
+    }
+    return [];
+}
+
+function FormatCurrency($number) {
+    return number_format($number, 2);
+}
+
+function getMonthName($monthNum) {
+    return date("F", mktime(0, 0, 0, $monthNum, 10));
+}
+
+function getIsoWeeksInYear($year) {
+    $date = new DateTime;
+    $date->setISODate($year, 53);
+    return ($date->format("W") === "53" ? 53 : 52);
+}
+
+function getStartAndEndDate($week, $year, $format) {
+    $dateTime = new DateTime();
+    $dateTime->setISODate($year, $week);
+    $result['date_start'] = $dateTime->format($format);
+    $dateTime->modify('+6 days');
+    $result['date_end'] = $dateTime->format($format);
+    return $result;
+}
+
+function getDayFromDate($date) {
+    $now = date_create($date);
+    $day = intVal($now->format("d"));
+    return $day;
+}
+
+ function getDaysFromRange($start, $end, $format = 'Y-m-d') {
+    $start  = new DateTime($start);
+    $end    = new DateTime($end);
+    $invert = $start > $end;
+
+    $dates = array();
+    $dates[] = $start->format($format);
+    while ($start != $end) {
+        $start->modify(($invert ? '-' : '+') . '1 day');
+        $dates[] = $start->format($format);
+    }
+    return $dates;
+ }
+
 ?>

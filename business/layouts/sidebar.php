@@ -26,6 +26,24 @@
                         <span class="menu--label">Reports</span>
                     </a>
                 </li>
+                <li class="menu--item">
+                    <a href="<?php echo BASE_URL() . 'business/reports-weekly.php' ?>" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Weekly" style="color: #333; background: #f5f7f9;">
+                        <i class="menu--icon"></i>
+                        <span class="menu--label">Weekly</span>
+                    </a>
+                </li>
+                <li class="menu--item">
+                    <a href="<?php echo BASE_URL() . 'business/reports-monthly.php' ?>" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Monthly" style="color: #333; background: #f5f7f9;">
+                        <i class="menu--icon"></i>
+                        <span class="menu--label">Monthly</span>
+                    </a>
+                </li>
+                <li class="menu--item">
+                    <a href="<?php echo BASE_URL() . 'business/reports-yearly.php' ?>" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Yearly" style="color: #333; background: #f5f7f9;">
+                        <i class="menu--icon"></i>
+                        <span class="menu--label">Yearly</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

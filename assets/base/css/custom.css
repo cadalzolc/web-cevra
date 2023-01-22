@@ -181,3 +181,13 @@ button.close {
 .modal-confirm .modal-title {
     color: #fff;
 }
+
+.d-flex-col {
+    flex-direction: column;
+}
+
+.d-form-select {
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}

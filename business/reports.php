@@ -58,15 +58,15 @@ $cnt = mysqli_num_rows($rows);
                 <div class="row">
                     <div class="col-md-12">
                         <div class="d-main-title">
-                            <h3><i class="fas fa-bookmark me-3"></i></i>Reports</h3>
+                            <h3><i class="fas fa-bookmark me-3"></i></i>All Sales Reports</h3>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="main-card p-4 mt-5">
+                        <div class="main-card p-2 mt-2">
                             <div class="dashboard-wrap-content">
-                                <div class="d-blocl">
-                                    <div class="d-block" style="float: right;">
-                                        <button class="btn btn-primary" style="float: right;" onclick="printJS({ printable: 'CnReports', type: 'html' })">Print</button>
+                                <div class="d-flex d-flex-col">
+                                    <div class="d-block">
+                                        <button class="btn btn-primary" style="float: right; width: 120px;" onclick="printJS({ printable: 'CnReports', type: 'html' })">Print</button>
                                     </div>
                                 </div>
                             </div>
@@ -135,6 +135,7 @@ $cnt = mysqli_num_rows($rows);
     <script src="<?php echo BASE_URL() . 'assets/base/js/custom.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/base/js/night-mode.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/base/js/app.js' ?>"></script>
+    <script src="<?php echo BASE_URL() . 'assets/plugins/js/moment.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/plugins/js/toastr.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/plugins/js/print.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'business/js/app.js' ?>"></script>

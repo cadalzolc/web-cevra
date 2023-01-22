@@ -6,13 +6,13 @@ include('./libs/base.php');
 include('./libs/func.php');
 include('./libs/db.php');
 
-
 $today = date("D, M j, Y");
 
-$sql_venues = "SELECT * FROM vw_listing LIMIT 12";
+$sql_venues = "SELECT * FROM vw_listing";
 $db = new Server();
 $res_venues = $db->DbQuery($sql_venues);
 $cnt_venues = mysqli_num_rows($res_venues);
+$arr_buss = GroupBy($res_venues, "account_name");
 
 ?>
 
@@ -61,22 +61,25 @@ $cnt_venues = mysqli_num_rows($res_venues);
 
         <div class="explore-events p-80">
             <div class="container">
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12">
-                        <?php 
-                            if ($cnt_venues == 0) {
-                        ?>
-                            <h5>No venue selection to display.</h5>
-                        <?php
-                            } else {
-                        ?>
+                <?php 
+                    if ($cnt_venues == 0) {
+                ?>
+                    <h5>No venue selection to display.</h5>
+                <?php
+                    } 
+                    else {
+                        foreach($arr_buss as $bus):
+                ?>
+                    <h5 style="text-transform: uppercase;" class="mt-4"><?php echo $bus->key; ?></h5>
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12">
                             <div class="featured-controls">
                                 <div class="row">
                                 <?php 
-                                    foreach($res_venues as $row):
+                                    foreach($bus->value as $row):
                                         ?>
                                         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mix arts concert workshops volunteer sports health_Wellness">
-                                            <div class="main-card mt-4">
+                                            <div class="main-card">
                                                 <div class="event-thumbnail">
                                                     <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($row['id']) ?>" class="thumbnail-img">
                                                         <img src="<?= BASE_URL() . 'assets/uploads/listings/'. IIF($row['photo'], "", "default.jpg") ?>" alt="">
@@ -84,7 +87,6 @@ $cnt_venues = mysqli_num_rows($res_venues);
                                                 </div>
                                                 <div class="event-content" style="text-align: center;">
                                                     <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($row['id']) ?>" class="event-name"><?= $row['name'] ?></a>
-                                                    <span><?php echo $row['account_name'] ?></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -93,11 +95,12 @@ $cnt_venues = mysqli_num_rows($res_venues);
                                 ?>
                                 </div>
                             </div>
-                        <?php
-                            }
-                        ?>
+                        </div>
                     </div>
-                </div>
+                <?php
+                        endforeach;
+                    }
+                ?>
             </div>
         </div>
     </div>
