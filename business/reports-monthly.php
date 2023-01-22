@@ -11,13 +11,33 @@ if (empty($_SESSION['B-ID'])) {
     exit;
 }
 
+$now = new DateTime();
+$curYear = intVal($now->format("Y"));
+
+if (!empty($_GET['year'])) {
+    $curYear = intVal($_GET['year']);
+}
+
 $GLOBALS["tabs"] = "Reports";
 
 $owner = $_SESSION['B-ID'];
-$sql = "SELECT * FROM vw_resevation WHERE status != 'FV' AND business_id = $owner";
+$sql = "SELECT amount, report_year, report_month, business_id FROM
+        (
+            SELECT 	amount, 
+                    Year(booking_date) as report_year, 
+                    Month(booking_date) as report_month,
+                    business_id
+            FROM vw_resevation WHERE status = 'PD'
+        ) X
+        WHERE business_id = $owner AND report_year = $curYear
+        GROUP BY amount, report_year, report_month, business_id
+        ORDER BY report_year";
 $db = new Server();
 $rows = $db->DbQuery($sql);
 $cnt = mysqli_num_rows($rows);
+
+$months = range(1, 12);
+$tot = 0;
 
 ?>
 
@@ -29,7 +49,7 @@ $cnt = mysqli_num_rows($rows);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <title>Business - Reports</title>
+    <title>Business - Reports Monthly</title>
     <link rel="icon" href="<?php echo BASE_URL() . 'assets/base/img/icon.png' ?>" type="image/png" sizes="16x16">
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
@@ -58,7 +78,7 @@ $cnt = mysqli_num_rows($rows);
                 <div class="row">
                     <div class="col-md-12">
                         <div class="d-main-title">
-                            <h3><i class="fas fa-bookmark me-3"></i></i>All Sales Reports</h3>
+                            <h3><i class="fas fa-bookmark me-3"></i></i>Reports - Monthly</h3>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -66,7 +86,19 @@ $cnt = mysqli_num_rows($rows);
                             <div class="dashboard-wrap-content">
                                 <div class="d-flex d-flex-col">
                                     <div class="d-block">
-                                        <button class="btn btn-primary" style="float: right; width: 120px;" onclick="printJS({ printable: 'CnReports', type: 'html' })">Print</button>
+                                        <select class="d-form-select" onchange="onYearChange(this);">
+                                        <?php 
+                                            $years = range(2021, 2050);
+                                            foreach($years as $yr):
+                                                if ($curYear == $yr) {
+                                                    echo "<option selected value=$yr>$yr</option>";
+                                                } else {
+                                                    echo "<option value=$yr>$yr</option>";
+                                                }
+                                            endforeach;
+                                        ?>
+                                        </select>
+                                        <button class="btn btn-primary" style="float: right; width: 120px;" onclick="printJS({ printable: 'CnReports', type: 'html'})">Print</button>
                                     </div>
                                 </div>
                             </div>
@@ -78,46 +110,38 @@ $cnt = mysqli_num_rows($rows);
                                         <table class="table" id="CnReports">
                                             <thead class="thead-dark">
                                                 <tr>
-                                                    <th scope="col"></th>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">REF. NO.</th>
-                                                    <th scope="col">Customer</th>
-                                                    <th scope="col">Venue</th>
-                                                    <th scope="col">Date</th>
-                                                    <th scope="col">Status</th>
-                                                    <th scope="col">Total</th>
+                                                    <th colspan="2" style="text-align: center; background: #fff; text-transform: uppercase; padding: 0 !important;">
+                                                        <span>Month Sales of Year <?php echo $curYear; ?> Summary</span>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="col" style="padding: 5px !important;">Month</th>
+                                                    <th scope="col" style="width: 50px; padding: 5px !important">Sales</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                             <?php 
-                                                if ($cnt == 0) {
-                                            ?>
-                                                <tr>
-                                                    <td colspan="25">No records to display</td>
-                                                </tr>
-                                            <?php
-                                                } else {
-                                                    $ctr = 1;
-                                                    foreach($rows as $row):
-                                                        ?>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="<?= BASE_URL() . 'business/reservations-info.php?ref=' . $row["ref_no"]; ?>"><i class="far fa-eye"></i></a>
-                                                            </td>
-                                                            <td><?= $ctr; ?></td>
-                                                            <td><?= $row["ref_no"]; ?></td>
-                                                            <td><?= $row["customer"]; ?></td>
-                                                            <td><?= $row["listing_name"]; ?></td>
-                                                            <td><?= $row["booking_date"]; ?></td>
-                                                            <td><span class="status-circle <?= CirlceStatus($row["status"]); ?>"></span><?= StatusName($row["status"]); ?></td>
-                                                            <td><?= $row["amount"]; ?></td>
-                                                        </tr>
-                                                        <?php
-                                                        $ctr++;
-                                                    endforeach;
-                                                }
+                                                 $ctr = 1;
+                                                 foreach($months as $row):
+                                                     $fil = FilterBy($rows, "report_month", $row);
+                                                     $amt = $fil ? $fil["amount"] : 0;
+                                                     $tot = $tot + $amt;
+                                                     ?>
+                                                     <tr>
+                                                         <td style="padding: 7px !important;"><?= getMonthName($row); ?></td>
+                                                         <td style="padding: 7px !important; text-align: right;"><?= FormatCurrency($amt) ?></td>
+                                                     </tr>
+                                                     <?php
+                                                     $ctr++;
+                                                 endforeach;
                                             ?>
                                             </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td style="padding: 7px !important; text-align: right;">Total Sales</td>
+                                                    <td style="padding: 7px !important; text-align: right;"><?php echo FormatCurrency($tot); ?></td>
+                                                </tr>
+                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>
@@ -139,6 +163,12 @@ $cnt = mysqli_num_rows($rows);
     <script src="<?php echo BASE_URL() . 'assets/plugins/js/toastr.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/plugins/js/print.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'business/js/app.js' ?>"></script>
+    <script>
+        function onYearChange(e) {
+            var yr = $(e).val();
+            window.location.href = "<?php echo BASE_URL() . 'business/reports-monthly.php?' ?> year=" + yr;
+        }
+    </script>
 </body>
 
 </html>
