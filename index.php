@@ -50,7 +50,7 @@ $arr_buss = GroupBy($res_venues, "account_name");
 
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-9 col-md-10">
+                    <div class="col-xl-7 col-lg-9 col-md-10" data-carousel="">
                         <div class="hero-banner-content">
                             <img src="./assets/base/img/logo-1.png" class="hero-logo" />
                         </div>
