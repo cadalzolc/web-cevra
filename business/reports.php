@@ -64,8 +64,8 @@ $cnt = mysqli_num_rows($rows);
                     <div class="col-md-12">
                         <div class="main-card p-4 mt-5">
                             <div class="dashboard-wrap-content">
-                                <div class="d-blocl">
-                                    <div class="d-block" style="float: right;">
+                                <div class="d-flex d-flex-col">
+                                    <div class="d-block">
                                         <button class="btn btn-primary" style="float: right;" onclick="printJS({ printable: 'CnReports', type: 'html' })">Print</button>
                                     </div>
                                 </div>
@@ -135,9 +135,13 @@ $cnt = mysqli_num_rows($rows);
     <script src="<?php echo BASE_URL() . 'assets/base/js/custom.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/base/js/night-mode.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/base/js/app.js' ?>"></script>
+    <script src="<?php echo BASE_URL() . 'assets/plugins/js/moment.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/plugins/js/toastr.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/plugins/js/print.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'business/js/app.js' ?>"></script>
+    <script>
+        console.log(moment("2023W01").format("YYYY-MM-DD"));
+    </script>
 </body>
 
 </html>

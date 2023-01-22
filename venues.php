@@ -10,8 +10,9 @@ $GLOBALS["tabs"] = "Venues";
 
 $sql_venues = "SELECT * FROM vw_listing";
 $db = new Server();
-$qry_venues = $db->DbQuery($sql_venues);
-$cntLst = mysqli_num_rows($qry_venues);
+$res_venues = $db->DbQuery($sql_venues);
+$cnt_venues = mysqli_num_rows($res_venues);
+$arr_buss = GroupBy($res_venues, "account_name");
 
 ?>
 
@@ -95,35 +96,51 @@ $cntLst = mysqli_num_rows($qry_venues);
                 <div class="row" style="margin-top: 50px;">
                     <div class="col-xl-12 col-lg-12 col-md-12">
                         <div class="event-filter-items">
-                            <div class="featured-controls">
+                            <?php 
+                                if ($cnt_venues == 0) {
+                            ?>
+                                <h5>No venue selection to display.</h5>
+                            <?php
+                                } 
+                                else {
+                                    foreach($arr_buss as $bus):
+                            ?>
+                                <h5 style="text-transform: uppercase;" class="mt-4"><?php echo $bus->key; ?></h5>
                                 <div class="row">
-                                    <?php 
-                                        foreach($qry_venues as $row):
-                                            ?>
-                                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mix arts concert workshops volunteer sports health_Wellness">
-                                                <div class="main-card mt-4">
-                                                    <div class="event-thumbnail">
-                                                        <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($row['id']) ?>" class="thumbnail-img">
-                                                            <img src="<?= BASE_URL() . 'assets/uploads/listings/'. IIF($row['photo'], "", "default.jpg") ?>" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="event-content" style="text-align: left;">
-                                                        <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($row['id']) ?>" class="event-title" style="margin-bottom: 0;"><?= $row['name'] ?></a>
-                                                        <span><?php echo $row['account_name'] ?></span>
-                                                        <br><br>
-                                                        <div class="duration-price-remaining">
-                                                            <span class="duration-price">₱ <?= $row['rates'] ?></span>
-                                                            <span class="remaining"></span>
+                                    <div class="col-xl-12 col-lg-12 col-md-12">
+                                        <div class="featured-controls">
+                                            <div class="row">
+                                            <?php 
+                                                foreach($bus->value as $row):
+                                                    ?>
+                                                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mix arts concert workshops volunteer sports health_Wellness">
+                                                        <div class="main-card">
+                                                            <div class="event-thumbnail">
+                                                                <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($row['id']) ?>" class="thumbnail-img">
+                                                                    <img src="<?= BASE_URL() . 'assets/uploads/listings/'. IIF($row['photo'], "", "default.jpg") ?>" alt="">
+                                                                </a>
+                                                            </div>
+                                                                <div class="event-content" style="text-align: left;">
+                                                                <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($row['id']) ?>" class="event-title" style="margin-bottom: 0;"><?= $row['name'] ?></a>
+                                                                <br><br>
+                                                                <div class="duration-price-remaining">
+                                                                    <span class="duration-price">₱ <?= $row['rates'] ?></span>
+                                                                    <span class="remaining"></span>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="event-footer"></div>
-                                                </div>
+                                                    <?php
+                                                endforeach;
+                                            ?>
                                             </div>
-                                            <?php
-                                        endforeach;
-                                    ?>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php
+                                    endforeach;
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>

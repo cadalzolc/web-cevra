@@ -78,4 +78,19 @@ function StatusName($status)
     }
 }
 
+function GroupBy($array, $key) {
+    $temp_array = [];
+    foreach ($array as $init) {
+        $temp_array[$init[$key]][] = $init;
+    }
+    $result = array();
+    foreach ($temp_array as $name => $arr) {
+        $obj = new stdClass;
+        $obj->key = $name;
+        $obj->value = $arr;
+        array_push($result, $obj);
+    }
+    return $result;
+}
+
 ?>

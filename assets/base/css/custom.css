@@ -181,3 +181,7 @@ button.close {
 .modal-confirm .modal-title {
     color: #fff;
 }
+
+.d-flex-col {
+    flex-direction: column;
+}
