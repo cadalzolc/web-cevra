@@ -1,9 +1,9 @@
 /*
 Datbase Creation 
 
-CREATE SCHEMA `db_psrm` ;
+CREATE SCHEMA `db_events` ;
 SET collation_connection = 'utf8mb4_unicode_ci';
-ALTER DATABASE db_psrm CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER DATABASE db_events CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 */
 
 
