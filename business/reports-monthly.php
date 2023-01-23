@@ -21,7 +21,7 @@ if (!empty($_GET['year'])) {
 $GLOBALS["tabs"] = "Reports";
 
 $owner = $_SESSION['B-ID'];
-$sql = "SELECT amount, report_year, report_month, business_id FROM
+$sql = "SELECT SUM(amount) AS amount, report_year, report_month, business_id FROM
         (
             SELECT 	amount, 
                     Year(booking_date) as report_year, 
@@ -30,7 +30,7 @@ $sql = "SELECT amount, report_year, report_month, business_id FROM
             FROM vw_resevation WHERE status = 'PD'
         ) X
         WHERE business_id = $owner AND report_year = $curYear
-        GROUP BY amount, report_year, report_month, business_id
+        GROUP BY report_year, report_month, business_id
         ORDER BY report_year";
 $db = new Server();
 $rows = $db->DbQuery($sql);
