@@ -18,7 +18,7 @@ $sql = "SELECT SUM(amount) AS amount, report_year, business_id FROM
             SELECT amount, Year(booking_date) as report_year, business_id FROM vw_resevation WHERE status = 'PD'
         ) X
         WHERE business_id = $owner
-        GROUP BY amount, report_year, business_id
+        GROUP BY report_year, business_id
         ORDER BY report_year";
 $db = new Server();
 $rows = $db->DbQuery($sql);
