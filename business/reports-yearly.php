@@ -13,7 +13,7 @@ if (empty($_SESSION['B-ID'])) {
 
 $GLOBALS["tabs"] = "Reports";
 $owner = $_SESSION['B-ID'];
-$sql = "SELECT amount, report_year, business_id FROM
+$sql = "SELECT SUM(amount) AS amount, report_year, business_id FROM
         (
             SELECT amount, Year(booking_date) as report_year, business_id FROM vw_resevation WHERE status = 'PD'
         ) X
