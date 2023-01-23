@@ -8,7 +8,7 @@ include('./libs/db.php');
 
 $today = date("D, M j, Y");
 
-$sql_venues = "SELECT * FROM vw_listing";
+$sql_venues = "SELECT * FROM vw_listing ORDER BY RAND()";
 $db = new Server();
 $res_venues = $db->DbQuery($sql_venues);
 $cnt_venues = mysqli_num_rows($res_venues);
@@ -60,12 +60,12 @@ $arr_buss = GroupBy($res_venues, "account_name");
                     <div class="col-lg-12">
                         <div class="owl-carousel owl-theme" style="margin-top: 3rem;">
                             <?php
-                                //$slides = shuffle($res_venues);
-                                foreach($res_venues as $img):
+                                foreach($res_venues as $slide):
                                     ?>
                                     <div class="item">
-                                        <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($img['id']) ?>" class="thumbnail-img">
-                                            <img src="<?= BASE_URL() . 'assets/uploads/listings/'. IIF($img['photo'], "", "default.jpg") ?>" alt="">
+                                        <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($slide['id']) ?>" class="thumbnail-img">
+                                            <div class="item-name" data-bs-toggle="tooltip" data-bs-placement="center" data-bs-original-title="<?= $slide['name'] ?>"><?= $slide['name'] ?></div>
+                                            <img src="<?= BASE_URL() . 'assets/uploads/listings/'. IIF($slide['photo'], "", "default.jpg") ?>" alt="">
                                         </a>
                                     </div>
                                     <?php
