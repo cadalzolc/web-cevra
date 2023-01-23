@@ -40,6 +40,9 @@ $arr_buss = GroupBy($res_venues, "account_name");
     <link rel="stylesheet" href="<?php echo BASE_URL() . 'assets/base/css/bootstrap-select.min.css' ?>">
     <link rel="stylesheet" href="<?php echo BASE_URL() . 'assets/base/css/custom.css' ?>">
     <link rel="stylesheet" href="<?php echo BASE_URL() . 'assets/plugins/css/toastr.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASE_URL() . 'assets/plugins/css/animate.min.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASE_URL() . 'assets/plugins/css/owl.carousel.min.css' ?>">
+    <link rel="stylesheet" href="<?php echo BASE_URL() . 'assets/plugins/css/owl.theme.default.min.css' ?>">
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -47,7 +50,6 @@ $arr_buss = GroupBy($res_venues, "account_name");
     <div class="wrapper">
         
         <div class="hero-banner">
-
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-9 col-md-10" data-carousel="">
@@ -55,11 +57,26 @@ $arr_buss = GroupBy($res_venues, "account_name");
                             <img src="./assets/base/img/logo-1.png" class="hero-logo" />
                         </div>
                     </div>
+                    <div class="col-lg-12">
+                        <div class="owl-carousel owl-theme" style="margin-top: 3rem;">
+                            <?php
+                                //$slides = shuffle($res_venues);
+                                foreach($res_venues as $img):
+                                    ?>
+                                    <div class="item">
+                                        <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($img['id']) ?>" class="thumbnail-img">
+                                            <img src="<?= BASE_URL() . 'assets/uploads/listings/'. IIF($img['photo'], "", "default.jpg") ?>" alt="">
+                                        </a>
+                                    </div>
+                                    <?php
+                                endforeach;
+                            ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="explore-events p-80">
+        <div class="explore-events p-80" style="display: block; position: relative;">
             <div class="container">
                 <?php 
                     if ($cnt_venues == 0) {
@@ -114,6 +131,42 @@ $arr_buss = GroupBy($res_venues, "account_name");
     <script src="<?php echo BASE_URL() . 'assets/plugins/js/toastr.js' ?>"></script>
     <script src="<?php echo BASE_URL() . 'assets/base/js/app.js' ?>"></script>
     <?php include("./website/layouts/scripts.php"); ?>
+    <script src="<?php echo BASE_URL() . 'assets/plugins/js/owl.carousel.min.js' ?>"></script>
+    <script>
+        $(document).ready(function(){
+            
+            var owl = $('.owl-carousel');
+            owl.owlCarousel({
+                rtl: false,
+                items: 3,
+                loop: true,
+                margin: 10,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true,
+                animateOut: 'slideOutDown',
+                animateIn: 'flipInX',
+                stagePadding: 50,
+                smartSpeed: 450,
+                responsive:{
+                    0:{
+                        items: 1,
+                        stagePadding: 0,
+                    },
+                    600:{
+                        items: 2
+                    },
+                    1023:{
+                        items: 3
+                    },
+                    1400:{
+                        items: 4,
+                        stagePadding: 0,
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
