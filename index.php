@@ -48,34 +48,27 @@ $arr_buss = GroupBy($res_venues, "account_name");
 <body class="d-flex flex-column h-100">
     <?php include("./website/layouts/header.php"); ?>
     <div class="wrapper">
-        
-        <div class="hero-banner">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-9 col-md-10" data-carousel="">
-                        <div class="hero-banner-content">
-                            <img src="./assets/base/img/logo-1.png" class="hero-logo" />
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="owl-carousel owl-theme" style="margin-top: 3rem;">
-                            <?php
-                                foreach($res_venues as $slide):
-                                    ?>
-                                    <div class="item">
-                                        <a href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($slide['id']) ?>" class="thumbnail-img">
-                                            <div class="item-name" data-bs-toggle="tooltip" data-bs-placement="center" data-bs-original-title="<?= $slide['name'] ?>"><?= $slide['name'] ?></div>
-                                            <img src="<?= BASE_URL() . 'assets/uploads/listings/'. IIF($slide['photo'], "", "default.jpg") ?>" alt="">
-                                        </a>
-                                    </div>
-                                    <?php
-                                endforeach;
-                            ?>
+        <div class="owl-carousel owl-theme">
+        <?php
+            foreach($res_venues as $slide):
+                ?>
+                <div class="owl-slide d-flex align-items-center cover" style="background-image: url(<?= BASE_URL() . 'assets/uploads/listings/'. IIF($slide['photo'], "", "default.jpg") ?>);">
+                    <div class="container">
+                        <div class="row justify-content-center justify-content-md-start">
+                            <div class="col-10 col-md-6 static">
+                                <div class="owl-slide-text">
+                                    <h2 class="owl-slide-animated owl-slide-title"><?= $slide['name'] ?></h2>
+                                    <div class="owl-slide-animated owl-slide-subtitle mb-3"><?= $slide['description'] ?></div>
+                                    <a class="btn btn-primary owl-slide-animated owl-slide-cta" href="<?= BASE_URL() .'venues-info.php?ref='. Encrypt($slide['id']) ?>" target="_blank" role="button">More Info</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+                <?php
+            endforeach;
+        ?>
+       </div>
         <div class="explore-events p-80" style="display: block; position: relative;">
             <div class="container">
                 <?php 
@@ -134,36 +127,19 @@ $arr_buss = GroupBy($res_venues, "account_name");
     <script src="<?php echo BASE_URL() . 'assets/plugins/js/owl.carousel.min.js' ?>"></script>
     <script>
         $(document).ready(function(){
-            
             var owl = $('.owl-carousel');
             owl.owlCarousel({
                 rtl: false,
-                items: 3,
+                items: 1,
                 loop: true,
                 margin: 10,
                 autoplay: true,
-                autoplayTimeout: 3000,
+                autoplayTimeout: 2000,
                 autoplayHoverPause: true,
                 animateOut: 'slideOutDown',
                 animateIn: 'flipInX',
-                stagePadding: 50,
+                stagePadding: 0,
                 smartSpeed: 450,
-                responsive:{
-                    0:{
-                        items: 1,
-                        stagePadding: 0,
-                    },
-                    600:{
-                        items: 2
-                    },
-                    1023:{
-                        items: 3
-                    },
-                    1400:{
-                        items: 4,
-                        stagePadding: 0,
-                    }
-                }
             });
         });
     </script>

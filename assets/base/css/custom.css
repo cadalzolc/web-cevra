@@ -209,40 +209,104 @@ button.close {
     text-transform: capitalize;
 }
 
-.animated  {
-    -webkit-animation-duration : 1000 ms  ;
-    animation-duration : 1000 ms  ;
-    -webkit-animation-fill-mode : both  ;
-    animation-fill-mode : both  ;
-  }  
-  /* .owl-animated-out - only for current item */ 
-  /* This is very important class. Use z-index if you want move Out item above In item */ 
-  .owl-animated-out {
-    z-index : 1 
-     }
-  /* .owl-animated-in - only for upcoming item
-  /* This is very important class. Use z-index if you want move In item above Out item */ 
-  .owl-animated-in {
-    z-index : 0 
-     }
-  /* .fadeOut is style taken from Animation.css and this is how it looks in owl.carousel.css:  */ 
-  .fadeOut  {
-    -webkit-animation-name : fadeOut  ;
-    animation-name : fadeOut  ;
-  }  
-  @-webkit-keyframes  fadeOut  {
-    0% {
-      opacity : 1   ;
-    }  
-    100% {
-      opacity : 0   ;
-    }  
+.cover {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
-  @keyframes  fadeOut  {
-    0% {
-      opacity : 1   ;
-    }  
-    100% {
-      opacity : 0   ;
-    }  
+  
+  .owl-carousel .owl-slide {
+    position: relative;
+    height: 90vh;
+    background-color: lightgray;
   }
+  
+  .owl-carousel .owl-slide-animated {
+    transform: translateX(20px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.05s;
+  }
+  
+  .owl-carousel .owl-slide-animated.is-transitioned {
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.5s;
+  }
+  
+  .owl-carousel .owl-slide-title.is-transitioned {
+    transition-delay: 0.2s;
+  }
+  
+  .owl-carousel .owl-slide-subtitle.is-transitioned {
+    transition-delay: 0.35s;
+  }
+  
+  .owl-carousel .owl-slide-cta.is-transitioned {
+    transition-delay: 0.5s;
+  }
+
+  .owl-carousel .owl-dots {
+    display: flex;
+    bottom: 25px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .owl-carousel .owl-dots,
+  .owl-carousel .owl-nav {
+    position: absolute;
+  }
+  
+  .owl-carousel .owl-dots .owl-dot,
+  .owl-carousel .owl-nav [class*="owl-"]:focus {
+    outline: none;
+  }
+  
+  .owl-carousel .owl-dots .owl-dot span {
+    background: transparent;
+    border: 1px solid var(--main-black-color);
+    transition: all 0.2s ease;
+  }
+  
+  .owl-carousel .owl-dots .owl-dot:hover span,
+  .owl-carousel .owl-dots .owl-dot.active span {
+    background: var(--main-black-color);
+  }
+  
+  .owl-carousel .owl-nav {
+    left: 50%;
+    top: 10%;
+    transform: translateX(-50%);
+    margin: 0;
+  }
+  
+  .owl-carousel .owl-nav svg {
+    opacity: 0.3;
+    transition: opacity 0.3s;
+  }
+  
+  .owl-carousel .owl-nav button:hover svg {
+    opacity: 1;
+  }
+  
+  .owl-carousel .owl-nav [class*="owl-"]:hover {
+    background: transparent;
+  }
+  
+  section {
+    display: none;
+  }
+  
+  @media screen and (max-width: 575px) {
+    .owl-carousel .owl-nav {
+      top: 5%;
+    }
+    
+    .owl-carousel .owl-nav svg {
+      width: 24px;
+      height: 24px;
+    }
+}
