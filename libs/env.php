@@ -24,15 +24,15 @@ class Configuration {
     public const settings = [
         "dev" => [
             'server'=> 'localhost',
-            'database'=> 'db_events',
+            'database'=> 'db',
             'username'=> 'root',
-            'password'=> '',
+            'password'=> 'pass', // Leave blank if no password
         ],
         'prod' => [
-            'server'=> '151.106.117.0',
-            'database'=> 'u485374257_cevra',
-            'username'=> 'u485374257_root',
-            'password'=> 'P@ssw0rd.22',
+            'server'=> 'server',
+            'database'=> 'db',
+            'username'=> 'root',
+            'password'=> 'pass',
         ],
         '*' => [
             'maileraddress'=> 'mailer@gmail.com',
